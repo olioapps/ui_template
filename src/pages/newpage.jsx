@@ -23,7 +23,6 @@ class NewPage extends Component {
         this.setState({ greeting: e.target.value })
     }
 
-
     render() {
         return (
             <div>
