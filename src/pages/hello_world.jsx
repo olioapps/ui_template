@@ -13,7 +13,7 @@ class HelloWorld extends Component {
 
                 <h2>{this.props.hello}</h2>
                 <h3>{this.props.number}</h3>
-                <button onClick= { this.props.addNumber } > ++ </button>
+                <button onClick={ this.props.addNumber } > ++ </button>
                 
             </div>
         )

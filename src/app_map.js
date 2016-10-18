@@ -30,7 +30,7 @@ const pages: pageDict = {
     newPage: {
         id: 'newPage',
         title: 'New Page',
-        path: '/newPage',
+        path: 'newPage',
         open: true,
         component: Pages.NewPage,
     },

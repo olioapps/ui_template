@@ -13,7 +13,6 @@ const router = (
     <Router history={appHistory}>
         <Route path="/" component={App}>
             <IndexRoute component={appMap.pages.helloWorld.component} {...appMap.buildProps('helloWorld') } />
-            <IndexRoute component={appMap.pages.newPage.component} {...appMap.buildProps('newPage') } />
             {appMap.routes()}
         </Route>
     </Router>
