@@ -11,8 +11,8 @@ class HelloWorld extends Component {
         return (
             <div>
 
-                <h2>{this.props.hello}</h2>
-                <h3>{this.props.number}</h3>
+                <h2>{this.props.hello.greeting}</h2>
+                <h3>{this.props.math.value}</h3>
                 <button onClick= { this.props.addNumber } > ++ </button>
                 
             </div>

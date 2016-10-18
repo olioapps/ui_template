@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux-immutablejs'
-import { INITIAL_STATE } from '../core'
+import { INITIAL_STATE, incrementValue } from '../core'
 
 // just for hello world
-function hello(state = INITIAL_STATE.get('hello'), action) {
+function hello(state = INITIAL_STATE.get("hello"), action) {
     switch(action.type) {
         default:
             return state
@@ -10,19 +10,18 @@ function hello(state = INITIAL_STATE.get('hello'), action) {
 }
 
 //
-function number(state = INITIAL_STATE.get('number'), action) {
+function math(state = INITIAL_STATE.get("math"), action) {
     switch(action.type){
         case 'INCREMENT':
-            return state + 1
-
+            return incrementValue(state)
         default:
             return state
     }
 }
 
 const rootReducer = combineReducers({
-    hello,
-    number,
+    hello: hello,
+    math:  math,
 })
 
 export default rootReducer
