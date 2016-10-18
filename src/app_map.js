@@ -27,6 +27,13 @@ const pages: pageDict = {
         open: true,
         component: Pages.HelloWorld,
     },
+    newPage: {
+        id: 'newPage',
+        title: 'New Page',
+        path: '/newPage',
+        open: true,
+        component: Pages.NewPage,
+    },
 }
 
 // utils
