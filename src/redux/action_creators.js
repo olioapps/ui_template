@@ -3,3 +3,9 @@ export function addNumber() {
         type: 'INCREMENT',
     }
 }
+export function setGreeting(val) {
+    return {
+        type: 'SET_GREETING',
+        value: val,
+    }
+}

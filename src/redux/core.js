@@ -29,6 +29,11 @@ export const AppStateRecord = Record( {
 
 export const INITIAL_STATE = new AppStateRecord()
 
-export function incrementValue(state: MathRecord): Math {
+export function incrementValue(state: MathRecord): MathRecord {
     return state.set("value", state.get("value") + 1 )
 }
+
+export function updateGreeting(state: HelloRecord, value: string): HelloRecord {
+    return state.set("greeting", value)
+}
+
