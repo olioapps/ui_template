@@ -9,7 +9,7 @@ function hello(state = INITIAL_STATE.get("hello"), action) {
     }
 }
 
-//
+// do some math
 function math(state = INITIAL_STATE.get("math"), action) {
     switch(action.type){
         case 'INCREMENT':
