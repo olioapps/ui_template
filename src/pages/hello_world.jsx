@@ -31,12 +31,6 @@ class HelloWorld extends Component {
                 <h3>{this.props.math.value}</h3>
                 <button onClick={this.props.addNumber} > ++ </button>
                 <button onClick={() => this.context.router.push('/newPage')}>Go to New Page</button>
-                
-                <button onClick={() => this.context.router.goBack()}>Go back</button>
-                <br />
-                <input type="text" onChange={this.setRoute} />
-                <button onClick={() => this.context.router.push(`/${this.state.route}`)}>Go to Our Route Page</button>
-
             </div>
         )
     }
