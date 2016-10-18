@@ -4,16 +4,14 @@ import * as actionCreators from '../redux/action_creators'
 
 
 
-class HelloWorld extends Component {
+class NewPage extends Component {
     
 
     render() {
         return (
             <div>
 
-                <h2>{this.props.hello}</h2>
-                <h3>{this.props.number}</h3>
-                <button onClick={ this.props.addNumber } > ++ </button>
+                <div>Yay a new page</div>
                 
             </div>
         )
@@ -22,4 +20,4 @@ class HelloWorld extends Component {
 
 export default connect(
     state => state.toJSON(), actionCreators
-)(HelloWorld)
+)(NewPage)
