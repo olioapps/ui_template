@@ -10,9 +10,6 @@ class HelloWorld extends Component {
         
         this.nextPage = this.nextPage.bind(this)
 
-        this.state = {
-            route: '',
-        }
     }
     
     static get contextTypes() {
@@ -26,10 +23,10 @@ class HelloWorld extends Component {
     render() {
         return (
             <div>
-                <h2>{this.state.route}</h2>
                 <h2>{this.props.hello.greeting}</h2>
-                <h3>{this.props.math.value}</h3>
+                <span>{this.props.math.value}</span>
                 <button onClick={this.props.addNumber} > ++ </button>
+                <br/>
                 <button onClick={this.nextPage}>Go to New Page</button>
             </div>
         )
