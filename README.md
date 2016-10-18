@@ -1,6 +1,8 @@
 # Olio Skeleton
 
 Steps to get started: 
-run npm install
+`npm install`
 
-npm run preflight to make sure everything is running correctly
+`npm run preflight` to make sure everything is running correctly
+
+`npm run web` to start web server. Open http://localhost/3000 in a web browser.

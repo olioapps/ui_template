@@ -9,8 +9,20 @@ function hello(state = INITIAL_STATE.get('hello'), action) {
     }
 }
 
+//
+function number(state = INITIAL_STATE.get('number'), action) {
+    switch(action.type){
+        case 'INCREMENT':
+            return state + 1
+
+        default:
+            return state
+    }
+}
+
 const rootReducer = combineReducers({
     hello,
+    number,
 })
 
 export default rootReducer
