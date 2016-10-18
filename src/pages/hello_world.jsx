@@ -5,16 +5,7 @@ import * as actionCreators from '../redux/action_creators'
 
 
 class HelloWorld extends Component {
-
-
-
-
-
-
-    // addNumber(event) {
-    //     this.setState( {number: this.state.number + 1})
-    //
-    // }
+    
 
     render() {
         return (
