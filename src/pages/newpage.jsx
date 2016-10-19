@@ -10,7 +10,8 @@ class NewPage extends Component {
         this.backPage = this.backPage.bind(this) 
         this.saveGreeting = this.saveGreeting.bind(this)
         this.state = {
-            greeting: 'Hello Olio',
+            // greeting: 'Hello Olio',
+            greeting: props.hello.greeting,
         }
     }
 
@@ -35,12 +36,11 @@ class NewPage extends Component {
             <div>
                 <h3>Enterer New Greeting: </h3>
 
-                <input type="text" onChange={this.setGreeting} />
+                <input type="text" value={this.state.greeting} onChange={this.setGreeting} />
 
                 <button onClick={this.saveGreeting}>Save</button>
                 <br/>
                 <button onClick={this.backPage}>Go back</button>
-
             </div>
         )
     }

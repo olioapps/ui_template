@@ -1,5 +1,7 @@
 # Olio Skeleton
 
+> React - Redux
+
 Steps to get started: 
 `npm install`
 
