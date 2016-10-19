@@ -22,8 +22,8 @@ function math(state = INITIAL_STATE.get("math"), action) {
 }
 
 const rootReducer = combineReducers({
-    hello: hello,
-    math:  math,
+    hello,
+    math,
 })
 
 export default rootReducer
