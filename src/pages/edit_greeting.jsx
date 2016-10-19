@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import * as actionCreators from '../redux/action_creators'
 
-class NewPage extends Component {
+class EditGreeting extends Component {
     constructor(props) {
         super(props)
 
@@ -48,4 +48,4 @@ class NewPage extends Component {
 
 export default connect(
     state => state.toJSON(), actionCreators
-)(NewPage)
+)(EditGreeting)

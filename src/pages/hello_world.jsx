@@ -17,7 +17,7 @@ class HelloWorld extends Component {
     }
 
     nextPage() {
-        this.context.router.push('/newPage')
+        this.context.router.push('/editGreeting')
     }
 
     render() {
