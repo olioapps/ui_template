@@ -34,7 +34,7 @@ class NewPage extends Component {
     render() {
         return (
             <div>
-                <h3>Enterer New Greeting: </h3>
+                <h3>Enter New Greeting: </h3>
 
                 <input type="text" value={this.state.greeting} onChange={this.setGreeting} />
 
