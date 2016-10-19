@@ -8,29 +8,26 @@ class HelloWorld extends Component {
     constructor(props) {
         super(props)
         
-        this.setRoute = this.setRoute.bind(this)
+        this.nextPage = this.nextPage.bind(this)
 
-        this.state = {
-            route: '',
-        }
     }
     
     static get contextTypes() {
         return { router: React.PropTypes.object.isRequired }
     }
 
-    setRoute(e) {
-        this.setState({ route: e.target.value })
-    }    
+    nextPage() {
+        this.context.router.push('/newPage')
+    }
 
     render() {
         return (
             <div>
-                <h2>{this.state.route}</h2>
                 <h2>{this.props.hello.greeting}</h2>
-                <h3>{this.props.math.value}</h3>
+                <span>{this.props.math.value}</span>
                 <button onClick={this.props.addNumber} > ++ </button>
-                <button onClick={() => this.context.router.push('/newPage')}>Go to New Page</button>
+                <br/>
+                <button onClick={this.nextPage}>Go to New Page</button>
             </div>
         )
     }
