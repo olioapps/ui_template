@@ -5,7 +5,7 @@ import { INITIAL_STATE, incrementValue, updateGreeting } from '../core'
 function hello(state = INITIAL_STATE.get("hello"), action) {
     switch(action.type) {
         case 'SET_GREETING':
-            return updateGreeting(state, action.value)
+            return updateGreeting(state, action.greeting)
         default:
             return state
     }
