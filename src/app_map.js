@@ -32,7 +32,7 @@ const pages: pageDict = {
         title: 'New Page',
         path: 'newPage',
         open: true,
-        component: Pages.NewPage,
+        component: Pages.EditGreeting,
     },
 }
 
