@@ -27,6 +27,13 @@ const pages: pageDict = {
         open: true,
         component: Pages.HelloWorld,
     },
+    editGreeting: {
+        id: 'editGreeting',
+        title: 'Edit Greeting',
+        path: 'editGreeting',
+        open: true,
+        component: Pages.EditGreeting,
+    },
 }
 
 // utils
