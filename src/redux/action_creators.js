@@ -10,7 +10,6 @@ export function setGreeting(greeting) {
     }
 }
 export function addTask(taskString) {
-    debugger
     return {
         type: 'ADD_TASK',
         taskString, 

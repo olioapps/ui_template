@@ -13,7 +13,6 @@ import { INITIAL_STATE, incrementValue, updateGreeting, setTask } from '../core'
 function addTask(state = INITIAL_STATE.get("task"), action) {
     switch(action.type){
         case 'ADD_TASK':
-            debugger
             return setTask(state, action.taskString)
         default:
             return state

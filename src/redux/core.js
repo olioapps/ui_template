@@ -20,7 +20,7 @@ export const MathRecord = Record({
 export type AppState = {
     // hello:      Hello,
     math:       Math,
-    task: Task,
+    task:       Task,
 }
 
 export const AppStateRecord = Record( {
@@ -35,7 +35,6 @@ export function incrementValue(state: MathRecord): MathRecord {
 }
 
 export function setTask(state: Task, task: string): TaskRecord {
-    debugger
     return new TaskRecord(task)
 }
 
