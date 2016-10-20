@@ -21,7 +21,6 @@ function math(state = INITIAL_STATE.get("math"), action) {
     }
 }
 
-
 const rootReducer = combineReducers({
     hello,
     math,

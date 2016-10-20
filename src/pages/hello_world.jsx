@@ -4,7 +4,7 @@ import * as actionCreators from '../redux/action_creators'
 
 
 
-class HelloWorld extends Component {
+class TodoApp extends Component {
     constructor(props) {
         super(props)
         
@@ -23,7 +23,7 @@ class HelloWorld extends Component {
     render() {
         return (
             <div>
-                <h2>{this.props.hello.greeting}</h2>
+                <h2>{this.props.todoApp.greeting}</h2>  
                 <span>{this.props.math.value}</span>
                 <button onClick={this.props.addNumber} > ++ </button>
                 <br/>
@@ -33,4 +33,4 @@ class HelloWorld extends Component {
     }
 }
 
-export default connect( state => state.toJSON(), actionCreators )(HelloWorld)
+export default connect( state => state.toJSON(), actionCreators )(TodoApp)

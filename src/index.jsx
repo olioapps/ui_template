@@ -12,7 +12,7 @@ const appHistory = useRouterHistory(createHashHistory)({ queryKey: false })
 const router = (
     <Router history={appHistory}>
         <Route path="/" component={App}>
-            <IndexRoute component={appMap.pages.helloWorld.component} {...appMap.buildProps('helloWorld') } />
+            <IndexRoute component={appMap.pages.todoApp.component} {...appMap.buildProps('todoApp') } />
             {appMap.routes()}
         </Route>
     </Router>
