@@ -3,8 +3,7 @@ import { connect } from 'react-redux'
 import * as actionCreators from '../redux/action_creators'
 
 
-
-class TodoApp extends Component {
+class Task extends Component {
     constructor(props) {
         super(props)
         
@@ -23,14 +22,16 @@ class TodoApp extends Component {
     render() {
         return (
             <div>
-                <h2>{this.props.todoApp.greeting}</h2>  
-                <span>{this.props.math.value}</span>
-                <button onClick={this.props.addNumber} > ++ </button>
+
+                <input type="checkbox"/>
+                <span>Task</span>
+                <button> Edit </button>
+                <button> Delete </button>
                 <br/>
-                <button onClick={this.nextPage}>Go to New Page</button>
+                <button>New Task Button</button>
             </div>
         )
     }
 }
 
-export default connect( state => state.toJSON(), actionCreators )(TodoApp)
+export default connect( state => state.toJSON(), actionCreators )(Task)

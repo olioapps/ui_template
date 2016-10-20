@@ -22,7 +22,7 @@ export type pageDict = { [key: string]: page }
 const pages: pageDict = {
     todoApp: {
         id: 'todoApp',
-        title: 'Hello',
+        title: 'Todo App',
         path: '/',
         open: true,
         component: Pages.todoApp,
