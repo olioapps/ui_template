@@ -10,15 +10,12 @@ class TodoApp extends Component {
         return { router: React.PropTypes.object.isRequired }
     }
 
-  
-
     render() {
         return (
             <div>
                 <h1>To Do App...</h1>
                 <SideMenu />
                 <TaskList />
-
 
             </div>
         )

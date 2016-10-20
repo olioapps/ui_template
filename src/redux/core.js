@@ -1,12 +1,12 @@
 /* @flow */
 import { List, Map, Record, fromJS } from 'immutable' // eslint-disable-line no-unused-vars
 
-export type Hello = {
-    greeting: string,
+export type Task = {
+    task: string,
 }
 
-export const HelloRecord = Record({
-    greeting: "hello olio",
+export const TaskRecord = Record({
+    task: "",
 })
 
 export type Math = {
@@ -18,12 +18,13 @@ export const MathRecord = Record({
 })
 
 export type AppState = {
-    hello:      Hello,
+    // hello:      Hello,
     math:       Math,
+    task: Task,
 }
 
 export const AppStateRecord = Record( {
-    hello:      new HelloRecord(),
+    task:       new TaskRecord(),
     math:       new MathRecord(),
 })
 
@@ -33,7 +34,12 @@ export function incrementValue(state: MathRecord): MathRecord {
     return state.set("value", state.get("value") + 1 )
 }
 
-export function updateGreeting(state: HelloRecord, value: string): HelloRecord {
-    return state.set("greeting", value)
+export function setTask(state: Task, task: string): TaskRecord {
+    debugger
+    return new TaskRecord(task)
 }
+
+// export function updateGreeting(state: HelloRecord, value: string): HelloRecord {
+//     return state.set("greeting", value)
+// }
 

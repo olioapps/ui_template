@@ -6,12 +6,25 @@ import Task from './task'
 
 
 class TaskList extends Component {
+    constructor(props) {
+        super(props)
 
+        this.setTask = this.setTask.bind(this)
+        this.saveTask = this.saveTask.bind(this)
 
-    static get contextTypes() {
-        return { router: React.PropTypes.object.isRequired }
+        this.state = {
+            taskName: '',
+        }
     }
-    
+    setTask(event){
+        const text = event.target.value
+
+        this.setState({ taskName: text})
+
+    }
+    saveTask(){
+        this.props.saveTask(this.state.taskName)
+    }
 
     render() {
         return (
@@ -22,7 +35,9 @@ class TaskList extends Component {
                 <Task />
                 <Task />
                 <br/>
-                <button>New Task Button</button>
+                <input type="text" onChange={this.taskName}></input>
+                <button onClick={this.saveTask}>Save</button>
+                <button>Clear</button>
 
             </div>
         )
