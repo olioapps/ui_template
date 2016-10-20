@@ -25,7 +25,7 @@ const pages: pageDict = {
         title: 'Todo App',
         path: '/',
         open: true,
-        component: Pages.todoApp,
+        component: Pages.TodoApp,
     },
     editGreeting: {
         id: 'editGreeting',
