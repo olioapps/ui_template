@@ -15,3 +15,9 @@ export function addTask(taskString) {
         taskString, 
     }
 }
+export function addList(listNameString) {
+    return {
+        type: 'ADD_LIST',
+        listNameString,
+    }
+}

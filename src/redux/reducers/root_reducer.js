@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux-immutablejs'
-import { INITIAL_STATE, incrementValue, addToList } from '../core'
+import { INITIAL_STATE, addToList, saveList } from '../core'
 
 // just for hello world
 // function hello(state = INITIAL_STATE.get("hello"), action) {
@@ -10,6 +10,15 @@ import { INITIAL_STATE, incrementValue, addToList } from '../core'
 //             return state
 //     }
 // }
+
+function list(state = INITIAL_STATE.get("listOfTasks"), action) {
+    switch(action.type){
+        case 'ADD_LIST':
+            return saveList(state, action.listNameString)
+        default:
+            return state
+    }
+}
 
 function tasks(state = INITIAL_STATE.get("listOfTasks"), action) {
     switch(action.type){
@@ -29,20 +38,10 @@ function tasks(state = INITIAL_STATE.get("listOfTasks"), action) {
 //     }
 // }
 
-// do some math
-function math(state = INITIAL_STATE.get("math"), action) {
-    switch(action.type){
-        case 'INCREMENT':
-            return incrementValue(state)
-        default:
-            return state
-    }
-}
 
 const rootReducer = combineReducers({
-    // hello,
     tasks,
-    math,
+    list,
 })
 
 export default rootReducer
