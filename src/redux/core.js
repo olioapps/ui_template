@@ -1,49 +1,45 @@
 /* @flow */
 import { List, Map, Record, fromJS } from 'immutable' // eslint-disable-line no-unused-vars
 
-export type list = {
-    // items: [],
-    name: string,
-}
-
-export const ListRecord = Record({
-    name: "",
-})
-
 
 export type ListOfTasks = {
     items: [],
 }
 
+
 export const ListOfTasksRecord = Record({
     items: new List(),
 })
 
+
 export type AppState = {
-    // task:       Task,
-    items:      ListOfTasks,
+    currentList: string,
+    tasks: Map<ListOfTasksRecord>,
 }
 
+
 export const AppStateRecord = Record( {
-    // task:       new TaskRecord(),
-    listOfLists:   new ListRecord(),
-    listOfTasks:   new ListOfTasksRecord(),
+    currentList: '',
+    tasks: new Map(),
 })
 
 export const INITIAL_STATE = new AppStateRecord()
 
 
-export function addToList(state: ListOfTasksRecord, task: string): ListOfTasksRecord {
-
-    return state.update("items", items => items.push(task) )
-    // return state.set('items', [ 'is this working' ])
+export function addList(state, listName){
+    return state.set(listName, new ListOfTasksRecord() )
 }
 
-export function saveList(state: ListRecord, listName: string): ListRecord {
 
-    return state.set("name", listName)
-    // return state.update("items", items => items.push(task) )
-    // return state.set('items', [ 'is this working' ])
+
+
+export function addToList(state: ListOfTasksRecord, task: string): ListOfTasksRecord {
+    return state.update("items", items => items.push(task) )
+}
+
+
+export function saveList(state: TodoListRecord, listName: string): TodoListRecord {
+    return state.update("names", names => names.push(listName) )
 }
 
 

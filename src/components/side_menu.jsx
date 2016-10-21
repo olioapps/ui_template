@@ -39,7 +39,7 @@ class SideMenu extends Component {
 
                 <h3>User</h3>
                 <h6>My lists... </h6>
-                <h3>{this.props.list.name}</h3>
+                <h3>{this.props.list.names}</h3>
                 <input type="text" placeholder="Enter new list name" value={this.state.listName} onChange={this.newList}/>
                 <button onClick={this.saveList}>Save</button>
                 <button onClick={this.clearList}>Clear</button>

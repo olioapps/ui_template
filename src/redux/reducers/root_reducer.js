@@ -11,7 +11,7 @@ import { INITIAL_STATE, addToList, saveList } from '../core'
 //     }
 // }
 
-function list(state = INITIAL_STATE.get("listOfTasks"), action) {
+function list(state = INITIAL_STATE.get("listOfLists"), action) {
     switch(action.type){
         case 'ADD_LIST':
             return saveList(state, action.listNameString)
