@@ -38,8 +38,9 @@ export function incrementValue(state: MathRecord): MathRecord {
 }
 
 export function addToList(state: ListOfTasksRecord, task: string): ListOfTasksRecord {
-    
+
     return state.update("items", items => items.push(task) )
+    // return state.set('items', [ 'is this working' ])
 }
 
 

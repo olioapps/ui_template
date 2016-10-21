@@ -37,24 +37,16 @@ class TaskList extends Component {
 
     render() {
 
+        var listOfTasks = this.props.tasks.items.map(task => <Task task={task} />);
 
         return (
             <div>
 
                 <h3>A List</h3>
-                <Task />
-                <Task />
-                <br/>
-                <h3>{this.state.taskName}</h3>
+                <h3>{listOfTasks}</h3>
                 <input id="task_input" type="text" value={this.state.taskName} onChange={this.setTask}></input>
                 <button onClick={this.saveTask}>Save</button>
                 <button onClick={this.clearTask}>Clear</button>
-                <br/>
-
-
-                <h3>Hey</h3>
-                <h3>{this.props.tasks.items}</h3>
-
 
 
             </div>

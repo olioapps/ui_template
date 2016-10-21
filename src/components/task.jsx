@@ -10,7 +10,7 @@ class Task extends Component {
             <div>
 
                 <input type="checkbox"/>
-                <span>Task </span>
+                <span>{this.props.task} </span>
                 <button> Edit </button>
                 <button> Delete </button>
 
