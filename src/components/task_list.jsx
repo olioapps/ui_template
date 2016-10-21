@@ -25,17 +25,19 @@ class TaskList extends Component {
 
 
     saveTask(){
-        this.clearTask()
         this.props.addTask(this.state.taskName)
+        this.clearTask()
     }
 
 
     clearTask(){
-        document.getElementById("task_input").value = ""
+        this.setState({ taskName: ''})
     }
 
 
     render() {
+
+
         return (
             <div>
 
@@ -44,9 +46,16 @@ class TaskList extends Component {
                 <Task />
                 <br/>
                 <h3>{this.state.taskName}</h3>
-                <input id="task_input" type="text" onChange={this.setTask}></input>
+                <input id="task_input" type="text" value={this.state.taskName} onChange={this.setTask}></input>
                 <button onClick={this.saveTask}>Save</button>
                 <button onClick={this.clearTask}>Clear</button>
+                <br/>
+
+
+                <h3>Hey</h3>
+                <h3>{this.props.tasks.items}</h3>
+
+
 
             </div>
         )
