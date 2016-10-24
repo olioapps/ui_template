@@ -1,23 +1,22 @@
-export function addNumber() {
-    return {
-        type: 'INCREMENT',
-    }
-}
-export function setGreeting(greeting) {
-    return {
-        type: 'SET_GREETING',
-        greeting: greeting,
-    }
-}
-export function addTask(taskString) {
+export function addTask(taskListID, taskString) {
     return {
         type: 'ADD_TASK',
-        taskString, 
+        taskListID,
+        taskString,
     }
 }
-export function addList(listNameString) {
+
+export function addList(listNameString, id) {
     return {
         type: 'ADD_LIST',
         listNameString,
+        id,
+    }
+}
+
+export function setCurrentListID(taskListId) {
+    return {
+        type: 'SET_CURRENT_LIST',
+        taskListId,
     }
 }

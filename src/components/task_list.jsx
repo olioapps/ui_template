@@ -23,12 +23,10 @@ class TaskList extends Component {
         this.setState({ taskName: text})
     }
 
-
     saveTask(){
         this.props.addTask(this.state.taskName)
         this.clearTask()
     }
-
 
     clearTask(){
         this.setState({ taskName: ''})
@@ -36,13 +34,13 @@ class TaskList extends Component {
 
 
     render() {
-
-        const listOfTasks = this.props.tasks.items.map(task => <Task task={task} />)
+        const currentList = this.props.catalog.find((list) => list.id === this.props.currentListId) || {tasks: []}
+        const listOfTasks = currentList.tasks.map(task => <Task task={task} />)
 
         return (
             <div>
 
-                <h3>A List</h3>
+                <h3>{currentList.name}</h3>
                 <h3>{listOfTasks}</h3>
                 <input id="task_input" type="text" value={this.state.taskName} onChange={this.setTask}></input>
                 <button onClick={this.saveTask}>Save</button>

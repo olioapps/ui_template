@@ -17,12 +17,25 @@ class SideMenu extends Component {
         }
     }
 
+    id() {
+        function s4() {
+            return Math.floor((1 + Math.random()) * 0x10000)
+                .toString(16)
+                .substring(1)
+        }
+
+        return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
+            s4() + '-' + s4() + s4() + s4()
+    }
+
     newList(event){
         this.setState({ listName: event.target.value })
     }
 
     saveList(){
-        this.props.addList(this.state.listName)
+        const id = this.id()
+        this.props.addList(this.state.listName, id)
+        this.props.setCurrentListID(id)
         this.clearList()
     }
 
@@ -31,15 +44,20 @@ class SideMenu extends Component {
     }
 
     render() {
+        const listNames = this.props.catalog.map((list) =>
+            <button
+                key={list.id}
+                onClick = {()=> this.props.setCurrentListID(list.id)}
+        >{list.name}</button>)
 
-        // const list = this.props.list.name.map( listName => <div>{listName}</div>)
 
+        console.log(this.props.list)
         return (
             <div>
 
                 <h3>User</h3>
                 <h6>My lists... </h6>
-                <h3>{this.props.list.names}</h3>
+                <h3>{listNames}</h3>
                 <input type="text" placeholder="Enter new list name" value={this.state.listName} onChange={this.newList}/>
                 <button onClick={this.saveList}>Save</button>
                 <button onClick={this.clearList}>Clear</button>

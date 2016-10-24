@@ -2,54 +2,72 @@
 import { List, Map, Record, fromJS } from 'immutable' // eslint-disable-line no-unused-vars
 
 
-export type ListOfTasks = {
-    items: [],
+export type Task = {
+    id: string,
+    label: string,
 }
 
-
-export const ListOfTasksRecord = Record({
-    items: new List(),
+export const TaskRecord = Record({
+    id: '',
+    label: '',
 })
 
-
-export type AppState = {
-    currentList: string,
-    tasks: Map<ListOfTasksRecord>,
+export type TaskList = {
+    id: string,
+    name: string,
+    tasks: List<Task>,
 }
 
+export const TaskListRecord = Record({
+    id: '',
+    name: '',
+    tasks: new List(),
+})
+
+export type AppState = {
+    catalog: List<TaskList>,
+    currentListId: string,
+}
 
 export const AppStateRecord = Record( {
-    currentList: '',
-    tasks: new Map(),
+    catalog: new List(),
+    currentListId: "",
 })
 
 export const INITIAL_STATE = new AppStateRecord()
 
-
-export function addList(state, listName){
-    return state.set(listName, new ListOfTasksRecord() )
+export function addList(state: List<TaskList>, listName: string, id:string): List<TaskList> {
+    return state.push(new TaskListRecord({
+        id: id,
+        name: listName,
+        tasks: new List(),
+    }))
 }
 
+export function addToList(state: List<TaskList>, idOfList: string, taskLabel: string): List<TaskList> {
+    return state.update(
+        // find index
+        state.findIndex( taskList => taskList.id === idOfList ),
 
-
-
-export function addToList(state: ListOfTasksRecord, task: string): ListOfTasksRecord {
-    return state.update("items", items => items.push(task) )
+        // update
+        taskList =>
+             taskList.update("tasks", list => list.push(new TaskRecord({
+                 id: id(),
+                 label: taskLabel,
+             })))
+    )
 }
 
-
-export function saveList(state: TodoListRecord, listName: string): TodoListRecord {
-    return state.update("names", names => names.push(listName) )
+export function setCurrentListID(state: AppState, id:string):AppState {
+    return state.set('currentListId', id)
 }
 
-
-
-
-// export function setTask(state: Task, task: string): TaskRecord {
-//     return new TaskRecord(task)
-// }
-
-// export function updateGreeting(state: HelloRecord, value: string): HelloRecord {
-//     return state.set("greeting", value)
-// }
-
+function id() {
+    function s4() {
+        return Math.floor((1 + Math.random()) * 0x10000)
+            .toString(16)
+            .substring(1)
+    }
+    return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
+        s4() + '-' + s4() + s4() + s4()
+}

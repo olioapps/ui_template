@@ -1,47 +1,38 @@
 import { combineReducers } from 'redux-immutablejs'
-import { INITIAL_STATE, addToList, saveList } from '../core'
+import { INITIAL_STATE, addToList, addList, setCurrentListID } from '../core'
 
-// just for hello world
-// function hello(state = INITIAL_STATE.get("hello"), action) {
-//     switch(action.type) {
-//         case 'SET_GREETING':
-//             return updateGreeting(state, action.greeting)
-//         default:
-//             return state
-//     }
-// }
-
-function list(state = INITIAL_STATE.get("listOfLists"), action) {
+function catalog(state = INITIAL_STATE.get("catalog"), action) {
     switch(action.type){
         case 'ADD_LIST':
-            return saveList(state, action.listNameString)
+            return addList(state, action.listNameString, action.id)
         default:
             return state
     }
 }
 
-function tasks(state = INITIAL_STATE.get("listOfTasks"), action) {
+function tasks(state = INITIAL_STATE.get("catalog"), action) {
     switch(action.type){
         case 'ADD_TASK':
-            return addToList(state, action.taskString)
+            return addToList(state, action.taskListID, action.taskString)
         default:
             return state
     }
 }
 
-// function addTask(state = INITIAL_STATE.get("task"), action) {
-//     switch(action.type){
-//         case 'ADD_TASK':
-//             return setTask(state, action.taskString)
-//         default:
-//             return state
-//     }
-// }
-
+function currentListId(state = '', action) {
+    switch(action.type){
+        case 'SET_CURRENT_LIST':
+            // return setCurrentListID(state, action.taskListId)
+            return action.taskListId
+        default:
+            return state
+    }
+}
 
 const rootReducer = combineReducers({
     tasks,
-    list,
+    catalog,
+    currentListId,
 })
 
 export default rootReducer
