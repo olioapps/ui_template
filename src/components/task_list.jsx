@@ -24,7 +24,6 @@ class TaskList extends Component {
     }
 
     saveTask(){
-        debugger
         this.props.addTask( this.props.currentListId, this.state.taskName)
         this.clearTask()
     }
@@ -36,8 +35,7 @@ class TaskList extends Component {
 
     render() {
         const currentList = this.props.catalog.find((list) => list.id === this.props.currentListId) || {tasks: []}
-        const listOfTasks = currentList.tasks.map(task => <Task task={task} />)
-
+        const listOfTasks = currentList.tasks.map( (task, i) => <Task key={i} task={task}/>)
         return (
             <div>
 
