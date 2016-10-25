@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux-immutablejs'
-import { INITIAL_STATE, addToList, addList, setCurrentListID } from '../core'
+import { INITIAL_STATE, addToList, addList } from '../core'
 
 function catalog(state = INITIAL_STATE.get("catalog"), action) {
     switch(action.type){

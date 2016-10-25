@@ -59,9 +59,6 @@ export function addToList(state: List<TaskList>, idOfList: string, taskLabel: st
     )
 }
 
-export function setCurrentListID(state: AppState, id:string):AppState {
-    return state.set('currentListId', id)
-}
 
 function id() {
     function s4() {

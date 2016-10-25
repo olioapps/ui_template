@@ -47,7 +47,7 @@ class SideMenu extends Component {
         const listNames = this.props.catalog.map((list) =>
             <button
                 key={list.id}
-                onClick = {()=> this.props.setCurrentListID(list.id)}
+                onClick={()=> this.props.setCurrentListID(list.id)}
         >{list.name}</button>)
 
 

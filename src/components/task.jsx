@@ -1,6 +1,4 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import * as actionCreators from '../redux/action_creators'
 
 
 class Task extends Component {
@@ -21,4 +19,3 @@ class Task extends Component {
 
 export default Task
 
-// export default connect( state => state.toJSON(), actionCreators )(Task)
