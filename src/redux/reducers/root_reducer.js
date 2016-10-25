@@ -5,13 +5,6 @@ function catalog(state = INITIAL_STATE.get("catalog"), action) {
     switch(action.type){
         case 'ADD_LIST':
             return addList(state, action.listNameString, action.id)
-        default:
-            return state
-    }
-}
-
-function tasks(state = INITIAL_STATE.get("catalog"), action) {
-    switch(action.type){
         case 'ADD_TASK':
             return addToList(state, action.taskListID, action.taskString)
         default:
@@ -19,10 +12,9 @@ function tasks(state = INITIAL_STATE.get("catalog"), action) {
     }
 }
 
-function currentListId(state = '', action) {
+function currentListId(state = INITIAL_STATE.get("currentListId"), action) {
     switch(action.type){
         case 'SET_CURRENT_LIST':
-            // return setCurrentListID(state, action.taskListId)
             return action.taskListId
         default:
             return state
@@ -30,7 +22,7 @@ function currentListId(state = '', action) {
 }
 
 const rootReducer = combineReducers({
-    tasks,
+    // tasks,
     catalog,
     currentListId,
 })

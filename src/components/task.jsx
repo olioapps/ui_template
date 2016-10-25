@@ -19,4 +19,6 @@ class Task extends Component {
     }
 }
 
-export default connect( state => state.toJSON(), actionCreators )(Task)
+export default Task
+
+// export default connect( state => state.toJSON(), actionCreators )(Task)

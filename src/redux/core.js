@@ -45,6 +45,7 @@ export function addList(state: List<TaskList>, listName: string, id:string): Lis
 }
 
 export function addToList(state: List<TaskList>, idOfList: string, taskLabel: string): List<TaskList> {
+    debugger
     return state.update(
         // find index
         state.findIndex( taskList => taskList.id === idOfList ),
