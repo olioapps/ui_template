@@ -36,7 +36,7 @@ class Task extends Component {
     render() {
 
         return (
-            <div>
+            <div id="task">
 
                 <input type="checkbox"/>
                 {this.state.editMode

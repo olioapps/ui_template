@@ -1,0 +1,46 @@
+#sideMenu {
+  width: 100%;
+  button {
+    display: block;
+    width: 100%;
+  }
+}
+
+#taskList {
+  width: 100%;
+  display: flex;
+  button {
+    display: block;
+    width: 100%;
+  }
+}
+
+#task {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.btnContainer {
+  display: flex;
+  align-items: flex-start;
+  width: 100% !important;
+  border-color: red;
+  input {
+    flex-grow: 2;
+    padding: 0.5rem;
+  }
+  button {
+    align-self: auto;
+    padding: 0.7rem;
+  }
+}
+
+
+
+@media screen and (min-width: 600px) {
+  #listContainer {
+
+  }
+}

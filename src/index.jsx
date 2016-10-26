@@ -8,8 +8,10 @@ import * as appMap                                     from './app_map'
 import App                                             from './app'
 import './assets/vendor/normalize.css'
 import './assets/vendor/bootstrap-3.3.7-dist 2/css/bootstrap.min.css'
+import './assets/vendor/font-awesome.min.css'
 import './assets/base.scss'
 import './assets/layout.scss'
+import './assets/modules.scss'
 
 const appHistory = useRouterHistory(createHashHistory)({ queryKey: false })
 
