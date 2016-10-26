@@ -6,6 +6,10 @@ import { Provider }                                    from 'react-redux'
 import store                                           from './redux/store'
 import * as appMap                                     from './app_map'
 import App                                             from './app'
+import './assets/vendor/normalize.css'
+import './assets/vendor/bootstrap-3.3.7-dist 2/css/bootstrap.min.css'
+import './assets/base.scss'
+import './assets/layout.scss'
 
 const appHistory = useRouterHistory(createHashHistory)({ queryKey: false })
 

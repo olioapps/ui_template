@@ -24,6 +24,7 @@ class TaskList extends Component {
     }
 
     saveTask(){
+
         this.props.addTask( this.props.currentListId, this.state.taskName)
         this.clearTask()
     }

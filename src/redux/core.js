@@ -1,5 +1,5 @@
 /* @flow */
-import { List, Map, Record, fromJS } from 'immutable' // eslint-disable-line no-unused-vars
+import {List, Map, Record, fromJS} from 'immutable' // eslint-disable-line no-unused-vars
 
 
 export type Task = {
@@ -29,14 +29,14 @@ export type AppState = {
     currentListId: string,
 }
 
-export const AppStateRecord = Record( {
+export const AppStateRecord = Record({
     catalog: new List(),
     currentListId: "",
 })
 
 export const INITIAL_STATE = new AppStateRecord()
 
-export function addList(state: List<TaskList>, listName: string, id:string): List<TaskList> {
+export function addList(state: List<TaskList>, listName: string, id: string): List<TaskList> {
     return state.push(new TaskListRecord({
         id: id,
         name: listName,
@@ -45,20 +45,43 @@ export function addList(state: List<TaskList>, listName: string, id:string): Lis
 }
 
 export function addToList(state: List<TaskList>, idOfList: string, taskLabel: string): List<TaskList> {
-    
+    console.log("Addtolist: ", state)
+    debugger
+
     return state.update(
         // find index
-        state.findIndex( taskList => taskList.id === idOfList ),
+        state.findIndex(taskList => taskList.id === idOfList),
 
         // update
         taskList =>
-             taskList.update("tasks", list => list.push(new TaskRecord({
-                 id: id(),
-                 label: taskLabel,
-             })))
+            taskList.update("tasks", list => list.push(new TaskRecord({
+                id: id(),
+                label: taskLabel,
+            })))
     )
 }
 
+export function updateTaskSave(state: List<TaskList>, listId: string, taskId: string, taskString: string): List<TaskList> {
+    console.log("UpdateTaskSave: ", state)
+    console.log("IdOfList: ", listId)
+    console.log("IdOfTask: ", taskId)
+    debugger
+    return state.update(
+        // find the list
+        state.findIndex(
+            taskList => taskList.id === listId
+        ),
+
+        // find the task in that list
+        taskList => {
+            const taskIndex = taskList.tasks.findIndex(task => task.id === taskId)
+            debugger
+            return taskList.updateIn(
+                ["tasks", taskIndex],
+                task => task.set( "label", taskString))
+        }
+    )
+}
 
 function id() {
     function s4() {
@@ -66,6 +89,7 @@ function id() {
             .toString(16)
             .substring(1)
     }
+
     return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
         s4() + '-' + s4() + s4() + s4()
 }

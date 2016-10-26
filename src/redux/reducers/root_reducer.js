@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux-immutablejs'
-import { INITIAL_STATE, addToList, addList } from '../core'
+import { INITIAL_STATE, addToList, addList, updateTaskSave } from '../core'
 
 function catalog(state = INITIAL_STATE.get("catalog"), action) {
     switch(action.type){
@@ -7,6 +7,8 @@ function catalog(state = INITIAL_STATE.get("catalog"), action) {
             return addList(state, action.listNameString, action.id)
         case 'ADD_TASK':
             return addToList(state, action.taskListID, action.taskString)
+        case 'UPDATE_TASK_STRING':
+            return updateTaskSave(state, action.listId, action.taskId, action.taskString)
         default:
             return state
     }
@@ -22,7 +24,6 @@ function currentListId(state = INITIAL_STATE.get("currentListId"), action) {
 }
 
 const rootReducer = combineReducers({
-    // tasks,
     catalog,
     currentListId,
 })
