@@ -27,9 +27,10 @@ class Task extends Component {
     }
 
     saveEdit() {
-        debugger
         this.props.updateTaskSave(this.props.currentListId, this.props.task.id, this.state.taskName )
-        // this.setEditMode(false)
+        this.setEditMode(false)()
+
+
     }
 
     render() {

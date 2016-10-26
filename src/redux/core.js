@@ -46,7 +46,7 @@ export function addList(state: List<TaskList>, listName: string, id: string): Li
 
 export function addToList(state: List<TaskList>, idOfList: string, taskLabel: string): List<TaskList> {
     console.log("Addtolist: ", state)
-    debugger
+
 
     return state.update(
         // find index
@@ -65,7 +65,7 @@ export function updateTaskSave(state: List<TaskList>, listId: string, taskId: st
     console.log("UpdateTaskSave: ", state)
     console.log("IdOfList: ", listId)
     console.log("IdOfTask: ", taskId)
-    debugger
+
     return state.update(
         // find the list
         state.findIndex(
@@ -75,7 +75,7 @@ export function updateTaskSave(state: List<TaskList>, listId: string, taskId: st
         // find the task in that list
         taskList => {
             const taskIndex = taskList.tasks.findIndex(task => task.id === taskId)
-            debugger
+
             return taskList.updateIn(
                 ["tasks", taskIndex],
                 task => task.set( "label", taskString))

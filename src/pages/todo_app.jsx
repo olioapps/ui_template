@@ -13,7 +13,7 @@ class TodoApp extends Component {
     render() {
         return (
             <div id="appContainer">
-                <h1>To Do App...</h1>
+                {/*<h1>To Do App...</h1>*/}
                 <div id="listContainer">
                     <SideMenu />
                     <TaskList />
