@@ -13,6 +13,7 @@ class SideMenu extends Component {
         this.handleKeyPress = this.handleKeyPress.bind(this)
         this.renderNormal = this.renderNormal.bind(this)
         this.renderEdit = this.renderEdit.bind(this)
+        this.toggleEditMode = this.toggleEditMode.bind(this)
 
 
         this.state = {
@@ -36,12 +37,17 @@ class SideMenu extends Component {
         this.setState({listName: event.target.value})
     }
 
+    toggleEditMode() {
+        this.setState({editMode: !this.state.editMode})
+
+    }
+
     saveList() {
         const id = this.id()
         this.props.addList(this.state.listName, id)
         this.props.setCurrentListID(id)
         this.clearList()
-        this.setState({editMode: !this.state.editMode})
+        this.toggleEditMode()
     }
 
     handleKeyPress(e) {
@@ -66,7 +72,7 @@ class SideMenu extends Component {
 
                 <br/>
                 <div className="btnContainer">
-                    <button>Edit</button>
+                    <button onClick={this.toggleEditMode}>Edit</button>
                     <button onClick={this.addList}> New List</button>
                 </div>
 
@@ -94,7 +100,7 @@ class SideMenu extends Component {
 
                 <div className="btnContainer">
 
-                    <input type="text" placeholder="Enter new list name" value={this.state.listName}
+                    <input autoFocus type="text" placeholder="Enter new list name" value={this.state.listName}
                            onChange={this.newList} onKeyPress={this.handleKeyPress}/>
                     <button onClick={this.saveList}><i className="fa fa-check" aria-hidden="true"></i></button>
                     <button onClick={this.clearList}><i className="fa fa-times" aria-hidden="true"></i>
