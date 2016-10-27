@@ -5,11 +5,13 @@ import {List, Map, Record, fromJS} from 'immutable' // eslint-disable-line no-un
 export type Task = {
     id: string,
     label: string,
+    completed: bool,
 }
 
 export const TaskRecord = Record({
     id: '',
     label: '',
+    completed: false,
 })
 
 export type TaskList = {
@@ -87,8 +89,7 @@ export function updateTaskSave(state: List<TaskList>, listId: string, taskId: st
 
 
 export function updateTaskDelete(state: List<TaskList>, listId: string, taskId: string): List<TaskList>  {
-
-
+    
     return state.update(
         //find list
         state.findIndex(
@@ -105,6 +106,25 @@ export function updateTaskDelete(state: List<TaskList>, listId: string, taskId: 
     )
 }
 
+
+export function toggleChecked(state: List<TaskList>, listId: string, taskId: string, checked: bool): List<TaskList> {
+
+    return state.update(
+        // find the list
+        state.findIndex(
+            taskList => taskList.id === listId
+        ),
+
+        // find the task in that list
+        taskList => {
+            const taskIndex = taskList.tasks.findIndex(task => task.id === taskId)
+
+            return taskList.updateIn(
+                ["tasks", taskIndex],
+                task => task.set( "completed", checked))
+        }
+    )
+}
 
 
 function id() {

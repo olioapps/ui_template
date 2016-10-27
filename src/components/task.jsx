@@ -11,7 +11,7 @@ class Task extends Component {
         this.changeName = this.changeName.bind(this)
         this.saveEdit = this.saveEdit.bind(this)
         this.deleteTask = this.deleteTask.bind(this)
-        
+        this.checkToggle = this.checkToggle.bind(this)
 
         this.state = {
             editMode: false,
@@ -35,13 +35,16 @@ class Task extends Component {
     deleteTask() {
         this.props.updateTaskDelete(this.props.currentListId, this.props.task.id)
     }
+    checkToggle() {
+        this.props.checkToggle(this.props.currentListId, this.props.task.id, !this.props.task.completed)
+    }
 
     render() {
 
         return (
             <ul id="task">
 
-                <input type="checkbox"/>
+                <input type="checkbox" checked={this.props.task.completed} onChange={this.checkToggle}/>
                 {this.state.editMode
                     ? <input type="text" autoFocus value={this.state.taskName} onChange={this.changeName} />
                     : <li>{this.props.task.label} </li>}
