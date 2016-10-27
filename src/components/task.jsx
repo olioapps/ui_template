@@ -1,5 +1,5 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
+import React, {Component} from 'react'
+import {connect} from 'react-redux'
 import * as actionCreators from '../redux/action_creators'
 
 class Task extends Component {
@@ -11,7 +11,7 @@ class Task extends Component {
         this.changeName = this.changeName.bind(this)
         this.saveEdit = this.saveEdit.bind(this)
         this.deleteTask = this.deleteTask.bind(this)
-        
+        this.checkToggle = this.checkToggle.bind(this)
 
         this.state = {
             editMode: false,
@@ -24,11 +24,11 @@ class Task extends Component {
     }
 
     changeName(e) {
-        this.setState({ taskName: e.target.value })
+        this.setState({taskName: e.target.value})
     }
 
     saveEdit() {
-        this.props.updateTaskSave(this.props.currentListId, this.props.task.id, this.state.taskName )
+        this.props.updateTaskSave(this.props.currentListId, this.props.task.id, this.state.taskName)
         this.setEditMode(false)()
     }
 
@@ -36,21 +36,35 @@ class Task extends Component {
         this.props.updateTaskDelete(this.props.currentListId, this.props.task.id)
     }
 
+    checkToggle() {
+        this.props.checkToggle(this.props.currentListId, this.props.task.id, !this.props.task.completed)
+    }
+
     render() {
+        // if(this.props.task.completed) {<li
+        //     style={{ textDecoration: 'line-through', color: 'grey'}}>{this.props.task.label} </li>}
+        // else {}
+        const textStyle = this.props.task.completed ? 'line-through': "none"
+        const colorStyle = this.props.task.completed ? 'grey': "inherit"
 
         return (
-            <ul id="task">
 
-                <input type="checkbox"/>
+            <ul id="task">
+                <input type="checkbox" checked={this.props.task.completed} onChange={this.checkToggle}/>
                 {this.state.editMode
-                    ? <input type="text" autoFocus value={this.state.taskName} onChange={this.changeName} />
-                    : <li>{this.props.task.label} </li>}
+                    ? <input type="text" autoFocus value={this.state.taskName} onChange={this.changeName}/>
+                    // : <li style={this.props.style}>{this.props.task.label}</li>
+                    : <li style={{textDecoration: textStyle, color: colorStyle }}>{this.props.task.label}</li>
+
+                }
+
+
                 {this.state.editMode
-                    ? <button onClick={this.saveEdit}> <i className="fa fa-check" aria-hidden="true"></i> </button>
-                    : <button onClick={this.setEditMode(true)}> <i className="fa fa-pencil" aria-hidden="true"></i>
+                    ? <button onClick={this.saveEdit}><i className="fa fa-check" aria-hidden="true"></i></button>
+                    : <button onClick={this.setEditMode(true)}><i className="fa fa-pencil" aria-hidden="true"></i>
                 </button>}
 
-                <button onClick={this.deleteTask}> <i className="fa fa-times" aria-hidden="true"></i>
+                <button onClick={this.deleteTask}><i className="fa fa-times" aria-hidden="true"></i>
                 </button>
 
             </ul>
@@ -58,4 +72,4 @@ class Task extends Component {
     }
 }
 
-export default connect( state => state.toJSON(), actionCreators )(Task)
+export default connect(state => state.toJSON(), actionCreators)(Task)

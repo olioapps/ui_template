@@ -23,7 +23,6 @@ class TaskList extends Component {
     }
 
     saveTask() {
-
         this.props.addTask(this.props.currentListId, this.state.taskName)
         this.clearTask()
     }
@@ -34,13 +33,26 @@ class TaskList extends Component {
 
 
     render() {
+
         const currentList = this.props.catalog.find((list) => list.id === this.props.currentListId) || {tasks: []}
-        const listOfTasks = currentList.tasks.map((task, i) => <Task key={i} task={task}/>)
+        const listOfTasks = currentList.tasks.map((task, i) => {
+
+            // const textStyle = task.completed ? 'line-through': "none"
+            return <Task key={i} task={task}  />
+
+        })
+
+        // const incompleteTasks = currentList.tasks.filter( task=> task.completed ===false).map((task, i) => <Task key={i} task={task}/>)
+        // const completeTasks = currentList.tasks.filter( task=> task.completed ===true).map((task, i) => <Task key={i} task={task}/>)
+
         return (
             <div id="taskList">
 
                 <h3>{currentList.name}</h3>
+
                 {listOfTasks}
+
+
                 <div className="newTaskContainer">
                     <input id="task_input" type="text" placeholder="Enter new task" value={this.state.taskName}
                            onChange={this.setTask}></input>

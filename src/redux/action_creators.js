@@ -37,3 +37,13 @@ export function updateTaskDelete(listId, taskId) {
         taskId,
     }
 }
+
+export function checkToggle(listId, taskId, checked) {
+    return {
+        type: 'TOGGLE_TASK_COMPLETED',
+        listId,
+        taskId,
+        checked,
+    }
+}
+
