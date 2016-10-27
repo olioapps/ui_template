@@ -44,10 +44,10 @@ class SideMenu extends Component {
 
     render() {
         const listNames = this.props.catalog.map((list) =>
-            <button
+            <li
                 key={list.id}
                 onClick={()=> this.props.setCurrentListID(list.id)}
-            >{list.name}</button>)
+            >{list.name}</li>)
 
 
         console.log(this.props.list)
@@ -56,16 +56,17 @@ class SideMenu extends Component {
 
                 <h3>User</h3>
                 <h6>My lists... </h6>
-                <h3>{listNames}</h3>
+                <ul>{listNames}</ul>
                 <div className="btnContainer">
                     <input type="text" placeholder="Enter new list name" value={this.state.listName}
                            onChange={this.newList}/>
-                    <button onClick={this.saveList}>Save</button>
-                    <button onClick={this.clearList}>Clear</button>
+                    <button onClick={this.saveList}><i className="fa fa-check" aria-hidden="true"></i></button>
+                    <button onClick={this.clearList}><i className="fa fa-times" aria-hidden="true"></i>
+                    </button>
                 </div>
                 <br/>
                 <div className="btnContainer">
-                    <button> Edit</button>
+                    <button>Edit</button>
                     <button onClick={this.addList}> New List</button>
                 </div>
             </div>

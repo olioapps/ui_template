@@ -41,7 +41,7 @@ class TaskList extends Component {
             <div id="taskList">
 
                 <h3>{currentList.name}</h3>
-                <h3>{listOfTasks}</h3>
+                {listOfTasks}
                 <input id="task_input" type="text" value={this.state.taskName} onChange={this.setTask}></input>
                 <div className="btnContainer">
                     <button onClick={this.saveTask}>Save</button>

@@ -36,19 +36,21 @@ class Task extends Component {
     render() {
 
         return (
-            <div id="task">
+            <ul id="task">
 
                 <input type="checkbox"/>
                 {this.state.editMode
-                    ? <input autoFocus value={this.state.taskName} onChange={this.changeName} />
-                    : <span>{this.props.task.label} </span>}
+                    ? <input type="text" autoFocus value={this.state.taskName} onChange={this.changeName} />
+                    : <li>{this.props.task.label} </li>}
                 {this.state.editMode
                     ? <button onClick={this.saveEdit}> Save </button>
-                    : <button onClick={this.setEditMode(true)}> Edit </button>}
+                    : <button onClick={this.setEditMode(true)}> <i className="fa fa-pencil" aria-hidden="true"></i>
+                </button>}
 
-                <button> Delete </button>
+                <button> <i className="fa fa-times" aria-hidden="true"></i>
+                </button>
 
-            </div>
+            </ul>
         )
     }
 }
