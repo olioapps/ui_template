@@ -12,6 +12,7 @@ class Task extends Component {
         this.saveEdit = this.saveEdit.bind(this)
         this.deleteTask = this.deleteTask.bind(this)
         this.checkToggle = this.checkToggle.bind(this)
+        this.handleKeyPress = this.handleKeyPress.bind(this)
 
         this.state = {
             editMode: false,
@@ -25,7 +26,15 @@ class Task extends Component {
 
     changeName(e) {
         this.setState({taskName: e.target.value})
+
     }
+    handleKeyPress(e) {
+        if (e.key === 'Enter'){
+            console.log("enter key pressed")
+            this.saveEdit()
+        }
+    }
+
 
     saveEdit() {
         this.props.updateTaskSave(this.props.currentListId, this.props.task.id, this.state.taskName)
@@ -41,18 +50,15 @@ class Task extends Component {
     }
 
     render() {
-        // if(this.props.task.completed) {<li
-        //     style={{ textDecoration: 'line-through', color: 'grey'}}>{this.props.task.label} </li>}
-        // else {}
         const textStyle = this.props.task.completed ? 'line-through': "none"
         const colorStyle = this.props.task.completed ? 'grey': "inherit"
 
         return (
 
             <ul id="task">
-                <input type="checkbox" checked={this.props.task.completed} onChange={this.checkToggle}/>
+                <input type="checkbox" checked={this.props.task.completed} onChange={this.checkToggle} />
                 {this.state.editMode
-                    ? <input type="text" autoFocus value={this.state.taskName} onChange={this.changeName}/>
+                    ? <input type="text" autoFocus value={this.state.taskName} onKeyPress={this.handleKeyPress} onChange={this.changeName}  />
                     // : <li style={this.props.style}>{this.props.task.label}</li>
                     : <li style={{textDecoration: textStyle, color: colorStyle }}>{this.props.task.label}</li>
 
