@@ -11,6 +11,8 @@ class TaskList extends Component {
         this.setTask = this.setTask.bind(this)
         this.saveTask = this.saveTask.bind(this)
         this.clearTask = this.clearTask.bind(this)
+        this.handleKeyPress = this.handleKeyPress.bind(this)
+        
 
         this.state = {
             taskName: '',
@@ -25,6 +27,13 @@ class TaskList extends Component {
     saveTask() {
         this.props.addTask(this.props.currentListId, this.state.taskName)
         this.clearTask()
+    }
+
+    handleKeyPress(e) {
+        if (e.key === 'Enter'){
+            console.log("enter key pressed")
+            this.saveTask()
+        }
     }
 
     clearTask() {
@@ -55,7 +64,7 @@ class TaskList extends Component {
 
                 <div className="newTaskContainer">
                     <input id="task_input" type="text" placeholder="Enter new task" value={this.state.taskName}
-                           onChange={this.setTask}></input>
+                           onChange={this.setTask} onKeyPress={this.handleKeyPress}></input>
                     <div className="btnContainer">
                         <button onClick={this.saveTask}><i className="fa fa-check" aria-hidden="true"></i></button>
                         <button onClick={this.clearTask}><i className="fa fa-times" aria-hidden="true"></i></button>

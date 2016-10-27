@@ -10,9 +10,14 @@ class SideMenu extends Component {
         this.newList = this.newList.bind(this)
         this.saveList = this.saveList.bind(this)
         this.clearList = this.clearList.bind(this)
+        this.handleKeyPress = this.handleKeyPress.bind(this)
+        this.renderNormal = this.renderNormal.bind(this)
+        this.renderEdit = this.renderEdit.bind(this)
+
 
         this.state = {
             listName: '',
+            editMode: false,
         }
     }
 
@@ -36,10 +41,69 @@ class SideMenu extends Component {
         this.props.addList(this.state.listName, id)
         this.props.setCurrentListID(id)
         this.clearList()
+        this.setState({editMode: !this.state.editMode})
+    }
+
+    handleKeyPress(e) {
+        if (e.key === 'Enter') {
+            console.log("enter key pressed")
+            this.saveList()
+        }
     }
 
     clearList() {
         this.setState({listName: ''})
+    }
+
+    renderNormal(listNames) {
+
+        return (
+            <div id="sideMenu">
+
+                <h3>User</h3>
+                <h6>My Lists: </h6>
+                <ul>{listNames}</ul>
+
+                <br/>
+                <div className="btnContainer">
+                    <button>Edit</button>
+                    <button onClick={this.addList}> New List</button>
+                </div>
+
+            </div>
+        )
+
+    }
+
+    renderEdit(listNames) {
+
+        const displayLists = this.props.currentListId !== ''
+
+        const lists = (displayLists) ? listNames : ''
+
+
+        return (
+            <div id="sideMenu">
+
+                <h3>User</h3>
+                <h6>My Lists: </h6>
+
+
+                <ul>{lists}</ul>
+
+
+                <div className="btnContainer">
+
+                    <input type="text" placeholder="Enter new list name" value={this.state.listName}
+                           onChange={this.newList} onKeyPress={this.handleKeyPress}/>
+                    <button onClick={this.saveList}><i className="fa fa-check" aria-hidden="true"></i></button>
+                    <button onClick={this.clearList}><i className="fa fa-times" aria-hidden="true"></i>
+                    </button>
+
+                </div>
+
+            </div>
+        )
     }
 
     render() {
@@ -50,27 +114,16 @@ class SideMenu extends Component {
             >{list.name}</li>)
 
 
-        console.log(this.props.list)
-        return (
-            <div id="sideMenu">
 
-                <h3>User</h3>
-                <h6>My lists... </h6>
-                <ul>{listNames}</ul>
-                <div className="btnContainer">
-                    <input type="text" placeholder="Enter new list name" value={this.state.listName}
-                           onChange={this.newList}/>
-                    <button onClick={this.saveList}><i className="fa fa-check" aria-hidden="true"></i></button>
-                    <button onClick={this.clearList}><i className="fa fa-times" aria-hidden="true"></i>
-                    </button>
-                </div>
-                <br/>
-                <div className="btnContainer">
-                    <button>Edit</button>
-                    <button onClick={this.addList}> New List</button>
-                </div>
-            </div>
-        )
+        if (this.state.editMode === false) {
+            return this.renderEdit(listNames)
+        }
+        else {
+            return this.renderNormal(listNames)
+        }
+
+
+
     }
 }
 
