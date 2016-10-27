@@ -1,7 +1,6 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
+import React, {Component} from 'react'
+import {connect} from 'react-redux'
 import * as actionCreators from '../redux/action_creators'
-
 
 
 class SideMenu extends Component {
@@ -28,45 +27,51 @@ class SideMenu extends Component {
             s4() + '-' + s4() + s4() + s4()
     }
 
-    newList(event){
-        this.setState({ listName: event.target.value })
+    newList(event) {
+        this.setState({listName: event.target.value})
     }
 
-    saveList(){
+    saveList() {
         const id = this.id()
         this.props.addList(this.state.listName, id)
         this.props.setCurrentListID(id)
         this.clearList()
     }
 
-    clearList(){
-        this.setState({ listName: '' })
+    clearList() {
+        this.setState({listName: ''})
     }
 
     render() {
         const listNames = this.props.catalog.map((list) =>
-            <button
+            <li
                 key={list.id}
                 onClick={()=> this.props.setCurrentListID(list.id)}
-        >{list.name}</button>)
+            >{list.name}</li>)
 
 
         console.log(this.props.list)
         return (
-            <div>
+            <div id="sideMenu">
 
                 <h3>User</h3>
                 <h6>My lists... </h6>
-                <h3>{listNames}</h3>
-                <input type="text" placeholder="Enter new list name" value={this.state.listName} onChange={this.newList}/>
-                <button onClick={this.saveList}>Save</button>
-                <button onClick={this.clearList}>Clear</button>
+                <ul>{listNames}</ul>
+                <div className="btnContainer">
+                    <input type="text" placeholder="Enter new list name" value={this.state.listName}
+                           onChange={this.newList}/>
+                    <button onClick={this.saveList}><i className="fa fa-check" aria-hidden="true"></i></button>
+                    <button onClick={this.clearList}><i className="fa fa-times" aria-hidden="true"></i>
+                    </button>
+                </div>
                 <br/>
-                <button> Edit </button>
-                <button onClick={this.addList}> New List </button>
+                <div className="btnContainer">
+                    <button>Edit</button>
+                    <button onClick={this.addList}> New List</button>
+                </div>
             </div>
         )
     }
 }
 
-export default connect( state => state.toJSON(), actionCreators )(SideMenu)
+export default connect(state => state.toJSON(), actionCreators)(SideMenu)

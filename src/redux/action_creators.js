@@ -20,3 +20,12 @@ export function setCurrentListID(taskListId) {
         taskListId,
     }
 }
+
+export function updateTaskSave(listId, taskId, taskString) {
+    return {
+        type: 'UPDATE_TASK_STRING',
+        listId,
+        taskId,
+        taskString,
+    }
+}

@@ -12,10 +12,12 @@ class TodoApp extends Component {
 
     render() {
         return (
-            <div>
-                <h1>To Do App...</h1>
-                <SideMenu />
-                <TaskList />
+            <div id="appContainer">
+                {/*<h1>To Do App...</h1>*/}
+                <div id="listContainer">
+                    <SideMenu />
+                    <TaskList />
+                </div>
 
             </div>
         )
