@@ -17,12 +17,14 @@ export const TaskRecord = Record({
 export type TaskList = {
     id: string,
     name: string,
+    count: number,
     tasks: List<Task>,
 }
 
 export const TaskListRecord = Record({
     id: '',
     name: '',
+    count: 0,
     tasks: new List(),
 })
 
