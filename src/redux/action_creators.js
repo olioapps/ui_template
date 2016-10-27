@@ -29,3 +29,11 @@ export function updateTaskSave(listId, taskId, taskString) {
         taskString,
     }
 }
+
+export function updateTaskDelete(listId, taskId) {
+    return {
+        type: 'UPDATE_TASK_DELETE',
+        listId,
+        taskId,
+    }
+}

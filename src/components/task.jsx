@@ -10,7 +10,8 @@ class Task extends Component {
         this.setEditMode = this.setEditMode.bind(this)
         this.changeName = this.changeName.bind(this)
         this.saveEdit = this.saveEdit.bind(this)
-
+        this.deleteTask = this.deleteTask.bind(this)
+        
 
         this.state = {
             editMode: false,
@@ -29,8 +30,10 @@ class Task extends Component {
     saveEdit() {
         this.props.updateTaskSave(this.props.currentListId, this.props.task.id, this.state.taskName )
         this.setEditMode(false)()
+    }
 
-
+    deleteTask() {
+        this.props.updateTaskDelete(this.props.currentListId, this.props.task.id)
     }
 
     render() {
@@ -43,11 +46,11 @@ class Task extends Component {
                     ? <input type="text" autoFocus value={this.state.taskName} onChange={this.changeName} />
                     : <li>{this.props.task.label} </li>}
                 {this.state.editMode
-                    ? <button onClick={this.saveEdit}> Save </button>
+                    ? <button onClick={this.saveEdit}> <i className="fa fa-check" aria-hidden="true"></i> </button>
                     : <button onClick={this.setEditMode(true)}> <i className="fa fa-pencil" aria-hidden="true"></i>
                 </button>}
 
-                <button> <i className="fa fa-times" aria-hidden="true"></i>
+                <button onClick={this.deleteTask}> <i className="fa fa-times" aria-hidden="true"></i>
                 </button>
 
             </ul>

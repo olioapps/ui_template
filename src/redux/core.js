@@ -44,6 +44,7 @@ export function addList(state: List<TaskList>, listName: string, id: string): Li
     }))
 }
 
+
 export function addToList(state: List<TaskList>, idOfList: string, taskLabel: string): List<TaskList> {
     console.log("Addtolist: ", state)
 
@@ -60,6 +61,7 @@ export function addToList(state: List<TaskList>, idOfList: string, taskLabel: st
             })))
     )
 }
+
 
 export function updateTaskSave(state: List<TaskList>, listId: string, taskId: string, taskString: string): List<TaskList> {
     console.log("UpdateTaskSave: ", state)
@@ -82,6 +84,28 @@ export function updateTaskSave(state: List<TaskList>, listId: string, taskId: st
         }
     )
 }
+
+
+export function updateTaskDelete(state: List<TaskList>, listId: string, taskId: string): List<TaskList>  {
+
+
+    return state.update(
+        //find list
+        state.findIndex(
+            taskList => taskList.id ===listId
+        ),
+
+        // find the task in that list
+        taskList => {
+            const taskIndex = taskList.tasks.findIndex(task => task.id === taskId)
+
+            return taskList.deleteIn(
+                ["tasks", taskIndex]
+            )}
+    )
+}
+
+
 
 function id() {
     function s4() {

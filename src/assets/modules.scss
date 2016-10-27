@@ -27,7 +27,9 @@
 
   button {
     display: block;
-    width: 100%;
+    width: 3.7rem;
+    padding: 0.7rem;
+
   }
 }
 
@@ -47,8 +49,17 @@
   }
   button {
     width: auto;
-
   }
+  input[type=text] {
+    width: 100%;
+    margin-bottom: 0;
+  }
+}
+
+.newTaskContainer {
+  display: flex;
+  width: 100%;
+
   input[type=text] {
     width: 100%;
     margin-bottom: 0;
@@ -58,15 +69,12 @@
 .btnContainer {
   display: flex;
   align-items: flex-start;
-  width: 100% !important;
-  border-color: red;
   input {
     flex-grow: 2;
     padding: 0.5rem;
   }
   button {
     align-self: auto;
-    padding: 0.7rem;
   }
 }
 
@@ -77,5 +85,6 @@
       width: 3.7rem;
     }
   }
+
 
 }
