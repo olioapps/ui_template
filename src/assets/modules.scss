@@ -15,6 +15,16 @@
   }
 }
 
+.newTaskContainer {
+  display: flex;
+  width: 100%;
+  margin-bottom: 0.7rem;
+  input[type=text] {
+    width: 100%;
+    margin-bottom: 0;
+  }
+}
+
 #taskList {
   width: 100%;
   display: flex;
@@ -22,7 +32,6 @@
   input {
     border: 1px solid #e8e8e8;
     padding: 0.5rem 0.4rem;
-    margin-bottom: 0.7rem;
   }
 
   button {
@@ -50,16 +59,6 @@
   button {
     width: auto;
   }
-  input[type=text] {
-    width: 100%;
-    margin-bottom: 0;
-  }
-}
-
-.newTaskContainer {
-  display: flex;
-  width: 100%;
-
   input[type=text] {
     width: 100%;
     margin-bottom: 0;
