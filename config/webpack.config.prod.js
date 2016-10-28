@@ -49,12 +49,12 @@ module.exports = {
         query: require('./babel.prod')
       },
       {
-        test: /\.css$/,
+        test: [/\.scss$/, /\.css$/],
         include: [paths.appSrc, paths.appNodeModules],
         // Disable autoprefixer in css-loader itself:
         // https://github.com/webpack/css-loader/issues/281
         // We already have it thanks to postcss.
-        loader: ExtractTextPlugin.extract('style', 'css?-autoprefixer!postcss')
+        loader: ExtractTextPlugin.extract('style!css!sass')
       },
       {
         test: /\.json$/,
@@ -73,7 +73,28 @@ module.exports = {
         test: /\.(mp4|webm)$/,
         include: [paths.appSrc, paths.appNodeModules],
         loader: 'url?limit=10000'
-      }
+      },
+      // for font awesome
+      {
+        test: /\.woff(\?v=\d+\.\d+\.\d+)?$/,
+        loader: "url?limit=10000&mimetype=application/font-woff"
+      },
+      {
+        test: /\.woff2(\?v=\d+\.\d+\.\d+)?$/,
+        loader: "url?limit=10000&mimetype=application/font-woff"
+      },
+      {
+        test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
+        loader: "url?limit=10000&mimetype=application/octet-stream"
+      },
+      {
+        test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
+        loader: "file"
+      },
+      {
+        test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
+        loader: "url?limit=10000&mimetype=image/svg+xml"
+      },
     ]
   },
   eslint: {

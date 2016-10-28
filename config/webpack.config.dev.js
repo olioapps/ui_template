@@ -42,9 +42,9 @@ module.exports = {
         query: require('./babel.dev')
       },
       {
-        test: /\.css$/,
+        test: [/\.scss$/, /\.css$/],
         include: [paths.appSrc, paths.appNodeModules],
-        loader: 'style!css!postcss'
+        loader: 'style!css!sass'
       },
       {
         test: /\.json$/,
@@ -60,7 +60,29 @@ module.exports = {
         test: /\.(mp4|webm)$/,
         include: [paths.appSrc, paths.appNodeModules],
         loader: 'url?limit=10000'
-      }
+      },
+
+      // for font awesome
+      {
+        test: /\.woff(\?v=\d+\.\d+\.\d+)?$/,
+        loader: "url?limit=10000&mimetype=application/font-woff"
+      },
+      {
+        test: /\.woff2(\?v=\d+\.\d+\.\d+)?$/,
+        loader: "url?limit=10000&mimetype=application/font-woff"
+      },
+      {
+        test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
+        loader: "url?limit=10000&mimetype=application/octet-stream"
+      },
+      {
+        test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
+        loader: "file"
+      },
+      {
+        test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
+        loader: "url?limit=10000&mimetype=image/svg+xml"
+      },
     ]
   },
   eslint: {
