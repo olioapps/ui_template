@@ -1,6 +1,8 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import * as actionCreators from '../redux/action_creators'
+import List from './list'
+
 
 
 class SideMenu extends Component {
@@ -114,48 +116,72 @@ class SideMenu extends Component {
     }
 
     render() {
-        const editingListMode = this.state.editListMode
-        const editingMode = this.state.editMode
 
-        let buttons = null
-
-        if(editingListMode) {
-            buttons =
-                <div>
-                    <button onClick={this.toggleEditMode}><i className="fa fa-pencil" aria-hidden="true"></i></button>
-                    <button><i className="fa fa-times" aria-hidden="true"></i></button>
-                </div>
-        }
-
-        if(editingMode) {
-            buttons =
-                <div>
-                    <button><i className="fa fa-check" aria-hidden="true"></i></button>
-                    <button><i className="fa fa-times" aria-hidden="true"></i></button>
-                </div>
-        }
+        const lists = this.props.catalog.map((listItem, i) => {
+            return <List key={i} listItem={listItem}  />
+        })
         
-        // {this.state.editMode
-        //     ? <input type="text" autoFocus value={this.state.taskName} onKeyPress={this.handleKeyPress} onChange={this.changeName}  />
-        //     // : <li style={this.props.style}>{this.props.task.label}</li>
-        //     : <li style={{textDecoration: textStyle, color: colorStyle }}>{this.props.task.label}</li>
-        // }
-
-
-        const listNames = this.props.catalog.map((list) =>
-            <li key={list.id} onClick={()=> this.props.setCurrentListID(list.id)} >
-                {list.name}
-                <span>{list.count}</span>
-                <span>{buttons}</span>
-            </li>
+        return (
+            <div id="sideMenu">
+                <h3>User</h3>
+                <h6>My Lists: </h6>
+                
+                {lists}
+                <div className="btnContainer">
+                    <input autoFocus type="text" placeholder="Enter new list name" value={this.state.listName}
+                           onChange={this.newList} onKeyPress={this.handleKeyPress}/>
+                    <button onClick={this.saveList}><i className="fa fa-check" aria-hidden="true"></i></button>
+                    <button onClick={this.clearList}><i className="fa fa-times" aria-hidden="true"></i>
+                    </button>
+                </div>
+                <div className="btnContainer">
+                    <button onClick={this.toggleEditListMode}>Edit</button>
+                    <button onClick={this.toggleAddMode}> New List</button>
+                </div>
+                
+            </div>
         )
-
-        if (this.state.addMode === true) {
-            return this.renderAddList(listNames)
-        }
-        else {
-            return this.renderNormal(listNames)
-        }
+        
+        
+        // *************************************
+        
+        // const editingListMode = this.state.editListMode
+        // const editingMode = this.state.editMode
+        //
+        // let buttons = null
+        //
+        // if(editingListMode) {
+        //     buttons =
+        //         <div>
+        //             <button onClick={this.toggleEditMode}><i className="fa fa-pencil" aria-hidden="true"></i></button>
+        //             <button><i className="fa fa-times" aria-hidden="true"></i></button>
+        //         </div>
+        // }
+        //
+        // if(editingMode) {
+        //     buttons =
+        //         <div>
+        //             <button><i className="fa fa-check" aria-hidden="true"></i></button>
+        //             <button><i className="fa fa-times" aria-hidden="true"></i></button>
+        //         </div>
+        // }
+        //
+        // const listNames = this.props.catalog.map((list) =>
+        //     <li key={list.id} onClick={()=> this.props.setCurrentListID(list.id)} >
+        //         {list.name}
+        //         <span>{list.count}</span>
+        //         <span>{buttons}</span>
+        //     </li>
+        // )
+        //
+        // if (this.state.addMode === true) {
+        //     return this.renderAddList(listNames)
+        // }
+        // else {
+        //     return this.renderNormal(listNames)
+        // }
+        //
+        
     }
 }
 

@@ -28,9 +28,8 @@ class Task extends Component {
         this.setState({taskName: e.target.value})
 
     }
-
     handleKeyPress(e) {
-        if (e.key === 'Enter') {
+        if (e.key === 'Enter'){
             console.log("enter key pressed")
             this.saveEdit()
         }
@@ -51,27 +50,27 @@ class Task extends Component {
     }
 
     render() {
-        const textStyle = this.props.task.completed ? 'line-through' : "none"
-        const colorStyle = this.props.task.completed ? '#DBDBDB' : "inherit"
+        const textStyle = this.props.task.completed ? 'line-through': "none"
+        const colorStyle = this.props.task.completed ? 'grey': "inherit"
 
         return (
 
             <ul id="task">
-                <input type="checkbox" checked={this.props.task.completed} onChange={this.checkToggle}/>
+                <input type="checkbox" checked={this.props.task.completed} onChange={this.checkToggle} />
                 {this.state.editMode
-                    ? <input type="text" autoFocus value={this.state.taskName} onKeyPress={this.handleKeyPress}
-                             onChange={this.changeName}/>
+                    ? <input type="text" autoFocus value={this.state.taskName} onKeyPress={this.handleKeyPress} onChange={this.changeName}  />
+                    // : <li style={this.props.style}>{this.props.task.label}</li>
                     : <li style={{textDecoration: textStyle, color: colorStyle }}>{this.props.task.label}</li>
                 }
 
-                <div className="btnContainer">
-                    {this.state.editMode
-                        ? <button onClick={this.saveEdit}><i className="fa fa-check" /></button>
-                        : <button onClick={this.setEditMode(true)}><i className="fa fa-pencil" />
-                    </button>}
-                    <button onClick={this.deleteTask}><i className="fa fa-times" />
-                    </button>
-                </div>
+
+                {this.state.editMode
+                    ? <button onClick={this.saveEdit}><i className="fa fa-check" aria-hidden="true"></i></button>
+                    : <button onClick={this.setEditMode(true)}><i className="fa fa-pencil" aria-hidden="true"></i>
+                </button>}
+
+                <button onClick={this.deleteTask}><i className="fa fa-times" aria-hidden="true"></i>
+                </button>
 
             </ul>
         )
