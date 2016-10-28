@@ -7,6 +7,7 @@ $color1: #112233;
 
 #appContainer {
   width: 100%;
+  height: 100vh;
 }
 #listContainer {
   display: flex;
@@ -27,10 +28,6 @@ $color1: #112233;
   }
 }
 
-//i.fa-pencil {
-//  padding-left: 0.75rem;
-//}
-
 button {
   width: 50%;
   align-self: center;
@@ -39,37 +36,6 @@ button {
   transition: all 0.5s;
   position: relative;
   border: none;
-
-  //padding: 0.4rem;
-
-  //&:before {
-  //  content: '';
-  //  position: absolute;
-  //  top: 0;
-  //  left: 0;
-  //  width: 100%;
-  //  height: 100%;
-  //  z-index: 1;
-  //  background-color: rgba(255,255,255,0.1);
-  //  transition: all 0.3s;
-  //}
-  //&:after {
-  //  content: '';
-  //  position: absolute;
-  //  top: 0;
-  //  left: 0;
-  //  width: 100%;
-  //  height: 100%;
-  //  z-index: 1;
-  //  opacity: 0;
-  //  transition: all 0.3s;
-  //  border: 1px solid rgba(255,255,255,0.5);
-  //  transform: scale(1.2,1.2);
-  //}
-  //&:hover::after {
-  //  opacity: 1;
-  //  transform: scale(1,1);
-  //}
 }
 
 

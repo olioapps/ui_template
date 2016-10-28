@@ -95,19 +95,19 @@ class SideMenu extends Component {
                 <h6>My Lists: </h6>
 
 
-                <ul>{lists}</ul>
 
 
                 <div className="btnContainer">
 
                     <input autoFocus type="text" placeholder="Enter new list name" value={this.state.listName}
                            onChange={this.newList} onKeyPress={this.handleKeyPress}/>
-                    <button onClick={this.saveList}><i className="fa fa-check" aria-hidden="true"></i></button>
-                    <button onClick={this.clearList}><i className="fa fa-times" aria-hidden="true"></i>
+                    <button onClick={this.saveList}><i className="fa fa-check"></i></button>
+                    <button onClick={this.clearList}><i className="fa fa-times"></i>
                     </button>
 
                 </div>
 
+                <ul>{lists}</ul>
             </div>
         )
     }
