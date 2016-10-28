@@ -43,11 +43,9 @@ class TaskList extends Component {
     render() {
 
         const currentList = this.props.catalog.find((list) => list.id === this.props.currentListId) || {tasks: []}
+        
         const listOfTasks = currentList.tasks.map((task, i) => {
-
-            // const textStyle = task.completed ? 'line-through': "none"
             return <Task key={i} task={task}  />
-
         })
 
         // const incompleteTasks = currentList.tasks.filter( task=> task.completed ===false).map((task, i) => <Task key={i} task={task}/>)
