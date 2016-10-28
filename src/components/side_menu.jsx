@@ -117,7 +117,7 @@ class SideMenu extends Component {
             <li
                 key={list.id}
                 onClick={()=> this.props.setCurrentListID(list.id)}
-            >{list.name}</li>)
+            >{list.name}<span>{list.count}</span></li>)
 
 
 
