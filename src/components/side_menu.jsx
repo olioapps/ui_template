@@ -45,7 +45,9 @@ class SideMenu extends Component {
     }
 
     toggleAddMode() {
-        if(this.state.editListMode) { this.toggleEditListMode() }
+        if (this.state.editListMode) {
+            this.toggleEditListMode()
+        }
 
         this.setState({addMode: !this.state.addMode})
     }
@@ -87,8 +89,8 @@ class SideMenu extends Component {
                 <div className="btnContainer">
                     <input autoFocus type="text" placeholder="Enter new list name" value={this.state.listName}
                            onChange={this.newList} onKeyPress={this.handleKeyPress}/>
-                    <button onClick={this.saveList}><i className="fa fa-check" /></button>
-                    <button onClick={this.clearList}><i className="fa fa-times" />
+                    <button onClick={this.saveList}><i className="fa fa-check"/></button>
+                    <button onClick={this.clearList}><i className="fa fa-times"/>
                     </button>
                 </div>
             </div>
@@ -111,7 +113,16 @@ class SideMenu extends Component {
                     <button onClick={this.toggleEditListMode}>Edit</button>
                     <button onClick={this.toggleAddMode}> New List</button>
                 </div>
+
+                <input autoFocus type="text" placeholder="Enter new list name" value={this.state.listName}
+                       onChange={this.newList} onKeyPress={this.handleKeyPress}/>
+                <button onClick={this.saveList}><i className="fa fa-check"></i></button>
+                <button onClick={this.clearList}><i className="fa fa-times"></i>
+                </button>
+
+                <ul>{lists}</ul>
             </div>
+
         )
     }
 
@@ -119,16 +130,16 @@ class SideMenu extends Component {
 
         const isEditing = this.state.editListMode
         let buttons = null
-        if(isEditing) {
+        if (isEditing) {
             buttons =
                 <div>
-                    <button><i className="fa fa-pencil" /></button>
-                    <button><i className="fa fa-times" /></button>
+                    <button><i className="fa fa-pencil"/></button>
+                    <button><i className="fa fa-times"/></button>
                 </div>
         }
 
         const listNames = this.props.catalog.map((list) =>
-            <li key={list.id} onClick={()=> this.props.setCurrentListID(list.id)} >
+            <li key={list.id} onClick={()=> this.props.setCurrentListID(list.id)}>
                 {list.name}
                 <span>{list.count}</span>
                 <span>{buttons}</span>
