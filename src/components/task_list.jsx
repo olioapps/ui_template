@@ -59,6 +59,7 @@ class TaskList extends Component {
                 <h3>{currentList.name}</h3>
 
                 {listOfTasks}
+                {console.log(this.props.catalog)}
 
                     {this.props.catalog.length !== 0
                         ? <div className="newTaskContainer">
