@@ -72,8 +72,8 @@ class SideMenu extends Component {
 
                 <br/>
                 <div className="btnContainer">
-                    <button onClick={this.toggleEditMode}>Edit</button>
-                    <button onClick={this.addList}> New List</button>
+                    <button >Edit</button>
+                    <button onClick={this.toggleEditMode}> New List</button>
                 </div>
 
             </div>
