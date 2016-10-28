@@ -40,7 +40,6 @@ class TaskList extends Component {
         this.setState({taskName: ''})
     }
 
-
     render() {
 
         const currentList = this.props.catalog.find((list) => list.id === this.props.currentListId) || {tasks: []}
@@ -64,10 +63,10 @@ class TaskList extends Component {
 
                 <div className="newTaskContainer">
                     <input id="task_input" type="text" placeholder="Enter new task" value={this.state.taskName}
-                           onChange={this.setTask} onKeyPress={this.handleKeyPress}></input>
+                           onChange={this.setTask} onKeyPress={this.handleKeyPress} />
                     <div className="btnContainer">
-                        <button onClick={this.saveTask}><i className="fa fa-check" aria-hidden="true"></i></button>
-                        <button onClick={this.clearTask}><i className="fa fa-times" aria-hidden="true"></i></button>
+                        <button onClick={this.saveTask}><i className="fa fa-check" /></button>
+                        <button onClick={this.clearTask}><i className="fa fa-times" /></button>
                     </div>
                 </div>
             </div>
