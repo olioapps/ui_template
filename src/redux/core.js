@@ -49,11 +49,11 @@ export function addList(state:List<TaskList>, listName:string, id:string):List<T
 }
 
 
-export function addToList(state:List<TaskList>, idOfList:string, taskLabel:string):List<TaskList> {
+export function addToList(state:List<TaskList>, listId:string, taskLabel:string):List<TaskList> {
     console.log("Addtolist: ", state)
 
     const newState = state.update(
-        state.findIndex(taskList => taskList.id === idOfList),
+        state.findIndex(taskList => taskList.id === listId),
         taskList => {
             return taskList.set('count', taskList.get('count') + 1)
         }
@@ -61,7 +61,7 @@ export function addToList(state:List<TaskList>, idOfList:string, taskLabel:strin
 
     return newState.update(
         // find index
-        state.findIndex(taskList => taskList.id === idOfList),
+        state.findIndex(taskList => taskList.id === listId),
 
         // update
         taskList =>
@@ -98,7 +98,14 @@ export function updateTaskSave(state:List<TaskList>, listId:string, taskId:strin
 
 export function updateTaskDelete(state:List<TaskList>, listId:string, taskId:string):List<TaskList> {
 
-    return state.update(
+    const newState = state.update(
+        state.findIndex(taskList => taskList.id === listId),
+        taskList => {
+            return taskList.set('count', taskList.get('count') - 1)
+        }
+    )
+
+    return newState.update(
         //find list
         state.findIndex(
             taskList => taskList.id === listId
