@@ -17,7 +17,6 @@ class SideMenu extends Component {
         this.toggleEditMode = this.toggleEditMode.bind(this)
         this.toggleAddMode = this.toggleAddMode.bind(this)
 
-
         this.state = {
             listName: '',
             editListMode: false,
@@ -45,16 +44,16 @@ class SideMenu extends Component {
         this.setState({editListMode: !this.state.editListMode})
     }
 
-    toggleEditMode() {
-        this.setState({editMode: !this.state.editMode})
-    }
-
     toggleAddMode() {
         if(this.state.editListMode) { this.toggleEditListMode() }
 
         this.setState({addMode: !this.state.addMode})
     }
 
+
+    toggleEditMode() {
+        this.setState({editMode: !this.state.editMode})
+    }
 
     saveList() {
         const id = this.id()
@@ -64,7 +63,6 @@ class SideMenu extends Component {
         this.toggleAddMode()
     }
 
-
     handleKeyPress(e) {
         if (e.key === 'Enter') {
             console.log("enter key pressed")
@@ -72,14 +70,15 @@ class SideMenu extends Component {
         }
     }
 
-
     clearList() {
         this.setState({listName: ''})
     }
 
+
     renderAddList(listNames) {
         const displayLists = this.props.currentListId !== ''
         const lists = (displayLists) ? listNames : ''
+
         return (
             <div id="sideMenu">
                 <h3>User</h3>
@@ -88,8 +87,8 @@ class SideMenu extends Component {
                 <div className="btnContainer">
                     <input autoFocus type="text" placeholder="Enter new list name" value={this.state.listName}
                            onChange={this.newList} onKeyPress={this.handleKeyPress}/>
-                    <button onClick={this.saveList}><i className="fa fa-check" aria-hidden="true"></i></button>
-                    <button onClick={this.clearList}><i className="fa fa-times" aria-hidden="true"></i>
+                    <button onClick={this.saveList}><i className="fa fa-check" /></button>
+                    <button onClick={this.clearList}><i className="fa fa-times" />
                     </button>
                 </div>
             </div>
@@ -117,16 +116,16 @@ class SideMenu extends Component {
     }
 
     render() {
+
         const isEditing = this.state.editListMode
         let buttons = null
         if(isEditing) {
             buttons =
                 <div>
-                    <button><i className="fa fa-pencil" aria-hidden="true"></i></button>
-                    <button><i className="fa fa-times" aria-hidden="true"></i></button>
+                    <button><i className="fa fa-pencil" /></button>
+                    <button><i className="fa fa-times" /></button>
                 </div>
         }
-
 
         const listNames = this.props.catalog.map((list) =>
             <li key={list.id} onClick={()=> this.props.setCurrentListID(list.id)} >
@@ -144,6 +143,5 @@ class SideMenu extends Component {
         }
     }
 }
-
 
 export default connect(state => state.toJSON(), actionCreators)(SideMenu)
