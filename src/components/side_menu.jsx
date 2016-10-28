@@ -12,13 +12,16 @@ class SideMenu extends Component {
         this.clearList = this.clearList.bind(this)
         this.handleKeyPress = this.handleKeyPress.bind(this)
         this.renderNormal = this.renderNormal.bind(this)
-        this.renderEdit = this.renderEdit.bind(this)
+        this.renderAddList = this.renderAddList.bind(this)
+        this.toggleEditListMode = this.toggleEditListMode.bind(this)
         this.toggleEditMode = this.toggleEditMode.bind(this)
-
+        this.toggleAddMode = this.toggleAddMode.bind(this)
 
         this.state = {
             listName: '',
+            editListMode: false,
             editMode: false,
+            addMode: true,
         }
     }
 
@@ -37,9 +40,21 @@ class SideMenu extends Component {
         this.setState({listName: event.target.value})
     }
 
+    toggleEditListMode() {
+        this.setState({editListMode: !this.state.editListMode})
+    }
+
+    toggleAddMode() {
+        if (this.state.editListMode) {
+            this.toggleEditListMode()
+        }
+
+        this.setState({addMode: !this.state.addMode})
+    }
+
+
     toggleEditMode() {
         this.setState({editMode: !this.state.editMode})
-
     }
 
     saveList() {
@@ -47,7 +62,7 @@ class SideMenu extends Component {
         this.props.addList(this.state.listName, id)
         this.props.setCurrentListID(id)
         this.clearList()
-        this.toggleEditMode()
+        this.toggleAddMode()
     }
 
     handleKeyPress(e) {
@@ -61,75 +76,82 @@ class SideMenu extends Component {
         this.setState({listName: ''})
     }
 
-    renderNormal(listNames) {
 
-        return (
-            <div id="sideMenu">
-
-                <h3>User</h3>
-                <h6>My Lists: </h6>
-                <ul>{listNames}</ul>
-
-                <br/>
-                <div className="btnContainer">
-                    <button >Edit</button>
-                    <button onClick={this.toggleEditMode}> New List</button>
-                </div>
-
-            </div>
-        )
-
-    }
-
-    renderEdit(listNames) {
-
+    renderAddList(listNames) {
         const displayLists = this.props.currentListId !== ''
-
         const lists = (displayLists) ? listNames : ''
 
-
         return (
             <div id="sideMenu">
-
                 <h3>User</h3>
                 <h6>My Lists: </h6>
-
-
-
-
+                <ul>{lists}</ul>
                 <div className="btnContainer">
-
                     <input autoFocus type="text" placeholder="Enter new list name" value={this.state.listName}
                            onChange={this.newList} onKeyPress={this.handleKeyPress}/>
-                    <button onClick={this.saveList}><i className="fa fa-check"></i></button>
-                    <button onClick={this.clearList}><i className="fa fa-times"></i>
+                    <button onClick={this.saveList}><i className="fa fa-check"/></button>
+                    <button onClick={this.clearList}><i className="fa fa-times"/>
                     </button>
-
                 </div>
+            </div>
+        )
+    }
+
+    renderNormal(listNames) {
+        return (
+            <div id="sideMenu">
+                <h3>User</h3>
+                <h6>My Lists: </h6>
+                <ul id="lists">
+
+                    {listNames}
+
+
+                </ul>
+                <br/>
+                <div className="btnContainer">
+                    <button onClick={this.toggleEditListMode}>Edit</button>
+                    <button onClick={this.toggleAddMode}> New List</button>
+                </div>
+
+                <input autoFocus type="text" placeholder="Enter new list name" value={this.state.listName}
+                       onChange={this.newList} onKeyPress={this.handleKeyPress}/>
+                <button onClick={this.saveList}><i className="fa fa-check"></i></button>
+                <button onClick={this.clearList}><i className="fa fa-times"></i>
+                </button>
 
                 <ul>{lists}</ul>
             </div>
+
         )
     }
 
     render() {
+
+        const isEditing = this.state.editListMode
+        let buttons = null
+        if (isEditing) {
+            buttons =
+                <div>
+                    <button><i className="fa fa-pencil"/></button>
+                    <button><i className="fa fa-times"/></button>
+                </div>
+        }
+
         const listNames = this.props.catalog.map((list) =>
-            <li
-                key={list.id}
-                onClick={()=> this.props.setCurrentListID(list.id)}
-            >{list.name}<span>{list.count}</span></li>)
+            <li key={list.id} onClick={()=> this.props.setCurrentListID(list.id)}>
+                {list.name}
+                <span>{list.count}</span>
+                <span>{buttons}</span>
+            </li>
+        )
 
-
-
-        if (this.state.editMode === false) {
-            return this.renderEdit(listNames)
+        if (this.state.addMode === true) {
+            return this.renderAddList(listNames)
         }
         else {
             return this.renderNormal(listNames)
         }
-
-
-
     }
 }
 
