@@ -61,7 +61,6 @@ class Task extends Component {
                     ? <input type="text" autoFocus value={this.state.taskName} onKeyPress={this.handleKeyPress} onChange={this.changeName}  />
                     // : <li style={this.props.style}>{this.props.task.label}</li>
                     : <li style={{textDecoration: textStyle, color: colorStyle }}>{this.props.task.label}</li>
-
                 }
 
 

@@ -102,10 +102,7 @@ class SideMenu extends Component {
                 <h3>User</h3>
                 <h6>My Lists: </h6>
                 <ul id="lists">
-
                     {listNames}
-
-
                 </ul>
                 <br/>
                 <div className="btnContainer">
@@ -117,15 +114,32 @@ class SideMenu extends Component {
     }
 
     render() {
-        const isEditing = this.state.editListMode
+        const editingListMode = this.state.editListMode
+        const editingMode = this.state.editMode
+
         let buttons = null
-        if(isEditing) {
+
+        if(editingListMode) {
             buttons =
                 <div>
-                    <button><i className="fa fa-pencil" aria-hidden="true"></i></button>
+                    <button onClick={this.toggleEditMode}><i className="fa fa-pencil" aria-hidden="true"></i></button>
                     <button><i className="fa fa-times" aria-hidden="true"></i></button>
                 </div>
         }
+
+        if(editingMode) {
+            buttons =
+                <div>
+                    <button><i className="fa fa-check" aria-hidden="true"></i></button>
+                    <button><i className="fa fa-times" aria-hidden="true"></i></button>
+                </div>
+        }
+        
+        // {this.state.editMode
+        //     ? <input type="text" autoFocus value={this.state.taskName} onKeyPress={this.handleKeyPress} onChange={this.changeName}  />
+        //     // : <li style={this.props.style}>{this.props.task.label}</li>
+        //     : <li style={{textDecoration: textStyle, color: colorStyle }}>{this.props.task.label}</li>
+        // }
 
 
         const listNames = this.props.catalog.map((list) =>
