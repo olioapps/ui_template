@@ -31,6 +31,7 @@ class List extends Component {
 
     saveEdit() {
         this.props.updateListName(this.props.currentListId, this.state.listName)
+        this.setEditMode(false)()
     }
 
     setEditMode(bool) {
