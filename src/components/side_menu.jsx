@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import * as actionCreators from '../redux/action_creators'
 import List from './list'
-
+import EditMode from './side_menu_options'
 
 
 class SideMenu extends Component {
@@ -13,13 +13,10 @@ class SideMenu extends Component {
         this.saveList = this.saveList.bind(this)
         this.clearList = this.clearList.bind(this)
         this.handleKeyPress = this.handleKeyPress.bind(this)
-        this.renderNormal = this.renderNormal.bind(this)
-        this.renderAddList = this.renderAddList.bind(this)
         this.toggleEditListMode = this.toggleEditListMode.bind(this)
         this.toggleEditMode = this.toggleEditMode.bind(this)
         this.toggleAddMode = this.toggleAddMode.bind(this)
-
-
+        
         this.state = {
             listName: '',
             editListMode: false,
@@ -78,46 +75,11 @@ class SideMenu extends Component {
         this.setState({listName: ''})
     }
 
-    renderAddList(listNames) {
-        const displayLists = this.props.currentListId !== ''
-        const lists = (displayLists) ? listNames : ''
-        return (
-            <div id="sideMenu">
-                <h3>User</h3>
-                <h6>My Lists: </h6>
-                <ul>{lists}</ul>
-                <div className="btnContainer">
-                    <input autoFocus type="text" placeholder="Enter new list name" value={this.state.listName}
-                           onChange={this.newList} onKeyPress={this.handleKeyPress}/>
-                    <button onClick={this.saveList}><i className="fa fa-check" aria-hidden="true"></i></button>
-                    <button onClick={this.clearList}><i className="fa fa-times" aria-hidden="true"></i>
-                    </button>
-                </div>
-            </div>
-        )
-    }
-
-    renderNormal(listNames) {
-        return (
-            <div id="sideMenu">
-                <h3>User</h3>
-                <h6>My Lists: </h6>
-                <ul id="lists">
-                    {listNames}
-                </ul>
-                <br/>
-                <div className="btnContainer">
-                    <button onClick={this.toggleEditListMode}>Edit</button>
-                    <button onClick={this.toggleAddMode}> New List</button>
-                </div>
-            </div>
-        )
-    }
 
     render() {
 
         const lists = this.props.catalog.map((listItem, i) => {
-            return <List key={i} listItem={listItem} clearList={this.clearList} />
+            return <List key={i} listItem={listItem} clearList={this.clearList} />  
         })
         
         return (
@@ -126,18 +88,14 @@ class SideMenu extends Component {
                 <h6>My Lists: </h6>
                 
                 {lists}
-                <div className="btnContainer">
-                    <input autoFocus type="text" placeholder="Enter new list name" value={this.state.listName}
-                           onChange={this.newList} onKeyPress={this.handleKeyPress}/>
-                    <button onClick={this.saveList}><i className="fa fa-check" aria-hidden="true"></i></button>
-                    <button onClick={this.clearList}><i className="fa fa-times" aria-hidden="true"></i>
-                    </button>
-                </div>
-                <div className="btnContainer">
-                    <button onClick={this.toggleEditListMode}>Edit</button>
-                    <button onClick={this.toggleAddMode}> New List</button>
-                </div>
-                
+                {this.state.addMode
+                    ? <div className="btnContainer">
+                        <input autoFocus type="text" placeholder="Enter new list name" value={this.state.listName}
+                            onChange={this.newList} onKeyPress={this.handleKeyPress} />
+                        <button onClick={this.saveList}><i className="fa fa-check" aria-hidden="true"></i></button>
+                        <button onClick={this.clearList}><i className="fa fa-times" aria-hidden="true"></i></button>
+                     </div> : null}
+                    <EditMode addNew={this.toggleAddMode}/>
             </div>
         )
         
