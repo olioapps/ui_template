@@ -74,7 +74,6 @@ class SideMenu extends Component {
         }
     }
 
-
     clearList() {
         this.setState({listName: ''})
     }
@@ -118,7 +117,7 @@ class SideMenu extends Component {
     render() {
 
         const lists = this.props.catalog.map((listItem, i) => {
-            return <List key={i} listItem={listItem}  />
+            return <List key={i} listItem={listItem} clearList={this.clearList} />
         })
         
         return (
@@ -141,46 +140,6 @@ class SideMenu extends Component {
                 
             </div>
         )
-        
-        
-        // *************************************
-        
-        // const editingListMode = this.state.editListMode
-        // const editingMode = this.state.editMode
-        //
-        // let buttons = null
-        //
-        // if(editingListMode) {
-        //     buttons =
-        //         <div>
-        //             <button onClick={this.toggleEditMode}><i className="fa fa-pencil" aria-hidden="true"></i></button>
-        //             <button><i className="fa fa-times" aria-hidden="true"></i></button>
-        //         </div>
-        // }
-        //
-        // if(editingMode) {
-        //     buttons =
-        //         <div>
-        //             <button><i className="fa fa-check" aria-hidden="true"></i></button>
-        //             <button><i className="fa fa-times" aria-hidden="true"></i></button>
-        //         </div>
-        // }
-        //
-        // const listNames = this.props.catalog.map((list) =>
-        //     <li key={list.id} onClick={()=> this.props.setCurrentListID(list.id)} >
-        //         {list.name}
-        //         <span>{list.count}</span>
-        //         <span>{buttons}</span>
-        //     </li>
-        // )
-        //
-        // if (this.state.addMode === true) {
-        //     return this.renderAddList(listNames)
-        // }
-        // else {
-        //     return this.renderNormal(listNames)
-        // }
-        //
         
     }
 }

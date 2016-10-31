@@ -14,11 +14,10 @@ class List extends Component {
 
 
         this.state = {
-            listName: props.catalog.name,
+            listName: props.listItem.name,
             editMode: false,
         }
     }
-
 
     changeName(e) {
         this.setState({listName: e.target.value})
@@ -26,23 +25,21 @@ class List extends Component {
 
     handleKeyPress(e) {
         if (e.key === 'Enter') {
-            console.log("enter key pressed")
             this.saveEdit()
         }
     }
 
     saveEdit() {
-        console.log("save - update the list name")
+        this.props.updateListName(this.props.currentListId, this.state.listName)
     }
 
     setEditMode(bool) {
         return () => this.setState({editMode: bool})
     }
-
+    
     render() {
         
         return (
-
             <ul id="list">
                 {this.state.editMode
                     ? <input type="text" autoFocus value={this.state.listName} onKeyPress={this.handleKeyPress}
@@ -54,11 +51,13 @@ class List extends Component {
                 }
                 < div className="btnContainer">
                 {this.state.editMode
-                    ? <button onClick={this.saveEdit}><i className="fa fa-check"/></button>
-                    : <button onClick={this.setEditMode(true)}><i className="fa fa-pencil"/>
+                    ? <button onClick={this.saveEdit}><i className="fa fa-check"/></button> 
+                    : <button onClick={this.setEditMode(true)}><i className="fa fa-pencil"/> 
                 </button>}
-                <button onClick={this.deleteTask}><i className="fa fa-times"/>
-                </button>
+                {this.state.editMode
+                    ? <button onClick={this.deleteTask}><i className="fa fa-times"/></button>
+                    : <button onClick={this.clearTask}><i className="fa fa-times"/></button>
+                }
             </div>
 
             </ul>
