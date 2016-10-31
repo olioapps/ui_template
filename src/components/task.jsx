@@ -13,11 +13,16 @@ class Task extends Component {
         this.deleteTask = this.deleteTask.bind(this)
         this.checkToggle = this.checkToggle.bind(this)
         this.handleKeyPress = this.handleKeyPress.bind(this)
+        this.handleClear = this.handleClear.bind(this)
+
 
         this.state = {
             editMode: false,
             taskName: props.task.label,
         }
+
+        console.log('task name: ' + this.state.taskName)
+
     }
 
     setEditMode(bool) {
@@ -35,6 +40,9 @@ class Task extends Component {
         }
     }
 
+    handleClear() {
+        this.setState({taskName: " "})
+    }
 
     saveEdit() {
         this.props.updateTaskSave(this.props.currentListId, this.props.task.id, this.state.taskName)
@@ -48,6 +56,8 @@ class Task extends Component {
     checkToggle() {
         this.props.checkToggle(this.props.currentListId, this.props.task.id, !this.props.task.completed)
     }
+
+
 
     render() {
         const textStyle = this.props.task.completed ? 'line-through': "none"
@@ -69,9 +79,10 @@ class Task extends Component {
                     : <button onClick={this.setEditMode(true)}><i className="fa fa-pencil" aria-hidden="true"></i>
                 </button>}
 
-                <button onClick={this.deleteTask}><i className="fa fa-times" aria-hidden="true"></i>
-                </button>
-
+                {this.state.editMode
+                    ? <button onClick={this.handleClear}><i className="fa fa-times" aria-hidden="true"></i></button>  // clear input field
+                    : <button onClick={this.deleteTask}><i className="fa fa-times" aria-hidden="true"></i></button>  // delete task
+                }
             </ul>
         )
     }
