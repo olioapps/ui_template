@@ -142,6 +142,15 @@ export function toggleChecked(state:List<TaskList>, listId:string, taskId:string
     )
 }
 
+export function updateListName(state:List<TaskList>, id:string, updatedListName:string):List<TaskList> {
+    
+    return state.update(
+        state.findIndex(
+            tasklist => taskList.id === id
+        ),
+        list => list.set("name", updatedListName)
+    )
+}
 
 function id() {
     function s4() {

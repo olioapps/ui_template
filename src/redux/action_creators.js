@@ -47,3 +47,10 @@ export function checkToggle(listId, taskId, checked) {
     }
 }
 
+export function updateListName(listId, updatedListName) {
+    return {
+        type: 'UPDATE_LIST_NAME',
+        listId,
+        updatedListName,
+    }
+}

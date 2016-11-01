@@ -31,7 +31,7 @@ class Task extends Component {
 
     changeName(e) {
         this.setState({taskName: e.target.value})
-
+        console.log(this.state.taskName)
     }
     handleKeyPress(e) {
         if (e.key === 'Enter'){
