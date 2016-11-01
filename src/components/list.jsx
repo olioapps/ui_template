@@ -36,30 +36,36 @@ class List extends Component {
         this.setListEditMode(false)()
     }
 
-    setListEditMode(bool) {
-        return () => this.setState({editMode: bool})
+    setListEditMode() {
+        this.setState({editMode: !this.state.editMode})
     }
     deleteList() {
         this.props.deleteList(this.props.currentListId)
-        this.setListEditMode(false)()
+        this.setListEditMode(false)
     }
 
     render() {
         
         return (
             <ul id="list">
+                <li>
                 {this.state.editMode
+                    //true//
                     ? <input type="text" autoFocus value={this.state.listName} onKeyPress={this.handleKeyPress}
                              onChange={this.changeName} />
-                    : <li key={this.props.listItem.id} onClick={()=> this.props.setCurrentListID(this.props.listItem.id)}>
+                    //false//
+                    : <span key={this.props.listItem.id} onClick={()=> this.props.setCurrentListID(this.props.listItem.id)}>
                         {this.props.listItem.name}
-                    <span>{this.props.listItem.count}</span>
-                    {this.props.revealOptionsBool
-                        ? <ListOptions setListEditMode={this.setListEditMode}/>
-                        : null
-                    }
-                    </li>
+                        <span>{this.props.listItem.count}</span>
+                    </span>
                 }
+
+                {this.props.revealOptionsBool
+                    ? <ListOptions editMode={this.state.editMode} setListEditMode={this.setListEditMode}/>
+                    : null
+                }
+
+                </li>
             </ul>
         )
 
