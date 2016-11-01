@@ -72,7 +72,7 @@ class List extends Component {
                 }
 
                 {this.props.revealOptionsBool
-                    ? <ListOptions editMode={this.state.editMode} handleClear={this.handleClear} setListEditMode={this.setListEditMode}/>
+                    ? <ListOptions editMode={this.state.editMode} handleClear={this.handleClear} setListEditMode={this.setListEditMode} saveEdit={this.saveEdit}/>
                     : null
                 }
 
