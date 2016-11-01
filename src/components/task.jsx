@@ -1,6 +1,8 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import * as actionCreators from '../redux/action_creators'
+import HelpText from './help_text'
+
 
 class Task extends Component {
 
@@ -19,6 +21,7 @@ class Task extends Component {
         this.state = {
             editMode: false,
             taskName: props.task.label,
+            showHelp: false,
         }
 
         console.log('task name: ' + this.state.taskName)
@@ -32,6 +35,7 @@ class Task extends Component {
     changeName(e) {
         this.setState({taskName: e.target.value})
         console.log(this.state.taskName)
+        this.setState({showHelp: false})
     }
     handleKeyPress(e) {
         if (e.key === 'Enter'){
@@ -45,8 +49,13 @@ class Task extends Component {
     }
 
     saveEdit() {
-        this.props.updateTaskSave(this.props.currentListId, this.props.task.id, this.state.taskName)
-        this.setEditMode(false)()
+        if(this.state.taskName !== '') {
+            this.props.updateTaskSave(this.props.currentListId, this.props.task.id, this.state.taskName)
+            this.setEditMode(false)()
+        } else {
+            this.setState({showHelp: true})
+        }
+
     }
 
     deleteTask() {
@@ -64,27 +73,29 @@ class Task extends Component {
         const colorStyle = this.props.task.completed ? 'grey': "inherit"
 
         return (
+            <div>
+                <ul id="task">
+                    <input type="checkbox" checked={this.props.task.completed} onChange={this.checkToggle} />
+                    {this.state.editMode
+                        ? <input type="text" autoFocus value={this.state.taskName} onKeyPress={this.handleKeyPress} onChange={this.changeName}  />
+                        // : <li style={this.props.style}>{this.props.task.label}</li>
+                        : <li style={{textDecoration: textStyle, color: colorStyle }}>{this.props.task.label}</li>
+                    }
 
-            <ul id="task">
-                <input type="checkbox" checked={this.props.task.completed} onChange={this.checkToggle} />
-                {this.state.editMode
-                    ? <input type="text" autoFocus value={this.state.taskName} onKeyPress={this.handleKeyPress} onChange={this.changeName}  />
-                    // : <li style={this.props.style}>{this.props.task.label}</li>
-                    : <li style={{textDecoration: textStyle, color: colorStyle }}>{this.props.task.label}</li>
-                }
 
+                    {this.state.editMode
+                        ? <button onClick={this.saveEdit}><i className="fa fa-check" aria-hidden="true"></i></button>
+                        : <button onClick={this.setEditMode(true)}><i className="fa fa-pencil" aria-hidden="true"></i>
+                    </button>}
 
-                {this.state.editMode
-                    ? <button onClick={this.saveEdit}><i className="fa fa-check" aria-hidden="true"></i></button>
-                    : <button onClick={this.setEditMode(true)}><i className="fa fa-pencil" aria-hidden="true"></i>
-                </button>}
-
-                {this.state.editMode
-                    ? <button onClick={this.handleClear}><i className="fa fa-times" aria-hidden="true"></i></button>  // clear input field
-                    : <button onClick={this.deleteTask}><i className="fa fa-times" aria-hidden="true"></i></button>  // delete task
-                }
-            </ul>
-        )
+                    {this.state.editMode
+                        ? <button onClick={this.handleClear}><i className="fa fa-times" aria-hidden="true"></i></button>  // clear input field
+                        : <button onClick={this.deleteTask}><i className="fa fa-times" aria-hidden="true"></i></button>  // delete task
+                    }
+                </ul>
+                { this.state.showHelp ? <HelpText /> : null }
+        </div>
+    )
     }
 }
 
