@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import * as actionCreators from '../redux/action_creators'
+import ListOptions from './list_options'
 
 class List extends Component {
 
@@ -10,7 +11,7 @@ class List extends Component {
         this.changeName = this.changeName.bind(this)
         this.handleKeyPress = this.handleKeyPress.bind(this)
         this.saveEdit = this.saveEdit.bind(this)
-        this.setEditMode = this.setEditMode.bind(this)
+        this.setListEditMode = this.setListEditMode.bind(this)
         this.deleteList = this.deleteList.bind(this)
 
 
@@ -32,40 +33,38 @@ class List extends Component {
 
     saveEdit() {
         this.props.updateListName(this.props.listItem.id, this.state.listName)
-        this.setEditMode(false)()
+        this.setListEditMode(false)
     }
 
-    setEditMode(bool) {
-        return () => this.setState({editMode: bool})
+    setListEditMode() {
+        this.setState({editMode: !this.state.editMode})
     }
     deleteList() {
         this.props.deleteList(this.props.listItem.id)
-        this.setEditMode(false)()
+        this.setListEditMode(false)
     }
 
     render() {
         
         return (
             <ul id="list">
+                <li>
                 {this.state.editMode
+                    //true//
                     ? <input type="text" autoFocus value={this.state.listName} onKeyPress={this.handleKeyPress}
                              onChange={this.changeName}/>
-                    : <li key={this.props.listItem.id} onClick={()=> this.props.setCurrentListID(this.props.listItem.id)}>
+                    : <span key={this.props.listItem.id} onClick={()=> this.props.setCurrentListID(this.props.listItem.id)}>
                     {this.props.listItem.name} -&nbsp;
                     <span>{this.props.listItem.count}</span>
-                    </li>
+                    </span>
                 }
-                < div className="btnContainer">
-                {this.state.editMode
-                    ? <button onClick={this.saveEdit}><i className="fa fa-check"/></button> 
-                    : <button onClick={this.setEditMode(true)}><i className="fa fa-pencil"/> 
-                </button>}
-                {this.state.editMode
-                    ? <button><i className="fa fa-times"/></button>
-                    : <button onClick={this.deleteList}><i className="fa fa-times"/></button>
-                }
-            </div>
 
+                {this.props.revealOptionsBool
+                    ? <ListOptions editMode={this.state.editMode} setListEditMode={this.setListEditMode}/>
+                    : null
+                }
+
+                </li>
             </ul>
         )
 

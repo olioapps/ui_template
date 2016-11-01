@@ -50,7 +50,7 @@ class TaskList extends Component {
 
         // const incompleteTasks = currentList.tasks.filter( task=> task.completed ===false).map((task, i) => <Task key={i} task={task}/>)
         // const completeTasks = currentList.tasks.filter( task=> task.completed ===true).map((task, i) => <Task key={i} task={task}/>)
-
+  
         return (
             <div id="taskList">
 
