@@ -14,14 +14,12 @@ class SideMenu extends Component {
         this.clearList = this.clearList.bind(this)
         this.handleKeyPress = this.handleKeyPress.bind(this)
         this.toggleEditListMode = this.toggleEditListMode.bind(this)
-        this.toggleEditMode = this.toggleEditMode.bind(this)
         this.toggleAddMode = this.toggleAddMode.bind(this)
         this.revealOptions = this.revealOptions.bind(this)
 
         this.state = {
             listName: '',
             editListMode: false,
-            editMode: false,
             addMode: true,
             revealOptionsBool: true,
         }
@@ -46,9 +44,6 @@ class SideMenu extends Component {
         this.setState({editListMode: !this.state.editListMode})
     }
 
-    toggleEditMode() {
-        this.setState({editMode: !this.state.editMode})
-    }
 
     toggleAddMode() {
         if(this.state.editListMode) { this.toggleEditListMode() }
