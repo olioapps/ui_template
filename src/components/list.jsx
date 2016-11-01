@@ -59,7 +59,6 @@ class List extends Component {
     render() {
 
         return (
-
                 <li>
                 {this.state.editMode
                     //true//
