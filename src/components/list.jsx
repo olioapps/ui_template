@@ -13,12 +13,17 @@ class List extends Component {
         this.saveEdit = this.saveEdit.bind(this)
         this.setListEditMode = this.setListEditMode.bind(this)
         this.deleteList = this.deleteList.bind(this)
+        this.handleClear = this.handleClear.bind(this)
 
 
         this.state = {
             listName: props.listItem.name,
             editMode: false,
         }
+    }
+
+    handleClear() {
+        this.setState({listName: ""})
     }
 
     changeName(e) {
@@ -60,7 +65,7 @@ class List extends Component {
                 }
 
                 {this.props.revealOptionsBool
-                    ? <ListOptions editMode={this.state.editMode} setListEditMode={this.setListEditMode} saveEdit={this.saveEdit}/>
+                    ? <ListOptions editMode={this.state.editMode} handleClear={this.handleClear} setListEditMode={this.setListEditMode}/>
                     : null
                 }
 
