@@ -146,7 +146,7 @@ export function updateListName(state:List<TaskList>, id:string, updatedListName:
     
     return state.update(
         state.findIndex(
-            tasklist => taskList.id === id
+            taskList => taskList.get('id') === id
         ),
         list => list.set("name", updatedListName)
     )
@@ -156,7 +156,7 @@ export function updateListName(state:List<TaskList>, id:string, updatedListName:
 export function deleteList(state: list<TaskList>, id:string): List<TaskList> {
     
     return state.delete(
-        state.findIndex( tasklist => taskList.id === id
+        state.findIndex( taskList => taskList.id === id
         )
     )
 }

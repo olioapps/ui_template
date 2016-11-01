@@ -31,7 +31,7 @@ class List extends Component {
     }
 
     saveEdit() {
-        this.props.updateListName(this.props.currentListId, this.state.listName)
+        this.props.updateListName(this.props.listItem.id, this.state.listName)
         this.setEditMode(false)()
     }
 
@@ -39,7 +39,7 @@ class List extends Component {
         return () => this.setState({editMode: bool})
     }
     deleteList() {
-        this.props.deleteList(this.props.currentListId)
+        this.props.deleteList(this.props.listItem.id)
         this.setEditMode(false)()
     }
 
@@ -51,9 +51,9 @@ class List extends Component {
                     ? <input type="text" autoFocus value={this.state.listName} onKeyPress={this.handleKeyPress}
                              onChange={this.changeName}/>
                     : <li key={this.props.listItem.id} onClick={()=> this.props.setCurrentListID(this.props.listItem.id)}>
-                    {this.props.listItem.name}
+                    {this.props.listItem.name} -&nbsp;
                     <span>{this.props.listItem.count}</span>
-                </li>
+                    </li>
                 }
                 < div className="btnContainer">
                 {this.state.editMode
