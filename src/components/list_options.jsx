@@ -11,11 +11,14 @@ class ListOptions extends Component {
         this.optionButtons = this.optionButtons.bind(this)
     }
 
+ 
+
+
     editModeButtons() {
         return (
             <div>
                 <button onClick={this.props.saveEdit}><i className="fa fa-check"/></button>
-                <button><i className="fa fa-times"/></button>
+                <button onClick={this.props.handleClear}><i className="fa fa-times"/></button>
             </div>
         )
     }
