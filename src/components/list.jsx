@@ -11,7 +11,7 @@ class List extends Component {
         this.changeName = this.changeName.bind(this)
         this.handleKeyPress = this.handleKeyPress.bind(this)
         this.saveEdit = this.saveEdit.bind(this)
-        this.setTaskEditMode = this.setTaskEditMode.bind(this)
+        this.setListEditMode = this.setListEditMode.bind(this)
         this.deleteList = this.deleteList.bind(this)
 
 
@@ -33,15 +33,15 @@ class List extends Component {
 
     saveEdit() {
         this.props.updateListName(this.props.currentListId, this.state.listName)
-        this.setTaskEditMode(false)()
+        this.setListEditMode(false)()
     }
 
-    setTaskEditMode(bool) {
+    setListEditMode(bool) {
         return () => this.setState({editMode: bool})
     }
     deleteList() {
         this.props.deleteList(this.props.currentListId)
-        this.setTaskEditMode(false)()
+        this.setListEditMode(false)()
     }
 
     render() {
@@ -55,7 +55,7 @@ class List extends Component {
                         {this.props.listItem.name}
                     <span>{this.props.listItem.count}</span>
                     {this.props.revealOptionsBool
-                        ? <ListOptions setTaskEditMode={this.setTaskEditMode}/>
+                        ? <ListOptions setListEditMode={this.setListEditMode}/>
                         : null
                     }
                     </li>

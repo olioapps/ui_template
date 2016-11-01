@@ -27,7 +27,7 @@ class ListOptions extends Component {
     optionButtons() {
         return (
             <div>
-                <button onClick={this.props.setTaskEditMode(true)}><i className="fa fa-pencil"/></button>
+                <button onClick={this.props.setListEditMode(true)}><i className="fa fa-pencil"/></button>
                 <button onClick={this.props.deleteList}><i className="fa fa-times"/></button>
             </div>
         )
