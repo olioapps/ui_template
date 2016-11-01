@@ -102,7 +102,7 @@ class SideMenu extends Component {
                     : null
                 }
                     
-                <SideMenuOptions addNew={this.toggleAddMode} toggleEdit={this.revealOptions}/>
+                <SideMenuOptions revealOptionsBool={this.state.revealOptionsBool} toggleAddMode={this.toggleAddMode} revealOptions={this.revealOptions}/>
             </div>
         )
         
