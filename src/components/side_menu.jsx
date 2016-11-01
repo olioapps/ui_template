@@ -75,7 +75,7 @@ class SideMenu extends Component {
         this.setState({listName: ''})
     }
 
-    newListComponenet() {
+    newListComponent() {
         return <div className="btnContainer">
                         <input autoFocus type="text" placeholder="Enter new list name" value={this.state.listName}
                             onChange={this.newList} onKeyPress={this.handleKeyPress} />
@@ -103,7 +103,7 @@ class SideMenu extends Component {
                 {lists}
 
                 {this.state.addMode
-                    ? this.newListComponenet() 
+                    ? this.newListComponent() 
                     : null
                 }
                     
