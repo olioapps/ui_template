@@ -17,6 +17,7 @@ class SideMenuOptions extends Component {
         if (this.props.revealOptionsBool) { this.props.revealOptions() }
     }
 
+
     render() {
         return (
             <div className="btnContainer">

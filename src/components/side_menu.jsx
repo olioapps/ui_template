@@ -98,14 +98,15 @@ class SideMenu extends Component {
             <div id="sideMenu">
                 <h3>User</h3>
                 <h6>My Lists: </h6>
-                
+
+                <ul id="list">
                 {lists}
+                </ul>
 
                 {this.state.addMode
-                    ? this.newListComponent() 
+                    ? this.newListComponent()
                     : null
                 }
-                    
                 <SideMenuOptions revealOptionsBool={this.state.revealOptionsBool} revealOptions={this.revealOptions} toggleAddMode={this.toggleAddMode} />
             </div>
         )

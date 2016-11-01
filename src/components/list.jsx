@@ -39,15 +39,15 @@ class List extends Component {
     }
 
     saveEdit() {
-        this.props.updateListName(this.props.currentListId, this.state.listName)
-        this.setListEditMode(false)()
+        this.props.updateListName(this.props.listItem.id, this.state.listName)
+        this.setListEditMode(false)
     }
 
     setListEditMode() {
         this.setState({editMode: !this.state.editMode})
     }
     deleteList() {
-        this.props.deleteList(this.props.currentListId)
+        this.props.deleteList(this.props.listItem.id)
         this.setListEditMode(false)
     }
 
@@ -59,13 +59,12 @@ class List extends Component {
     render() {
 
         return (
-            <ul id="list">
+
                 <li>
                 {this.state.editMode
                     //true//
                     ? <input type="text" autoFocus value={this.state.listName} onKeyPress={this.handleKeyPress}
-                             onChange={this.changeName} />
-                    //false//
+                             onChange={this.changeName}/>
                     : <span key={this.props.listItem.id} onClick={()=> this.props.setCurrentListID(this.props.listItem.id)}>
                         {this.props.listItem.name}
                         <span>{this.incompleteCount()} </span>
@@ -78,7 +77,7 @@ class List extends Component {
                 }
 
                 </li>
-            </ul>
+
         )
 
     }

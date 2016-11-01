@@ -130,7 +130,7 @@ export function updateListName(state:List<TaskList>, id:string, updatedListName:
     
     return state.update(
         state.findIndex(
-            taskList => taskList.id === id
+            taskList => taskList.get('id') === id
         ),
         list => list.set("name", updatedListName)
     )
