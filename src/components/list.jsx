@@ -11,6 +11,7 @@ class List extends Component {
         this.handleKeyPress = this.handleKeyPress.bind(this)
         this.saveEdit = this.saveEdit.bind(this)
         this.setEditMode = this.setEditMode.bind(this)
+        this.deleteList = this.deleteList.bind(this)
 
 
         this.state = {
@@ -37,7 +38,11 @@ class List extends Component {
     setEditMode(bool) {
         return () => this.setState({editMode: bool})
     }
-    
+    deleteList() {
+        this.props.deleteList(this.props.currentListId)
+        this.setEditMode(false)()
+    }
+
     render() {
         
         return (
@@ -56,8 +61,8 @@ class List extends Component {
                     : <button onClick={this.setEditMode(true)}><i className="fa fa-pencil"/> 
                 </button>}
                 {this.state.editMode
-                    ? <button onClick={this.deleteTask}><i className="fa fa-times"/></button>
-                    : <button onClick={this.clearTask}><i className="fa fa-times"/></button>
+                    ? <button><i className="fa fa-times"/></button>
+                    : <button onClick={this.deleteList}><i className="fa fa-times"/></button>
                 }
             </div>
 

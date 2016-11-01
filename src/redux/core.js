@@ -152,6 +152,15 @@ export function updateListName(state:List<TaskList>, id:string, updatedListName:
     )
 }
 
+// delete list form side menu
+export function deleteList(state: list<TaskList>, id:string): List<TaskList> {
+    
+    return state.delete(
+        state.findIndex( tasklist => taskList.id === id
+        )
+    )
+}
+
 function id() {
     function s4() {
         return Math.floor((1 + Math.random()) * 0x10000)

@@ -54,3 +54,10 @@ export function updateListName(listId, updatedListName) {
         updatedListName,
     }
 }
+
+export function deleteList(listId) {
+    return {
+        type: 'DELETE_LIST',
+        listId,
+    }
+}

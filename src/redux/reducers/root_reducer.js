@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux-immutablejs'
-import { INITIAL_STATE, addToList, addList, updateTaskSave, updateTaskDelete, toggleChecked, updateListName } from '../core'
+import { INITIAL_STATE, addToList, addList, updateTaskSave, updateTaskDelete, toggleChecked, updateListName, deleteList } from '../core'
 
 function catalog(state = INITIAL_STATE.get("catalog"), action) {
     switch(action.type){
@@ -15,6 +15,8 @@ function catalog(state = INITIAL_STATE.get("catalog"), action) {
             return toggleChecked(state, action.listId, action.taskId, action.checked )
         case 'UPDATE_LIST_NAME':
             return updateListName(state, action.taskListId, action.updatedListName)
+        case 'DELETE_LIST':
+            return deleteList(state, action.taskListId)
 
         default:
             return state
