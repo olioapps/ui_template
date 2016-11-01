@@ -17,14 +17,12 @@ export const TaskRecord = Record({
 export type TaskList = {
     id: string,
     name: string,
-    count: number,
     tasks: List<Task>,
 }
 
 export const TaskListRecord = Record({
     id: '',
     name: '',
-    count: 0,
     tasks: new List(),
 })
 
@@ -52,14 +50,7 @@ export function addList(state:List<TaskList>, listName:string, id:string):List<T
 export function addToList(state:List<TaskList>, listId:string, taskLabel:string):List<TaskList> {
     console.log("Addtolist: ", state)
 
-    const newState = state.update(
-        state.findIndex(taskList => taskList.id === listId),
-        taskList => {
-            return taskList.set('count', taskList.get('count') + 1)
-        }
-    )
-
-    return newState.update(
+    return state.update(
         // find index
         state.findIndex(taskList => taskList.id === listId),
 
@@ -98,14 +89,7 @@ export function updateTaskSave(state:List<TaskList>, listId:string, taskId:strin
 
 export function updateTaskDelete(state:List<TaskList>, listId:string, taskId:string):List<TaskList> {
 
-    const newState = state.update(
-        state.findIndex(taskList => taskList.id === listId),
-        taskList => {
-            return taskList.set('count', taskList.get('count') - 1)
-        }
-    )
-
-    return newState.update(
+    return state.update(
         //find list
         state.findIndex(
             taskList => taskList.id === listId
@@ -119,7 +103,7 @@ export function updateTaskDelete(state:List<TaskList>, listId:string, taskId:str
                 ["tasks", taskIndex]
             )
         }
-    ).set("count", state.get('count') - 1)
+    )
 }
 
 
