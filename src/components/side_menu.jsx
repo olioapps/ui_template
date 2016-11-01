@@ -89,7 +89,11 @@ class SideMenu extends Component {
         const lists = this.props.catalog.map((listItem, i) => {
             return <List key={i} listItem={listItem} clearList={this.clearList} revealOptionsBool={this.state.revealOptionsBool}/>  
         })
-        
+
+
+        // const incompleteTasks = lists.tasks.filter( task=> task.completed ===false).map((task, i) => <Task key={i} task={task}/>)
+        // count = incompleteTasks.length()
+
         return (
             <div id="sideMenu">
                 <h3>User</h3>

@@ -14,6 +14,8 @@ class List extends Component {
         this.setListEditMode = this.setListEditMode.bind(this)
         this.deleteList = this.deleteList.bind(this)
         this.handleClear = this.handleClear.bind(this)
+        this.incompleteCount = this.incompleteCount.bind(this)
+
 
 
         this.state = {
@@ -49,8 +51,13 @@ class List extends Component {
         this.setListEditMode(false)
     }
 
+    incompleteCount() {
+        const incompleteTasks = this.props.listItem.tasks.filter( task => task.completed === false)
+        return incompleteTasks.length
+    }
+
     render() {
-        
+
         return (
             <ul id="list">
                 <li>
@@ -61,7 +68,7 @@ class List extends Component {
                     //false//
                     : <span key={this.props.listItem.id} onClick={()=> this.props.setCurrentListID(this.props.listItem.id)}>
                         {this.props.listItem.name}
-                        <span>{this.props.listItem.count}</span>
+                        <span>{this.incompleteCount()} </span>
                     </span>
                 }
 
