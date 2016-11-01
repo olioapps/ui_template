@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import * as actionCreators from '../redux/action_creators'
 
-class EditMode extends Component {
+class SideMenuOptions extends Component {
 
     render() {
         return (
@@ -15,4 +15,4 @@ class EditMode extends Component {
     }
 }
 
-export default connect(state => state.toJSON(), actionCreators)(EditMode)
+export default connect(state => state.toJSON(), actionCreators)(SideMenuOptions)

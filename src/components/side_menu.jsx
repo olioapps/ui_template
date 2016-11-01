@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import * as actionCreators from '../redux/action_creators'
 import List from './list'
-import EditMode from './side_menu_options'
+import SideMenuOptions from './side_menu_options'
 
 
 class SideMenu extends Component {
@@ -21,7 +21,7 @@ class SideMenu extends Component {
             listName: '',
             editListMode: false,
             addMode: true,
-            revealOptionsBool: true,
+            revealOptionsBool: false,
         }
     }
 
@@ -102,7 +102,7 @@ class SideMenu extends Component {
                     : null
                 }
                     
-                <EditMode addNew={this.toggleAddMode} toggleEdit={this.revealOptions}/>
+                <SideMenuOptions addNew={this.toggleAddMode} toggleEdit={this.revealOptions}/>
             </div>
         )
         
