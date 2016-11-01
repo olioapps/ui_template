@@ -7,7 +7,7 @@ class HelpText extends Component {
     render() {
         return (
             <div id="helpText">
-                "* cannot be empty"
+                * cannot be empty
             </div>
         )
     }
