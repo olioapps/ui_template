@@ -47,7 +47,7 @@ class List extends Component {
     render() {
         
         return (
-            <ul id="list">
+
                 <li>
                 {this.state.editMode
                     //true//
@@ -60,12 +60,12 @@ class List extends Component {
                 }
 
                 {this.props.revealOptionsBool
-                    ? <ListOptions editMode={this.state.editMode} setListEditMode={this.setListEditMode}/>
+                    ? <ListOptions editMode={this.state.editMode} setListEditMode={this.setListEditMode} saveEdit={this.saveEdit}/>
                     : null
                 }
 
                 </li>
-            </ul>
+
         )
 
     }
