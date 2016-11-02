@@ -17,11 +17,14 @@ class SideMenuOptions extends Component {
         if (this.props.revealOptionsBool) { this.props.revealOptions() }
     }
 
+    showEditButton() {
+        return <button onClick={this.props.revealOptions}>Edit</button>
+    }
 
     render() {
         return (
             <div className="btnContainer">
-                <button onClick={this.props.revealOptions}>Edit</button>
+                {this.props.catalog.length ? this.showEditButton(): null }
                 <button onClick={this.newListButton}>New List</button>
             </div>
         )
