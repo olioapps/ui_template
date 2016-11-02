@@ -13,6 +13,8 @@
     li {
       padding: 0.7rem 0;
       cursor: pointer;
+      display: flex;
+      align-items: center;
     }
   }
 }
@@ -73,7 +75,10 @@
 
 .btnContainer {
   display: flex;
-
+  div {
+    display: flex;
+    justify-content: flex-end;
+  }
   input {
     flex-grow: 2;
     padding: 0.5rem;
@@ -87,9 +92,6 @@
 @media screen and (min-width: 600px) {
   #task {
     width: 100%;
-    button {
-      //width: 3.7rem;
-    }
   }
 
 

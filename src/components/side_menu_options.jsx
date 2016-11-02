@@ -8,7 +8,7 @@ class SideMenuOptions extends Component {
         super(props)
 
         this.newListButton = this.newListButton.bind(this)
-
+        this.showNewList = this.showNewList.bind(this)
     }
 
 
@@ -21,11 +21,16 @@ class SideMenuOptions extends Component {
         return <button onClick={this.props.revealOptions}>Edit</button>
     }
 
+    showNewList() {
+
+        return <button onClick={this.newListButton}>New List</button>
+    }
+
     render() {
         return (
             <div className="btnContainer">
                 {this.props.catalog.length ? this.showEditButton(): null }
-                <button onClick={this.newListButton}>New List</button>
+                {!this.props.addMode ? this.showNewList() : null}
             </div>
         )
     }

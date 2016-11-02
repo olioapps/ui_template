@@ -92,8 +92,8 @@ class SideMenu extends Component {
                 <div className="btnContainer">
                         <input autoFocus type="text" placeholder="Enter new list name" value={this.state.listName}
                             onChange={this.newList} onKeyPress={this.handleKeyPress} />
-                        <button onClick={this.saveList}><i className="fa fa-check" aria-hidden="true"></i></button>
-                        <button onClick={this.toggleAddMode}><i className="fa fa-times" aria-hidden="true"></i></button>
+                        <button onClick={this.saveList}><i className="fa fa-check" /></button>
+                        <button onClick={this.toggleAddMode}><i className="fa fa-times" /></button>
                         <br/>
                      </div>
                 { this.state.showHelp ? <HelpText /> : null }
@@ -120,7 +120,7 @@ class SideMenu extends Component {
                     ? this.newListElement()
                     : null
                 }
-                <SideMenuOptions revealOptionsBool={this.state.revealOptionsBool} revealOptions={this.revealOptions} toggleAddMode={this.toggleAddMode} />
+                <SideMenuOptions revealOptionsBool={this.state.revealOptionsBool} revealOptions={this.revealOptions} toggleAddMode={this.toggleAddMode} addMode={this.state.addMode} />
             </div>
         )
         
