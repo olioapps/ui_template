@@ -23,9 +23,6 @@ class Task extends Component {
             taskName: props.task.label,
             showHelp: false,
         }
-
-        console.log('task name: ' + this.state.taskName)
-
     }
 
     setEditMode(bool) {
@@ -34,13 +31,11 @@ class Task extends Component {
 
     changeName(e) {
         this.setState({taskName: e.target.value})
-        console.log(this.state.taskName)
         this.setState({showHelp: false})
     }
 
     handleKeyPress(e) {
         if (e.key === 'Enter') {
-            console.log("enter key pressed")
             this.saveEdit()
         }
     }
@@ -77,7 +72,7 @@ class Task extends Component {
                 <ul id="task">
                     <input type="checkbox" checked={this.props.task.completed} onChange={this.checkToggle}/>
                     {this.state.editMode
-                        ? <input type="text" ref={ref => ref.focus()} value={this.state.taskName} onKeyPress={this.handleKeyPress}
+                        ? <input type="text" value={this.state.taskName} onKeyPress={this.handleKeyPress}
                                  onChange={this.changeName}/>
                         : <li style={{textDecoration: textStyle, color: colorStyle }}>{this.props.task.label}</li>
                     }

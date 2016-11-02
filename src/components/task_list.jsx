@@ -38,7 +38,7 @@ class TaskList extends Component {
 
     handleKeyPress(e) {
         if (e.key === 'Enter'){
-            console.log("enter key pressed")
+
             this.saveTask()
         }
     }
@@ -59,14 +59,13 @@ class TaskList extends Component {
         return (
             <div id="taskList">
 
-                <h3>{currentList.name}</h3>
+                {currentList.name ? <h3>{currentList.name}</h3> : null }
 
                 {listOfTasks}
-                {console.log(this.props.catalog)}
 
                     {this.props.catalog.length !== 0
                         ? <div className="newTaskContainer">
-                            <input id="task_input"  autoFocus type="text" placeholder="Enter new task" value={this.state.taskName}
+                            <input id="task_input" autoFocus type="text" placeholder="Enter new task" value={this.state.taskName}
                                    onChange={this.setTask} onKeyPress={this.handleKeyPress}/>
                                 <div className="btnContainer">
                                     <button onClick={this.saveTask}><i className="fa fa-check" /></button>

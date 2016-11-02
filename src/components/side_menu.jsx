@@ -72,7 +72,6 @@ class SideMenu extends Component {
 
     handleKeyPress(e) {
         if (e.key === 'Enter') {
-            console.log("enter key pressed")
             this.saveList()
         }
     }
@@ -82,7 +81,6 @@ class SideMenu extends Component {
     }
 
     revealOptions() {
-        console.log("OPTIONS: ", this.state.revealOptionsBool)
         this.setState({revealOptionsBool: !this.state.revealOptionsBool})
     }
 
@@ -104,13 +102,16 @@ class SideMenu extends Component {
 
     render() {
         const lists = this.props.catalog.map((listItem, i) => {
-            return <List key={i} listItem={listItem} clearList={this.clearList} revealOptionsBool={this.state.revealOptionsBool}/>  
+            return <List key={i}
+                         listItem={listItem}
+                         clearList={this.clearList}
+                         revealOptionsBool={this.state.revealOptionsBool}/>
         })
 
         return (
             <div id="sideMenu">
                 <h3>User</h3>
-                <h6>My Lists: </h6>
+                <h4>My Lists: </h4>
 
                 <ul id="list">
                 {lists}

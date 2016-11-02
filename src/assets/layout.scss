@@ -17,7 +17,7 @@ $color1: #112233;
   > div {
     display: flex;
     flex-direction: column;
-    padding: 1rem 1.4rem;
+    padding: 1rem 1.7rem;
 
     &:first-of-type {
       color: #fff;
@@ -44,8 +44,8 @@ input {
 
 
 @media screen and (min-width: 600px) {
-  #listContainer {
 
+  #listContainer {
     flex-direction: row;
     align-items: stretch;
     >div {
@@ -57,4 +57,10 @@ input {
 
     }
   }
+
+  #sideMenu {
+    min-width: 300px;
+  }
+
+
 }

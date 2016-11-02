@@ -77,7 +77,7 @@ class List extends Component {
                         : <span key={this.props.listItem.id} onClick={()=> this.props.setCurrentListID(this.props.listItem.id)}>
                             {this.props.listItem.name}
                             {this.incompleteCount()}
-                        </span>
+                          </span>
                     }
 
                     {this.props.revealOptionsBool

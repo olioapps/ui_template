@@ -48,7 +48,6 @@ export function addList(state:List<TaskList>, listName:string, id:string):List<T
 
 
 export function addToList(state:List<TaskList>, listId:string, taskLabel:string):List<TaskList> {
-    console.log("Addtolist: ", state)
 
     return state.update(
         // find index
@@ -65,9 +64,6 @@ export function addToList(state:List<TaskList>, listId:string, taskLabel:string)
 
 
 export function updateTaskSave(state:List<TaskList>, listId:string, taskId:string, taskString:string):List<TaskList> {
-    console.log("UpdateTaskSave: ", state)
-    console.log("IdOfList: ", listId)
-    console.log("IdOfTask: ", taskId)
 
     return state.update(
         // find the list
