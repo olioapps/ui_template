@@ -73,7 +73,7 @@ class Task extends Component {
                     : <li style={{textDecoration: textStyle, color: colorStyle }}>{this.props.task.label}</li>
                 }
 
-
+                <div className="btnContainer">
                 {this.state.editMode
                     ? <button onClick={this.saveEdit}><i className="fa fa-check" aria-hidden="true"></i></button>
                     : <button onClick={this.setEditMode(true)}><i className="fa fa-pencil" aria-hidden="true"></i>
@@ -83,6 +83,7 @@ class Task extends Component {
                     ? <button onClick={this.handleClear}><i className="fa fa-times" aria-hidden="true"></i></button>  // clear input field
                     : <button onClick={this.deleteTask}><i className="fa fa-times" aria-hidden="true"></i></button>  // delete task
                 }
+                </div>
             </ul>
         )
     }
