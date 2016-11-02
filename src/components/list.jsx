@@ -62,7 +62,7 @@ class List extends Component {
 
     incompleteCount() {
         const incompleteTasks = this.props.listItem.tasks.filter( task => task.completed === false)
-        return incompleteTasks.length
+        return !this.props.revealOptionsBool ? <span className="incompleteCount">{incompleteTasks.length}</span> : null
     }
 
     render() {
@@ -76,7 +76,7 @@ class List extends Component {
                                  onChange={this.changeName}/>
                         : <span key={this.props.listItem.id} onClick={()=> this.props.setCurrentListID(this.props.listItem.id)}>
                             {this.props.listItem.name}
-                            <span className="incompleteCount">{this.incompleteCount()} </span>
+                            {this.incompleteCount()}
                         </span>
                     }
 
