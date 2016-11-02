@@ -2,6 +2,8 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import * as actionCreators from '../redux/action_creators'
 import ListOptions from './list_options'
+import HelpText from './help_text'
+
 
 class List extends Component {
 
@@ -21,6 +23,8 @@ class List extends Component {
         this.state = {
             listName: props.listItem.name,
             editMode: false,
+            showHelp: false,
+
         }
     }
 
@@ -30,6 +34,7 @@ class List extends Component {
 
     changeName(e) {
         this.setState({listName: e.target.value})
+        this.setState({showHelp: false})
     }
 
     handleKeyPress(e) {
@@ -39,8 +44,12 @@ class List extends Component {
     }
 
     saveEdit() {
-        this.props.updateListName(this.props.listItem.id, this.state.listName)
-        this.setListEditMode(false)
+        if(this.state.listName !== '') {
+            this.props.updateListName(this.props.listItem.id, this.state.listName)
+            this.setListEditMode(false)
+        } else {
+            this.setState({showHelp: true})
+        }
     }
 
     setListEditMode() {
@@ -59,24 +68,28 @@ class List extends Component {
     render() {
 
         return (
+                <div>
+                    <li>
+                    {this.state.editMode
+                        //true//
+                        ? <input type="text" autoFocus value={this.state.listName} onKeyPress={this.handleKeyPress}
+                                 onChange={this.changeName}/>
+                        : <span key={this.props.listItem.id} onClick={()=> this.props.setCurrentListID(this.props.listItem.id)}>
+                            {this.props.listItem.name}
+                            <span>{this.incompleteCount()} </span>
+                        </span>
+                    }
 
-                <li>
-                {this.state.editMode
-                    //true//
-                    ? <input type="text" autoFocus value={this.state.listName} onKeyPress={this.handleKeyPress}
-                             onChange={this.changeName}/>
-                    : <span key={this.props.listItem.id} onClick={()=> this.props.setCurrentListID(this.props.listItem.id)}>
-                        {this.props.listItem.name}
-                        <span>{this.incompleteCount()} </span>
-                    </span>
-                }
+                    {this.props.revealOptionsBool
+                        ? <ListOptions editMode={this.state.editMode} handleClear={this.handleClear} setListEditMode={this.setListEditMode} saveEdit={this.saveEdit}/>
+                        : null
+                    }
 
-                {this.props.revealOptionsBool
-                    ? <ListOptions editMode={this.state.editMode} handleClear={this.handleClear} setListEditMode={this.setListEditMode} saveEdit={this.saveEdit}/>
-                    : null
-                }
+                    </li>
+                    { this.state.showHelp ? <HelpText /> : null }
 
-                </li>
+                </div>
+
 
         )
 

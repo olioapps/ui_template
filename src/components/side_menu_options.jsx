@@ -21,7 +21,6 @@ class SideMenuOptions extends Component {
     render() {
         return (
             <div className="btnContainer">
-            
                 <button onClick={this.props.revealOptions}>Edit</button>
                 <button onClick={this.newListButton}>New List</button>
             </div>
