@@ -66,7 +66,7 @@ class TaskList extends Component {
 
                     {this.props.catalog.length !== 0
                         ? <div className="newTaskContainer">
-                            <input id="task_input" type="text" placeholder="Enter new task" value={this.state.taskName}
+                            <input id="task_input"  autoFocus type="text" placeholder="Enter new task" value={this.state.taskName}
                                    onChange={this.setTask} onKeyPress={this.handleKeyPress}/>
                                 <div className="btnContainer">
                                     <button onClick={this.saveTask}><i className="fa fa-check" /></button>

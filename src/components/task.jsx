@@ -77,9 +77,8 @@ class Task extends Component {
                 <ul id="task">
                     <input type="checkbox" checked={this.props.task.completed} onChange={this.checkToggle}/>
                     {this.state.editMode
-                        ? <input type="text" autoFocus value={this.state.taskName} onKeyPress={this.handleKeyPress}
+                        ? <input type="text" ref={ref => ref.focus()} value={this.state.taskName} onKeyPress={this.handleKeyPress}
                                  onChange={this.changeName}/>
-                        // : <li style={this.props.style}>{this.props.task.label}</li>
                         : <li style={{textDecoration: textStyle, color: colorStyle }}>{this.props.task.label}</li>
                     }
 
