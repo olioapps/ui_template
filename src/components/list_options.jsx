@@ -16,7 +16,7 @@ class ListOptions extends Component {
 
     editModeButtons() {
         return (
-            <div className="btnContainer">
+            <div>
                 <button onClick={this.props.saveEdit}><i className="fa fa-check"/></button>
                 <button onClick={this.props.handleClear}><i className="fa fa-times"/></button>
             </div>
@@ -25,7 +25,7 @@ class ListOptions extends Component {
     
     optionButtons() {
         return (
-            <div className="btnContainer">
+            <div>
                 <button onClick={this.props.setListEditMode}><i className="fa fa-pencil"/></button>
                 <button onClick={this.props.deleteList}><i className="fa fa-times"/></button>
             </div>
@@ -33,7 +33,14 @@ class ListOptions extends Component {
     }
 
     render() {
-        return ( this.props.editMode ? this.editModeButtons() : this.optionButtons() )
+        return (
+            <div className="btnContainer">
+                { this.props.editMode
+                    ? this.editModeButtons()
+                    : this.optionButtons()
+                }
+            </div>
+        )
     }
 
 }

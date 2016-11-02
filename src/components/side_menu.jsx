@@ -3,6 +3,8 @@ import {connect} from 'react-redux'
 import * as actionCreators from '../redux/action_creators'
 import List from './list'
 import SideMenuOptions from './side_menu_options'
+import HelpText from './help_text'
+
 
 
 class SideMenu extends Component {
@@ -16,12 +18,16 @@ class SideMenu extends Component {
         this.toggleEditListMode = this.toggleEditListMode.bind(this)
         this.toggleAddMode = this.toggleAddMode.bind(this)
         this.revealOptions = this.revealOptions.bind(this)
+        this.newListElement = this.newListElement.bind(this)
+
+
 
         this.state = {
             listName: '',
             editListMode: false,
             addMode: true,
             revealOptionsBool: false,
+            showHelp: false,
         }
     }
 
@@ -38,6 +44,7 @@ class SideMenu extends Component {
 
     newList(event) {
         this.setState({listName: event.target.value})
+        this.setState({showHelp: false})
     }
 
     toggleEditListMode() {
@@ -47,16 +54,20 @@ class SideMenu extends Component {
 
     toggleAddMode() {
         if(this.state.editListMode) { this.toggleEditListMode() }
-
         this.setState({addMode: !this.state.addMode})
     }
 
     saveList() {
-        const id = this.id()
-        this.props.addList(this.state.listName, id)
-        this.props.setCurrentListID(id)
-        this.clearList()
-        this.toggleAddMode()
+        if (this.state.listName !== '') {
+            const id = this.id()
+            this.props.addList(this.state.listName, id)
+            this.props.setCurrentListID(id)
+            this.clearList()
+            this.toggleAddMode()
+        }
+        else {
+            this.setState({showHelp: true})
+        }
     }
 
     handleKeyPress(e) {
@@ -70,29 +81,31 @@ class SideMenu extends Component {
         this.setState({listName: ''})
     }
 
-    newListComponent() {
-        return <div className="btnContainer">
-                        <input autoFocus type="text" placeholder="Enter new list name" value={this.state.listName}
-                            onChange={this.newList} onKeyPress={this.handleKeyPress} />
-                        <button onClick={this.saveList}><i className="fa fa-check" aria-hidden="true"></i></button>
-                        <button onClick={this.toggleAddMode}><i className="fa fa-times" aria-hidden="true"></i></button>
-                     </div>
-    }
-
     revealOptions() {
         console.log("OPTIONS: ", this.state.revealOptionsBool)
         this.setState({revealOptionsBool: !this.state.revealOptionsBool})
     }
 
-    render() {
+    newListElement() {
+        return (
+            <div>
+                <div className="btnContainer">
+                        <input autoFocus type="text" placeholder="Enter new list name" value={this.state.listName}
+                            onChange={this.newList} onKeyPress={this.handleKeyPress} />
+                        <button onClick={this.saveList}><i className="fa fa-check" aria-hidden="true"></i></button>
+                        <button onClick={this.toggleAddMode}><i className="fa fa-times" aria-hidden="true"></i></button>
+                        <br/>
+                     </div>
+                { this.state.showHelp ? <HelpText /> : null }
+            </div>
+        )
+    }
 
+
+    render() {
         const lists = this.props.catalog.map((listItem, i) => {
             return <List key={i} listItem={listItem} clearList={this.clearList} revealOptionsBool={this.state.revealOptionsBool}/>  
         })
-
-
-        // const incompleteTasks = lists.tasks.filter( task=> task.completed ===false).map((task, i) => <Task key={i} task={task}/>)
-        // count = incompleteTasks.length()
 
         return (
             <div id="sideMenu">
@@ -104,7 +117,7 @@ class SideMenu extends Component {
                 </ul>
 
                 {this.state.addMode
-                    ? this.newListComponent()
+                    ? this.newListElement()
                     : null
                 }
                 <SideMenuOptions revealOptionsBool={this.state.revealOptionsBool} revealOptions={this.revealOptions} toggleAddMode={this.toggleAddMode} />

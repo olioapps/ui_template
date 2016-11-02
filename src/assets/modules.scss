@@ -1,10 +1,6 @@
 #sideMenu {
   width: 100%;
-
-  #list {
-    padding: 0;
-  }
-
+  height: 100%;
   button {
     display: block;
     width: auto;
@@ -15,21 +11,8 @@
     font-size: 24px;
     flex-grow: 1;
     li {
-      display: flex;
-      align-items: center;
-      padding: 0 1.2rem;
+      padding: 0.7rem 0;
       cursor: pointer;
-
-      width: 100%;
-      list-style-type: none;
-      span {
-        width: 100%;
-      }
-      input[type=text] {
-        width: 100%;
-        margin-bottom: 0;
-        font-size: 24px;
-      }
     }
   }
 }
@@ -102,11 +85,6 @@
 }
 
 @media screen and (min-width: 600px) {
-
-  #sideMenu {
-    height: 100%;
-  }
-
   #task {
     width: 100%;
     button {
