@@ -46,7 +46,7 @@ class Task extends Component {
     }
 
     handleClear() {
-        this.setState({taskName: " "})
+        this.setState({taskName: ""})
     }
 
     saveEdit() {
