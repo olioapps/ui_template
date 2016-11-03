@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom'
 import {connect} from 'react-redux'
 import * as actionCreators from '../redux/action_creators'
 import Task from './task'
-import HelpText from './help_text'
+import Validate from './validate'
 
 
 class TaskList extends Component {
@@ -93,7 +93,7 @@ class TaskList extends Component {
                     ? this.renderTaskInput()
                     : <h2>Please Create A List</h2>
                 }
-                { this.state.showHelp ? <HelpText /> : null }
+                { this.state.showHelp ? <Validate /> : null }
 
             </div>
         )

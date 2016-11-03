@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import * as actionCreators from '../redux/action_creators'
 import List from './list'
 import SideMenuOptions from './side_menu_options'
-import HelpText from './help_text'
+import Validate from './validate'
 import { makeId } from '../util/utils'
 
 class SideMenu extends Component {
@@ -89,7 +89,7 @@ class SideMenu extends Component {
                         <button onClick={this.toggleAddMode}><i className="fa fa-times" /></button>
                         <br/>
                      </div>
-                { this.state.showHelp ? <HelpText /> : null }
+                { this.state.showHelp ? <Validate /> : null }
             </div>
         )
     }

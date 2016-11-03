@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import * as actionCreators from '../redux/action_creators'
-import HelpText from './help_text'
+import Validate from './validate'
 
 
 class Task extends Component {
@@ -89,7 +89,7 @@ class Task extends Component {
                         }
                     </div>
                 </ul>
-                { this.state.showHelp ? <HelpText /> : null }
+                { this.state.showHelp ? <Validate /> : null }
             </div>
         )
     }

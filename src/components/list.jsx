@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import * as actionCreators from '../redux/action_creators'
 import ListOptions from './list_options'
-import HelpText from './help_text'
+import Validate from './validate'
 
 
 class List extends Component {
@@ -86,7 +86,7 @@ class List extends Component {
                     }
 
                     </li>
-                    { this.state.showHelp ? <HelpText /> : null }
+                    { this.state.showHelp ? <Validate /> : null }
 
                 </div>
 

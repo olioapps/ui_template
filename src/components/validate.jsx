@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 
-class HelpText extends Component {
+class validate extends Component {
 
 
     render() {
@@ -13,4 +13,4 @@ class HelpText extends Component {
     }
 }
 
-export default connect(state => state.toJSON())(HelpText)
+export default connect(state => state.toJSON())(validate)
