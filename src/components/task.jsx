@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import * as actionCreators from '../redux/action_creators'
-import HelpText from './help_text'
+import Validate from './validate'
 
 
 class Task extends Component {
@@ -16,6 +16,8 @@ class Task extends Component {
         this.checkToggle = this.checkToggle.bind(this)
         this.handleKeyPress = this.handleKeyPress.bind(this)
         this.handleClear = this.handleClear.bind(this)
+        this.renderInput = this.renderInput.bind(this)
+
 
 
         this.state = {
@@ -63,6 +65,15 @@ class Task extends Component {
     }
 
 
+    renderInput() {
+        return (
+            <input type="text"
+                   value={this.state.taskName}
+                   onKeyPress={this.handleKeyPress}
+                   onChange={this.changeName} />
+        )
+    }
+
     render() {
         const textStyle = this.props.task.completed ? 'line-through' : "none"
         const colorStyle = this.props.task.completed ? 'grey' : "inherit"
@@ -72,16 +83,15 @@ class Task extends Component {
                 <ul id="task">
                     <input type="checkbox" checked={this.props.task.completed} onChange={this.checkToggle}/>
                     {this.state.editMode
-                        ? <input type="text" value={this.state.taskName} onKeyPress={this.handleKeyPress}
-                                 onChange={this.changeName} />
+                        ? this.renderInput()
                         : <li onClick={this.checkToggle} style={{textDecoration: textStyle, color: colorStyle }}>{this.props.task.label}</li>
                     }
 
                     <div className="btnContainer">
                         {this.state.editMode
                             ? <button onClick={this.saveEdit}><i className="fa fa-check"/></button>
-                            : <button onClick={this.setEditMode(true)}><i className="fa fa-pencil"/>
-                        </button>}
+                            : <button onClick={this.setEditMode(true)}><i className="fa fa-pencil"/></button>
+                        }
 
                         {this.state.editMode
                             ? <button onClick={this.handleClear}><i className="fa fa-times"/></button>  // clear input field
@@ -89,7 +99,7 @@ class Task extends Component {
                         }
                     </div>
                 </ul>
-                { this.state.showHelp ? <HelpText /> : null }
+                { this.state.showHelp ? <Validate /> : null }
             </div>
         )
     }
