@@ -1,6 +1,6 @@
 /* @flow */
 import {List, Map, Record, fromJS} from 'immutable' // eslint-disable-line no-unused-vars
-
+import {makeId} from '../util/utils'
 
 export type Task = {
     id: string,
@@ -56,7 +56,7 @@ export function addToList(state:List<TaskList>, listId:string, taskLabel:string)
         // update
         taskList =>
             taskList.update("tasks", list => list.push(new TaskRecord({
-                id: id(),
+                id: makeId(),
                 label: taskLabel,
             })))
     )
@@ -141,13 +141,3 @@ export function deleteList(state: list<TaskList>, id:string): List<TaskList> {
     )
 }
 
-function id() {
-    function s4() {
-        return Math.floor((1 + Math.random()) * 0x10000)
-            .toString(16)
-            .substring(1)
-    }
-
-    return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
-        s4() + '-' + s4() + s4() + s4()
-}

@@ -4,6 +4,7 @@ import * as actionCreators from '../redux/action_creators'
 import List from './list'
 import SideMenuOptions from './side_menu_options'
 import HelpText from './help_text'
+import { makeId } from '../util/utils'
 
 class SideMenu extends Component {
     constructor(props) {
@@ -27,16 +28,6 @@ class SideMenu extends Component {
         }
     }
 
-    id() {
-        function s4() {
-            return Math.floor((1 + Math.random()) * 0x10000)
-                .toString(16)
-                .substring(1)
-        }
-
-        return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
-            s4() + '-' + s4() + s4() + s4()
-    }
 
     newList(event) {
         this.setState({listName: event.target.value})
@@ -49,13 +40,15 @@ class SideMenu extends Component {
 
 
     toggleAddMode() {
-        if(this.state.editListMode) { this.toggleEditListMode() }
+        if (this.state.editListMode) {
+            this.toggleEditListMode()
+        }
         this.setState({addMode: !this.state.addMode})
     }
 
     saveList() {
         if (this.state.listName !== '') {
-            const id = this.id()
+            const id = makeId()
             this.props.addList(this.state.listName, id)
             this.props.setCurrentListID(id)
             this.clearList()
@@ -117,10 +110,10 @@ class SideMenu extends Component {
                     revealOptionsBool={this.state.revealOptionsBool}
                     revealOptions={this.revealOptions}
                     toggleAddMode={this.toggleAddMode}
-                    addMode={this.state.addMode} />
+                    addMode={this.state.addMode}/>
                 </span>
                 <ul id="list">
-                {lists}
+                    {lists}
                 </ul>
 
                 {this.state.addMode
@@ -129,7 +122,6 @@ class SideMenu extends Component {
                 }
             </div>
         )
-        
     }
 }
 
