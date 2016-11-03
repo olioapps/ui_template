@@ -54,12 +54,21 @@ class TaskList extends Component {
     renderTaskInput() {
         return (
             <div className="newTaskContainer">
-                <input id="task_input" ref="taskInput" type="text" placeholder="Enter new task"
+                <input id="task_input"
+                       ref="taskInput" type="text"
+                       placeholder="Enter new task"
                        value={this.state.taskName}
-                       onChange={this.setTask} onKeyPress={this.handleKeyPress}/>
+                       onChange={this.setTask}
+                       onKeyPress={this.handleKeyPress}/>
                 <div className="btnContainer">
-                    <button onClick={this.saveTask}><i className="fa fa-check"/></button>
-                    <button onClick={this.clearTask}><i className="fa fa-times"/></button>
+                    <button
+                        onClick={this.saveTask}>
+                        <i className="fa fa-check"/>
+                    </button>
+                    <button
+                        onClick={this.clearTask}>
+                        <i className="fa fa-times"/>
+                    </button>
                 </div>
             </div>
         )
