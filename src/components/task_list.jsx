@@ -47,10 +47,6 @@ class TaskList extends Component {
         this.setState({taskName: ''})
     }
 
-    componentDidMount() {
-        this.refs.taskInput ? ReactDOM.findDOMNode(this.refs.taskInput).focus() : null
-    }
-
     renderTaskInput() {
         return (
             <div className="newTaskContainer">
