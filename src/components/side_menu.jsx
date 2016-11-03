@@ -112,8 +112,13 @@ class SideMenu extends Component {
         return (
             <div id="sideMenu">
                 <h3>User</h3>
-                <h4>My Lists: </h4>
-
+                <span>My Lists:
+                <SideMenuOptions
+                    revealOptionsBool={this.state.revealOptionsBool}
+                    revealOptions={this.revealOptions}
+                    toggleAddMode={this.toggleAddMode}
+                    addMode={this.state.addMode} />
+                </span>
                 <ul id="list">
                 {lists}
                 </ul>
@@ -122,11 +127,6 @@ class SideMenu extends Component {
                     ? this.newListElement()
                     : null
                 }
-                <SideMenuOptions
-                    revealOptionsBool={this.state.revealOptionsBool}
-                    revealOptions={this.revealOptions}
-                    toggleAddMode={this.toggleAddMode}
-                    addMode={this.state.addMode} />
             </div>
         )
         

@@ -32,9 +32,12 @@ button {
   align-self: center;
   background-color: #263646;
   color: #FFF;
-  transition: all 0.5s;
   position: relative;
   border: none;
+  transition: background-color 200ms ease-in-out;
+  &:hover {
+    background-color: #374f66;
+  }
 }
 
 
