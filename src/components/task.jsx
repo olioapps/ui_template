@@ -73,8 +73,8 @@ class Task extends Component {
                     <input type="checkbox" checked={this.props.task.completed} onChange={this.checkToggle}/>
                     {this.state.editMode
                         ? <input type="text" value={this.state.taskName} onKeyPress={this.handleKeyPress}
-                                 onChange={this.changeName}/>
-                        : <li style={{textDecoration: textStyle, color: colorStyle }}>{this.props.task.label}</li>
+                                 onChange={this.changeName} />
+                        : <li onClick={this.checkToggle} style={{textDecoration: textStyle, color: colorStyle }}>{this.props.task.label}</li>
                     }
 
                     <div className="btnContainer">
