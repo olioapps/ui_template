@@ -5,8 +5,6 @@ import List from './list'
 import SideMenuOptions from './side_menu_options'
 import HelpText from './help_text'
 
-
-
 class SideMenu extends Component {
     constructor(props) {
         super(props)
@@ -19,8 +17,6 @@ class SideMenu extends Component {
         this.toggleAddMode = this.toggleAddMode.bind(this)
         this.revealOptions = this.revealOptions.bind(this)
         this.newListElement = this.newListElement.bind(this)
-
-
 
         this.state = {
             listName: '',
@@ -88,8 +84,14 @@ class SideMenu extends Component {
         return (
             <div>
                 <div className="btnContainer">
-                        <input autoFocus type="text" placeholder="Enter new list name" value={this.state.listName}
-                            onChange={this.newList} onKeyPress={this.handleKeyPress} />
+                        <input
+                            autoFocus
+                            type="text"
+                            placeholder="Enter new list name"
+                            value={this.state.listName}
+                            onChange={this.newList}
+                            onKeyPress={this.handleKeyPress} />
+
                         <button onClick={this.saveList}><i className="fa fa-check" /></button>
                         <button onClick={this.toggleAddMode}><i className="fa fa-times" /></button>
                         <br/>
@@ -98,7 +100,6 @@ class SideMenu extends Component {
             </div>
         )
     }
-
 
     render() {
         const lists = this.props.catalog.map((listItem, i) => {
@@ -126,7 +127,6 @@ class SideMenu extends Component {
                     ? this.newListElement()
                     : null
                 }
-
             </div>
         )
         
