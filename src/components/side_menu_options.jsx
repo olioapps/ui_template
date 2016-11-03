@@ -28,10 +28,10 @@ class SideMenuOptions extends Component {
 
     render() {
         return (
-            <div className="btnContainer">
+            <span className="btnContainer">
                 {this.props.catalog.length && !this.props.addMode ? this.showEditButton(): null }
                 {!this.props.addMode ? this.showNewList() : null}
-            </div>
+            </span>
         )
     }
 }
