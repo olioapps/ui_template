@@ -7,7 +7,6 @@ import HelpText from './help_text'
 import { makeId } from '../util/utils'
 
 
-
 class SideMenu extends Component {
     constructor(props) {
         super(props)
@@ -20,7 +19,6 @@ class SideMenu extends Component {
         this.toggleAddMode = this.toggleAddMode.bind(this)
         this.revealOptions = this.revealOptions.bind(this)
         this.newListElement = this.newListElement.bind(this)
-
 
 
         this.state = {
@@ -44,7 +42,9 @@ class SideMenu extends Component {
 
 
     toggleAddMode() {
-        if(this.state.editListMode) { this.toggleEditListMode() }
+        if (this.state.editListMode) {
+            this.toggleEditListMode()
+        }
         this.setState({addMode: !this.state.addMode})
     }
 
@@ -79,12 +79,12 @@ class SideMenu extends Component {
         return (
             <div>
                 <div className="btnContainer">
-                        <input autoFocus type="text" placeholder="Enter new list name" value={this.state.listName}
-                            onChange={this.newList} onKeyPress={this.handleKeyPress} />
-                        <button onClick={this.saveList}><i className="fa fa-check" /></button>
-                        <button onClick={this.toggleAddMode}><i className="fa fa-times" /></button>
-                        <br/>
-                     </div>
+                    <input autoFocus type="text" placeholder="Enter new list name" value={this.state.listName}
+                           onChange={this.newList} onKeyPress={this.handleKeyPress}/>
+                    <button onClick={this.saveList}><i className="fa fa-check"/></button>
+                    <button onClick={this.toggleAddMode}><i className="fa fa-times"/></button>
+                    <br/>
+                </div>
                 { this.state.showHelp ? <HelpText /> : null }
             </div>
         )
@@ -107,10 +107,10 @@ class SideMenu extends Component {
                     revealOptionsBool={this.state.revealOptionsBool}
                     revealOptions={this.revealOptions}
                     toggleAddMode={this.toggleAddMode}
-                    addMode={this.state.addMode} />
+                    addMode={this.state.addMode}/>
                 </span>
                 <ul id="list">
-                {lists}
+                    {lists}
                 </ul>
 
                 {this.state.addMode
@@ -120,7 +120,6 @@ class SideMenu extends Component {
 
             </div>
         )
-        
     }
 }
 
