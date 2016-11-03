@@ -68,8 +68,9 @@ class List extends Component {
     render() {
 
         return (
+            <li>
                 <div>
-                    <li>
+
                     {this.state.editMode
                         //true//
                         ? <input type="text" autoFocus value={this.state.listName} onKeyPress={this.handleKeyPress}
@@ -85,10 +86,10 @@ class List extends Component {
                         : null
                     }
 
-                    </li>
-                    { this.state.showHelp ? <Validate /> : null }
 
-                </div>
+                    </div>
+                    { this.state.showHelp ? <Validate /> : null }
+            </li>
 
 
         )
