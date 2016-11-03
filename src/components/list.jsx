@@ -18,6 +18,9 @@ class List extends Component {
         this.handleClear = this.handleClear.bind(this)
         this.incompleteCount = this.incompleteCount.bind(this)
 
+        this.renderInput = this.renderInput.bind(this)
+        this.renderListOptions = this.renderListOptions.bind(this)
+        this.renderListNameCount = this.renderListNameCount.bind(this)
 
 
         this.state = {
@@ -65,33 +68,52 @@ class List extends Component {
         return !this.props.revealOptionsBool ? <span className="incompleteCount">{incompleteTasks.length}</span> : null
     }
 
+    renderInput() {
+        return (
+            <input type="text"
+                   autoFocus value={this.state.listName}
+                   onKeyPress={this.handleKeyPress}
+                   onChange={this.changeName}/>
+        )
+    }
+
+    renderListNameCount() {
+        return (
+            <span key={this.props.listItem.id} onClick={()=> this.props.setCurrentListID(this.props.listItem.id)}>
+                {this.props.listItem.name}
+                {this.incompleteCount()}
+            </span>
+        )
+    }
+
+    renderListOptions() {
+        return (
+            <ListOptions editMode={this.state.editMode}
+                         handleClear={this.handleClear}
+                         setListEditMode={this.setListEditMode}
+                         saveEdit={this.saveEdit}/>
+        )
+    }
+
+
+
     render() {
 
         return (
             <li>
                 <div>
-
                     {this.state.editMode
                         //true//
-                        ? <input type="text" autoFocus value={this.state.listName} onKeyPress={this.handleKeyPress}
-                                 onChange={this.changeName}/>
-                        : <span key={this.props.listItem.id} onClick={()=> this.props.setCurrentListID(this.props.listItem.id)}>
-                            {this.props.listItem.name}
-                            {this.incompleteCount()}
-                          </span>
+                        ? this.renderInput()
+                        : this.renderListNameCount()
                     }
-
                     {this.props.revealOptionsBool
-                        ? <ListOptions editMode={this.state.editMode} handleClear={this.handleClear} setListEditMode={this.setListEditMode} saveEdit={this.saveEdit}/>
+                        ? this.renderListOptions()
                         : null
                     }
-
-
-                    </div>
-                    { this.state.showHelp ? <Validate /> : null }
+                </div>
+                { this.state.showHelp ? <Validate /> : null }
             </li>
-
-
         )
 
     }

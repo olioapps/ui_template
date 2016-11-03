@@ -77,7 +77,6 @@ class TaskList extends Component {
     render() {
 
         const currentList = this.props.catalog.find((list) => list.id === this.props.currentListId) || {tasks: []}
-
         const listOfTasks = currentList.tasks.map((task, i) => {
             return <Task key={i} task={task}/>
         })
