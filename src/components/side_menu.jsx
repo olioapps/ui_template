@@ -4,6 +4,7 @@ import * as actionCreators from '../redux/action_creators'
 import List from './list'
 import SideMenuOptions from './side_menu_options'
 import HelpText from './help_text'
+import { makeId } from '../util/utils'
 
 
 class SideMenu extends Component {
@@ -29,16 +30,6 @@ class SideMenu extends Component {
         }
     }
 
-    id() {
-        function s4() {
-            return Math.floor((1 + Math.random()) * 0x10000)
-                .toString(16)
-                .substring(1)
-        }
-
-        return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
-            s4() + '-' + s4() + s4() + s4()
-    }
 
     newList(event) {
         this.setState({listName: event.target.value})
@@ -59,7 +50,7 @@ class SideMenu extends Component {
 
     saveList() {
         if (this.state.listName !== '') {
-            const id = this.id()
+            const id = makeId()
             this.props.addList(this.state.listName, id)
             this.props.setCurrentListID(id)
             this.clearList()
