@@ -11,9 +11,6 @@ class ListOptions extends Component {
         this.optionButtons = this.optionButtons.bind(this)
     }
 
- 
-
-
     editModeButtons() {
         return (
             <div>

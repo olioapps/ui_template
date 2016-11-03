@@ -14,7 +14,9 @@ class SideMenuOptions extends Component {
 
     newListButton() {
         this.props.toggleAddMode()
-        if (this.props.revealOptionsBool) { this.props.revealOptions() }
+        if (this.props.revealOptionsBool) {
+            this.props.revealOptions()
+        }
     }
 
     showEditButton() {
@@ -29,8 +31,12 @@ class SideMenuOptions extends Component {
     render() {
         return (
             <div className="btnContainer">
-                {this.props.catalog.length && !this.props.addMode ? this.showEditButton(): null }
-                {!this.props.addMode ? this.showNewList() : null}
+                {this.props.catalog.length && !this.props.addMode
+                    ? this.showEditButton()
+                    : null }
+                {!this.props.addMode
+                    ? this.showNewList()
+                    : null}
             </div>
         )
     }
