@@ -1,5 +1,4 @@
 import React, {Component} from 'react'
-import ReactDOM from 'react-dom'
 import {connect} from 'react-redux'
 import * as actionCreators from '../redux/action_creators'
 import Task from './task'
@@ -45,10 +44,6 @@ class TaskList extends Component {
 
     clearTask() {
         this.setState({taskName: ''})
-    }
-
-    componentDidMount() {
-        this.refs.taskInput ? ReactDOM.findDOMNode(this.refs.taskInput).focus() : null
     }
 
     renderTaskInput() {
