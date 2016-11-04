@@ -1,6 +1,5 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import Validate from './validate'
 import * as actionCreators from '../redux/action_creators'
 
 class TaskInput extends Component {
