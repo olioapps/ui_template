@@ -18,8 +18,6 @@ class Task extends Component {
         this.handleClear = this.handleClear.bind(this)
         this.renderInput = this.renderInput.bind(this)
 
-
-
         this.state = {
             editMode: false,
             taskName: props.task.label,
@@ -68,6 +66,7 @@ class Task extends Component {
     renderInput() {
         return (
             <input type="text"
+
                    value={this.state.taskName}
                    onKeyPress={this.handleKeyPress}
                    onChange={this.changeName} />
