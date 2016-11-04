@@ -97,15 +97,22 @@
 
   flex-direction: row;
   justify-content: center;
-  //align-items: flex-start;
+  align-items: center;
 
   padding-bottom: 0.8rem;
   border-bottom: 1px solid #e4e4e4;
+  &:hover {
+    background-color: #e8e8e8;
+    cursor: pointer;
+  }
   li {
     padding: 0 1.2rem;
     width: 100%;
     list-style-type: none;
     font-size: 1.8rem;
+    display: flex;
+    align-items: center;
+
   }
 
   input[type=text] {
