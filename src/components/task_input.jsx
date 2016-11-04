@@ -50,11 +50,18 @@ class TaskInput extends Component {
         }
     }
 
+    componentDidMount(){
+        console.log(this.refs)
+        this.refs.nameInput.focus()
+    }
+
     render() {
         return (
             <div className="newTaskContainer">
                 <input id="task_input"
                        autoFocus
+                       ref="nameInput"
+                       key={this.props.currentListId}
                        type="text"
                        placeholder="Enter new task"
                        value={this.state.taskName}

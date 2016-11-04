@@ -6,6 +6,7 @@ import TaskInput from './task_input'
 
 class TaskList extends Component {
 
+
     render() {
 
         const currentList = this.props.catalog.find((list) => list.id === this.props.currentListId) || {tasks: []}
