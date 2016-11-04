@@ -28,6 +28,9 @@
       }
     }
   }
+  #helpText {
+    font-size: 14px;
+  }
 }
 
 .incompleteCount {
@@ -45,9 +48,17 @@
   padding: 0;
 
   li {
+    flex-direction: column;
     div {
       width: 100%;
       display: flex;
+      input {
+        width: 100%;
+        flex-grow: 1;
+      }
+      .btnContainer {
+        width: auto;
+      }
       > span {
         width: 100%;
         display: flex;
