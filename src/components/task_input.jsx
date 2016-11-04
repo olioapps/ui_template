@@ -55,7 +55,6 @@ class TaskInput extends Component {
     }
 
     componentDidMount() {
-        console.log(this.refs)
         this.refs.nameInput.focus()
     }
 
