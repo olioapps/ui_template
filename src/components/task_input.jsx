@@ -27,12 +27,17 @@ class TaskInput extends Component {
         } else {
             this.setState({showHelp: true})
         }
-
     }
 
     saveTask() {
-        this.props.addTask(this.props.currentListId, this.state.taskName)
-        this.clearTask()
+        if (this.state.taskName !== '') {
+            this.props.addTask(this.props.currentListId, this.state.taskName)
+            this.clearTask()
+        } else {
+            this.setState({showHelp: true})
+            this.refs.nameInput.placeholder = "Cannot be empty"
+            this.refs.nameInput.style.borderColor = "#fbb040"
+        }
     }
 
     setTask(event) {
@@ -50,7 +55,7 @@ class TaskInput extends Component {
         }
     }
 
-    componentDidMount(){
+    componentDidMount() {
         console.log(this.refs)
         this.refs.nameInput.focus()
     }
@@ -77,7 +82,6 @@ class TaskInput extends Component {
                         <i className="fa fa-times"/>
                     </button>
                 </div>
-                { this.state.showHelp ? <Validate /> : null }
             </div>
         )
     }
