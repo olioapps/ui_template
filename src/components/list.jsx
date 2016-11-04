@@ -14,7 +14,7 @@ class List extends Component {
         this.handleKeyPress = this.handleKeyPress.bind(this)
         this.saveEdit = this.saveEdit.bind(this)
         this.setListEditMode = this.setListEditMode.bind(this)
-        this.deleteList = this.deleteList.bind(this)
+        this.listDelete = this.listDelete.bind(this)
         this.handleClear = this.handleClear.bind(this)
         this.incompleteCount = this.incompleteCount.bind(this)
 
@@ -27,7 +27,6 @@ class List extends Component {
             listName: props.listItem.name,
             editMode: false,
             showHelp: false,
-
         }
     }
 
@@ -47,7 +46,7 @@ class List extends Component {
     }
 
     saveEdit() {
-        if(this.state.listName !== '') {
+        if (this.state.listName !== '') {
             this.props.updateListName(this.props.listItem.id, this.state.listName)
             this.setListEditMode(false)
         } else {
@@ -58,13 +57,13 @@ class List extends Component {
     setListEditMode() {
         this.setState({editMode: !this.state.editMode})
     }
-    deleteList() {
+
+    listDelete() {
         this.props.deleteList(this.props.listItem.id)
-        this.setListEditMode(false)
     }
 
     incompleteCount() {
-        const incompleteTasks = this.props.listItem.tasks.filter( task => task.completed === false)
+        const incompleteTasks = this.props.listItem.tasks.filter(task => task.completed === false)
         return !this.props.revealOptionsBool ? <span className="incompleteCount">{incompleteTasks.length}</span> : null
     }
 
@@ -91,10 +90,10 @@ class List extends Component {
             <ListOptions editMode={this.state.editMode}
                          handleClear={this.handleClear}
                          setListEditMode={this.setListEditMode}
-                         saveEdit={this.saveEdit}/>
+                         saveEdit={this.saveEdit}
+                         listDelete={this.listDelete}/>
         )
     }
-
 
 
     render() {
