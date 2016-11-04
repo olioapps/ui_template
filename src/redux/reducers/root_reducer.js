@@ -16,7 +16,7 @@ function catalog(state = INITIAL_STATE.get("catalog"), action) {
         case 'UPDATE_LIST_NAME':
             return updateListName(state, action.taskListId, action.updatedListName)
         case 'DELETE_LIST':
-            return deleteList(state, action.taskListId)
+            return deleteList(state, action.listId)
 
         default:
             return state

@@ -123,7 +123,7 @@ export function toggleChecked(state:List<TaskList>, listId:string, taskId:string
 }
 
 export function updateListName(state:List<TaskList>, id:string, updatedListName:string):List<TaskList> {
-    
+    debugger
     return state.update(
         state.findIndex(
             taskList => taskList.get('id') === id
@@ -133,11 +133,10 @@ export function updateListName(state:List<TaskList>, id:string, updatedListName:
 }
 
 // delete list form side menu
-export function deleteList(state: list<TaskList>, id:string): List<TaskList> {
-    
+export function deleteList(state:List<TaskList>, id:string):List<TaskList> {
+    debugger
     return state.delete(
-        state.findIndex( taskList => taskList.id === id
+        state.findIndex( list => list.id === id
         )
     )
 }
-

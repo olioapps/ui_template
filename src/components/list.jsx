@@ -14,7 +14,7 @@ class List extends Component {
         this.handleKeyPress = this.handleKeyPress.bind(this)
         this.saveEdit = this.saveEdit.bind(this)
         this.setListEditMode = this.setListEditMode.bind(this)
-        this.deleteList = this.deleteList.bind(this)
+        this.listDelete = this.listDelete.bind(this)
         this.handleClear = this.handleClear.bind(this)
         this.incompleteCount = this.incompleteCount.bind(this)
 
@@ -27,7 +27,6 @@ class List extends Component {
             listName: props.listItem.name,
             editMode: false,
             showHelp: false,
-
         }
     }
 
@@ -58,9 +57,11 @@ class List extends Component {
     setListEditMode() {
         this.setState({editMode: !this.state.editMode})
     }
-    deleteList() {
+
+    listDelete() {
         this.props.deleteList(this.props.listItem.id)
-        this.setListEditMode(false)
+        debugger
+
     }
 
     incompleteCount() {
@@ -91,10 +92,10 @@ class List extends Component {
             <ListOptions editMode={this.state.editMode}
                          handleClear={this.handleClear}
                          setListEditMode={this.setListEditMode}
-                         saveEdit={this.saveEdit}/>
+                         saveEdit={this.saveEdit}
+                         listDelete={this.listDelete}/>
         )
     }
-
 
 
     render() {
