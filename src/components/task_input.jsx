@@ -10,6 +10,7 @@ class TaskInput extends Component {
         this.handleKeyPress = this.handleKeyPress.bind(this)
         this.submitTask = this.submitTask.bind(this)
         this.setTask = this.setTask.bind(this)
+        this.saveTask = this.saveTask.bind(this)
 
         this.state = {
             showHelp: false,
