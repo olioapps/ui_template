@@ -32,6 +32,9 @@ class TaskInput extends Component {
         if (this.state.taskName !== '') {
             this.props.addTask(this.props.currentListId, this.state.taskName)
             this.clearTask()
+            this.setState({showHelp: false})
+            this.refs.nameInput.style.borderColor = "rgb(232, 232, 232)"
+            this.refs.nameInput.placeholder = "Enter New Task"
         } else {
             this.setState({showHelp: true})
             this.refs.nameInput.placeholder = "Cannot be empty"
