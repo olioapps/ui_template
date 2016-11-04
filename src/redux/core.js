@@ -38,7 +38,7 @@ export const AppStateRecord = Record({
 
 export const INITIAL_STATE = new AppStateRecord()
 
-export function addList(state:List<TaskList>, listName:string, id:string):List<TaskList> {
+export function addList(state: List<TaskList>, listName: string, id: string): List<TaskList> {
     return state.push(new TaskListRecord({
         id: id,
         name: listName,
@@ -47,7 +47,7 @@ export function addList(state:List<TaskList>, listName:string, id:string):List<T
 }
 
 
-export function addToList(state:List<TaskList>, listId:string, taskLabel:string):List<TaskList> {
+export function addToList(state: List<TaskList>, listId: string, taskLabel: string): List<TaskList> {
 
     return state.update(
         // find index
@@ -63,7 +63,7 @@ export function addToList(state:List<TaskList>, listId:string, taskLabel:string)
 }
 
 
-export function updateTaskSave(state:List<TaskList>, listId:string, taskId:string, taskString:string):List<TaskList> {
+export function updateTaskSave(state: List<TaskList>, listId: string, taskId: string, taskString: string): List<TaskList> {
 
     return state.update(
         // find the list
@@ -83,7 +83,7 @@ export function updateTaskSave(state:List<TaskList>, listId:string, taskId:strin
 }
 
 
-export function updateTaskDelete(state:List<TaskList>, listId:string, taskId:string):List<TaskList> {
+export function updateTaskDelete(state: List<TaskList>, listId: string, taskId: string): List<TaskList> {
 
     return state.update(
         //find list
@@ -103,7 +103,7 @@ export function updateTaskDelete(state:List<TaskList>, listId:string, taskId:str
 }
 
 
-export function toggleChecked(state:List<TaskList>, listId:string, taskId:string, checked:bool):List<TaskList> {
+export function toggleChecked(state: List<TaskList>, listId: string, taskId: string, checked: bool): List<TaskList> {
 
     return state.update(
         // find the list
@@ -122,8 +122,7 @@ export function toggleChecked(state:List<TaskList>, listId:string, taskId:string
     )
 }
 
-export function updateListName(state:List<TaskList>, id:string, updatedListName:string):List<TaskList> {
-    debugger
+export function updateListName(state: List<TaskList>, id: string, updatedListName: string): List<TaskList> {
     return state.update(
         state.findIndex(
             taskList => taskList.get('id') === id
@@ -133,10 +132,9 @@ export function updateListName(state:List<TaskList>, id:string, updatedListName:
 }
 
 // delete list form side menu
-export function deleteList(state:List<TaskList>, id:string):List<TaskList> {
-    debugger
+export function deleteList(state: List<TaskList>, id: string): List<TaskList> {
     return state.delete(
-        state.findIndex( list => list.id === id
+        state.findIndex(list => list.id === id
         )
     )
 }

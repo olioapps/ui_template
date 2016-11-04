@@ -46,7 +46,7 @@ class List extends Component {
     }
 
     saveEdit() {
-        if(this.state.listName !== '') {
+        if (this.state.listName !== '') {
             this.props.updateListName(this.props.listItem.id, this.state.listName)
             this.setListEditMode(false)
         } else {
@@ -60,12 +60,10 @@ class List extends Component {
 
     listDelete() {
         this.props.deleteList(this.props.listItem.id)
-        debugger
-
     }
 
     incompleteCount() {
-        const incompleteTasks = this.props.listItem.tasks.filter( task => task.completed === false)
+        const incompleteTasks = this.props.listItem.tasks.filter(task => task.completed === false)
         return !this.props.revealOptionsBool ? <span className="incompleteCount">{incompleteTasks.length}</span> : null
     }
 
