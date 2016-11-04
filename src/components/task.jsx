@@ -75,7 +75,7 @@ class Task extends Component {
 
     render() {
         const textStyle = this.props.task.completed ? 'line-through' : "none"
-        const colorStyle = this.props.task.completed ? 'grey' : "inherit"
+        const colorStyle = this.props.task.completed ? '#BDBDBD' : "inherit"
 
         return (
             <div>
