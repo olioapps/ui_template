@@ -89,7 +89,7 @@ class SideMenu extends Component {
                         <button onClick={this.toggleAddMode}><i className="fa fa-times" /></button>
                         <br/>
                      </div>
-                { this.state.showHelp ? <Validate /> : null }
+
             </div>
         )
     }
@@ -120,6 +120,7 @@ class SideMenu extends Component {
                     ? this.newListElement()
                     : null
                 }
+                { this.state.showHelp ? <Validate /> : null }
             </div>
         )
     }
