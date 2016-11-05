@@ -3,7 +3,6 @@ import {connect} from 'react-redux'
 import * as actionCreators from '../redux/action_creators'
 import List from './list'
 import SideMenuOptions from './side_menu_options'
-import Validate from './validate'
 import { makeId } from '../util/utils'
 
 class SideMenu extends Component {
@@ -53,9 +52,15 @@ class SideMenu extends Component {
             this.props.setCurrentListID(id)
             this.clearList()
             this.toggleAddMode()
+            this.refs.listInput.style.borderColor = "rgb(232, 232, 232)"
+            this.refs.listInput.placeholder = "Enter New Task"
         }
         else {
             this.setState({showHelp: true})
+            this.refs.listInput.placeholder = "Cannot be empty"
+            this.refs.listInput.style.borderColor = "#fbb040"
+            this.refs.listInput.style.backgroundColor = "#FBECD5"
+            this.refs.listInput.style.borderSize = '5px'
         }
     }
 
@@ -80,6 +85,7 @@ class SideMenu extends Component {
                         <input
                             autoFocus
                             type="text"
+                            ref="listInput"
                             placeholder="Enter new list name"
                             value={this.state.listName}
                             onChange={this.newList}
@@ -120,7 +126,6 @@ class SideMenu extends Component {
                     ? this.newListElement()
                     : null
                 }
-                { this.state.showHelp ? <Validate /> : null }
             </div>
         )
     }
