@@ -23,7 +23,7 @@ class TaskList extends Component {
 
                 {this.props.catalog.length !== 0
                     ? <TaskInput saveTask={this.saveTask} addTask={this.props.addTask}/>
-                    : <h2>Please Create A List</h2>
+                    : null
                 }
 
             </div>
