@@ -2,7 +2,6 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import * as actionCreators from '../redux/action_creators'
 import ListOptions from './list_options'
-import Validate from './validate'
 
 
 class List extends Component {
@@ -50,8 +49,14 @@ class List extends Component {
         if(this.state.listName !== '') {
             this.props.updateListName(this.props.listItem.id, this.state.listName)
             this.setListEditMode(false)
+            this.refs.editInputField.style.borderColor = "rgb(232, 232, 232)"
+            this.refs.editInputField.placeholder = "Enter New Task"
         } else {
             this.setState({showHelp: true})
+            this.refs.editInputField.placeholder = "Cannot be empty"
+            this.refs.editInputField.style.borderColor = "#fbb040"
+            this.refs.editInputField.style.backgroundColor = "#FBECD5"
+            this.refs.editInputField.style.borderSize = '5px'
         }
     }
 
@@ -71,9 +76,11 @@ class List extends Component {
     renderInput() {
         return (
             <input type="text"
+                   ref="editInputField"
                    autoFocus value={this.state.listName}
                    onKeyPress={this.handleKeyPress}
-                   onChange={this.changeName}/>
+                   onChange={this.changeName}
+                    placeholder=""/>
         )
     }
 
@@ -112,7 +119,7 @@ class List extends Component {
                         : null
                     }
                 </div>
-                { this.state.showHelp ? <Validate /> : null }
+
             </li>
         )
 
