@@ -1,6 +1,6 @@
 # Olio Skeleton
 
-> React - Redux
+## React - Redux
 
 Steps to get started: 
 `npm install`
@@ -11,14 +11,14 @@ Steps to get started:
 
 # Olio Naming Conventions
 
-> File name conventions
+## File name conventions
 
 All file names will be snake cased, for example:
 
 `my_page.html`
 `blue_component.jsx`
 
-> JSON conventions
+## JSON conventions
 
 We will use camel case keys and values, for example:
 
