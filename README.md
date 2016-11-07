@@ -24,6 +24,13 @@ We will use camel case keys and values, for example:
 
 `
   {
-	   "myKey": "myValue"
+      "myKey": "myValue"
   }
+`
+## GitHub repo naming convention
+
+We will use kebab case for github repos:
+
+`
+   olioapps-repo
 `
