@@ -1,0 +1,156 @@
+#sideMenu {
+  > span {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.2rem;
+    height: 3rem;
+  }
+
+  button {
+    display: block;
+    width: auto;
+  }
+  ul {
+    list-style-type: none;
+    width: 100%;
+    font-size: 24px;
+    li {
+      padding: 0.7rem 1.2rem;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: all 500ms;
+      border-radius: 5px;
+      &:hover {
+        background-color: #1c3753
+      }
+    }
+  }
+  #helpText {
+    font-size: 14px;
+  }
+}
+
+.incompleteCount {
+  font-size: 20px;
+  background-color: #1b6d85;
+  padding: 5px 10px;
+  display: inline-block;
+  -moz-border-radius: 100px;
+  -webkit-border-radius: 100px;
+  border-radius: 100px;
+}
+
+#list {
+  margin: 0;
+  padding: 0;
+
+  li {
+    flex-direction: column;
+    div {
+      width: 100%;
+      display: flex;
+      input {
+        width: 100%;
+        flex-grow: 1;
+      }
+      .btnContainer {
+        width: auto;
+      }
+      > span {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+      }
+      button {
+        font-size: 18px;
+      }
+    }
+  }
+}
+
+.newTaskContainer {
+  display: flex;
+  width: 100%;
+  margin-bottom: 0.7rem;
+  input[type=text] {
+    width: 100%;
+    margin-bottom: 0;
+  }
+}
+
+#taskList {
+  width: 100%;
+  display: flex;
+
+  ul {
+    padding: 0;
+  }
+  input[type=text] {
+    border: 1px solid #e8e8e8;
+    padding: 0.5rem 0.4rem;
+  }
+
+  button {
+    display: block;
+    width: 3.7rem;
+    padding: 0.7rem 10px;
+
+  }
+}
+
+#task {
+  display: flex;
+  width: 100%;
+  margin-bottom: 0.7rem;
+
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+  padding-bottom: 0.8rem;
+  border-bottom: 1px solid #e4e4e4;
+  &:hover {
+    background-color: #e8e8e8;
+    cursor: pointer;
+  }
+  li {
+    padding: 0 1.2rem;
+    width: 100%;
+    list-style-type: none;
+    font-size: 1.8rem;
+    display: flex;
+    align-items: center;
+
+  }
+
+  input[type=text] {
+    width: 100%;
+    margin-bottom: 0;
+  }
+}
+
+.btnContainer {
+  display: flex;
+  div {
+    display: flex;
+    justify-content: flex-end;
+  }
+  input {
+    flex-grow: 2;
+    padding: 0.5rem;
+  }
+  button {
+    align-self: auto;
+    padding: 0.6rem 10px;
+  }
+}
+
+@media screen and (min-width: 600px) {
+  #task {
+    width: 100%;
+  }
+
+}

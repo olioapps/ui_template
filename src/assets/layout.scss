@@ -1,0 +1,83 @@
+$color1: #112233;
+
+* {
+  box-sizing: border-box;
+  outline: none;
+}
+
+#appContainer {
+  width: 100%;
+  height: 100vh;
+}
+
+#listContainer {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+
+  > div {
+    display: flex;
+    flex-direction: column;
+
+    &:first-of-type {
+      color: #fff;
+      background-color: $color1;
+    }
+
+  }
+}
+
+#sideMenu {
+  padding: 1rem 1.7rem;
+  width: 100%;
+  height: 100%;
+  > span {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.2rem;
+    height: 3rem;
+  }
+}
+
+#taskList {
+  padding: 1rem 2.5rem;
+}
+
+button {
+  width: 50%;
+  align-self: center;
+  background-color: #263646;
+  color: #FFF;
+  position: relative;
+  border: none;
+  transition: background-color 200ms ease-in-out;
+  &:hover {
+    background-color: #374f66;
+  }
+}
+
+input {
+  color: black;
+}
+
+@media screen and (min-width: 600px) {
+
+  #listContainer {
+    flex-direction: row;
+    align-items: stretch;
+    > div {
+      width: 80%;
+      &:first-of-type {
+        height: auto;
+        width: 30%;
+      }
+
+    }
+  }
+
+  #sideMenu {
+    min-width: 300px;
+  }
+
+}

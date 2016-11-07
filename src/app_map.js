@@ -20,12 +20,12 @@ export type pageDict = { [key: string]: page }
 // maps
 
 const pages: pageDict = {
-    helloWorld: {
-        id: 'helloWorld',
-        title: 'Hello',
+    todoApp: {
+        id: 'todoApp',
+        title: 'Todo App',
         path: '/',
         open: true,
-        component: Pages.HelloWorld,
+        component: Pages.TodoApp,
     },
 }
 
