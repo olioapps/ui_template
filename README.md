@@ -34,3 +34,7 @@ We will use kebab case for github repos:
 `
    olioapps-repo
 `
+
+## Quotes policy
+
+Unless there is no choice, single quotes for strings.
