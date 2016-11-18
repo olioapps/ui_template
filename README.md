@@ -38,3 +38,10 @@ We will use kebab case for github repos:
 ## Quotes policy
 
 Unless there is no choice, single quotes for strings.
+
+## URL Path Conventions
+
+We will use kebab case for url paths
+`
+   /olioapps-path
+`
