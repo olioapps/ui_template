@@ -34,6 +34,13 @@ const pages: pageDict = {
         open: true,
         component: Pages.EditGreeting,
     },
+    allEmployees: {
+        id: 'allEmployees',
+        title: 'All Employees',
+        path: 'allEmployees',
+        open: true,
+        component: Pages.AllEmployees,
+    },
 }
 
 // utils

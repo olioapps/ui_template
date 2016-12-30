@@ -2,13 +2,12 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import * as actionCreators from '../redux/action_creators'
 
-
-
 class HelloWorld extends Component {
     constructor(props) {
         super(props)
         
         this.nextPage = this.nextPage.bind(this)
+        this.apolloComponent = this.apolloComponent.bind(this)
 
     }
     
@@ -20,6 +19,10 @@ class HelloWorld extends Component {
         this.context.router.push('/editGreeting')
     }
 
+    apolloComponent() {
+        this.context.router.push('/allEmployees')
+    }
+
     render() {
         return (
             <div>
@@ -28,6 +31,7 @@ class HelloWorld extends Component {
                 <button onClick={this.props.addNumber} > ++ </button>
                 <br/>
                 <button onClick={this.nextPage}>Go to New Page</button>
+                <button onClick={this.apolloComponent}>Go to Apollo Component</button>
             </div>
         )
     }

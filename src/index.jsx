@@ -2,10 +2,11 @@ import React                                           from 'react'
 import ReactDOM                                        from 'react-dom'
 import { Router, Route, IndexRoute, useRouterHistory } from 'react-router'
 import { createHashHistory }                           from 'history'
-import { Provider }                                    from 'react-redux'
 import store                                           from './redux/store'
 import * as appMap                                     from './app_map'
 import App                                             from './app'
+import ApolloClient, { createNetworkInterface } from 'apollo-client'
+import { ApolloProvider } from 'react-apollo'
 
 const appHistory = useRouterHistory(createHashHistory)({ queryKey: false })
 
@@ -18,9 +19,14 @@ const router = (
     </Router>
 )
 
+
+const client = new ApolloClient({
+    networkInterface: createNetworkInterface({ uri: 'http://127.0.0.1:5000/graphql' }),
+})
+
 ReactDOM.render(
-    <Provider store={store}>
+    <ApolloProvider client={client} store={store}>
         {router}
-    </Provider>,
+    </ApolloProvider>,
     document.getElementById('root')
 )
