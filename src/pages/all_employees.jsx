@@ -10,9 +10,11 @@ class MyComponent extends Component {
         super(props)
         this.toggleEditInput = this.toggleEditInput.bind(this)
         this.renameEmployee = this.renameEmployee.bind(this)
+        this.setText = this.setText.bind(this)
         this.state = {
             editInput: false,
             editInputId: null,
+            text: '',
         }
     }
 
@@ -23,11 +25,24 @@ class MyComponent extends Component {
         }
     }
 
+    setText(e) {
+        this.setState({text: e.nativeEvent.target.value})
+    }
+
     renameEmployee(id) {
         return () => {
-            this.props.renameEmployee({variables: {id: id, name: "Charles"}}).then(this.props.data.refetch)
+            this.props.renameEmployee({variables: {id: id, name: this.state.text}}).then(this.props.data.refetch)
             this.toggleEditInput(null)()
         }
+    }
+
+    renderNameInput(id) {
+        return (
+            <div>
+                <input type="text" placeholder="Enter new name" onChange={(e) => this.setText(e)} />
+                <button onClick={this.renameEmployee(id)}>save</button>
+            </div>
+        )
     }
 
     renderEmployee(employee, i) {
@@ -37,7 +52,7 @@ class MyComponent extends Component {
              <li key={i}>
                 <div>
                     {employee.node.name}
-                    {editInput && editInputId === i ? <button onClick={this.renameEmployee(employeeId)}>Rename</button> : <button onClick={this.toggleEditInput(i)}>edit</button>}
+                    {editInput && editInputId === i ? this.renderNameInput(employeeId) : <button onClick={this.toggleEditInput(i)}>edit</button>}
                 </div>
             </li>
         )
