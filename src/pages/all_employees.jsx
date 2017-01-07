@@ -14,14 +14,20 @@ class MyComponent extends Component {
         this.toggleEditTodoItemInput = this.toggleEditTodoItemInput.bind(this)
         this.toggleAddTodoListInput = this.toggleAddTodoListInput.bind(this)
         this.addTodoList = this.addTodoList.bind(this)
+        this.toggleAddTodoItemInput = this.toggleAddTodoItemInput.bind(this)
         this.state = {
             editTodoListInput: false,
             editTodoItemInput: false,
             editInputId: null,
-            editItemListId: null,
+            todoListId: null,
             text: '',
             addTodoList: false,
+            addTodoItem: false,
         }
+    }
+
+    toggleAddTodoItemInput(id) {
+        return () => this.setState({addTodoItem: !this.state.addTodoItem, todoListId: id})
     }
 
     toggleAddTodoListInput() {
@@ -35,7 +41,7 @@ class MyComponent extends Component {
     }
 
     toggleEditTodoItemInput(id, todoListId) {
-        return () => this.setState({editTodoItemInput: !this.state.editTodoItemInput, editInputId: id, editItemListId: todoListId})
+        return () => this.setState({editTodoItemInput: !this.state.editTodoItemInput, editInputId: id, todoListId: todoListId})
     }
 
     setText(e) {
@@ -59,40 +65,48 @@ class MyComponent extends Component {
     addTodoList() {
         return () => {
             this.props.addTodoList({variables: {name: this.state.text}}).then(this.props.data.refetch)
-            this.toggleAddTodoListInput()
+            this.toggleAddTodoListInput()()
+        }
+    }
+
+    addTodoItem() {
+        return () => {
+            this.props.addTodoItem({variables: {todoListId: this.state.todoListId, name: this.state.text}}).then(this.props.data.refetch)
+            this.toggleAddTodoItemInput(null)()
         }
     }
 
     renderNameInput(id, todoListId) {
-        const { addTodoList } = this.state
+        const { addTodoList, addTodoItem } = this.state
         return (
             <div>
                 <input type="text" placeholder="Enter new name" onChange={(e) => this.setText(e)} />
-                <button onClick={todoListId ? this.renameTodoItem(id) : (addTodoList ? this.addTodoList() : this.renameTodoList(id))}>save</button>
+                <button onClick={todoListId ? this.renameTodoItem(id) : (addTodoList ? this.addTodoList() : (addTodoItem ? this.addTodoItem() : this.renameTodoList(id)))}>save</button>
             </div>
         )
     }
 
     renderTodoItems(todos) {
-        const { editTodoItemInput, editInputId, editItemListId } = this.state
+        const { editTodoItemInput, editInputId, todoListId } = this.state
         return (
             todos.map((todo, i) => <li key={i}>
                 <div>
                     {todo.node.name}
-                    {editTodoItemInput && editInputId === i && editItemListId === todo.node.todoListId ? this.renderNameInput(parseInt(atob(todo.node.id).split(':')[1], 10), todo.node.todoListId) : <button onClick={this.toggleEditTodoItemInput(i, todo.node.todoListId)}>edit</button>}
+                    {editTodoItemInput && editInputId === i && todoListId === todo.node.todoListId ? this.renderNameInput(parseInt(atob(todo.node.id).split(':')[1], 10), todo.node.todoListId) : <button onClick={this.toggleEditTodoItemInput(i, todo.node.todoListId)}>edit</button>}
                 </div>
             </li>)
         )
     }
 
     renderTodoList(todoList, i) {
-        const { editTodoListInput, editInputId } = this.state
+        const { editTodoListInput, editInputId, addTodoItem } = this.state
         const todoListId = parseInt(atob(todoList.node.id).split(':')[1], 10)
         return (
              <li key={i}>
                 <div>
                     {todoList.node.name}
                     {editTodoListInput && editInputId === i ? this.renderNameInput(todoListId) : <button onClick={this.toggleEditTodoListInput(i)}>edit</button>}
+                    {addTodoItem && todoListId === this.state.todoListId ? this.renderNameInput() : <button onClick={this.toggleAddTodoItemInput(parseInt(atob(todoList.node.id).split(":")[1], 10))}>add todo item</button>}
                     <div>
                         <ul>
                             {this.renderTodoItems(todoList.node.todos.edges)}
@@ -157,6 +171,12 @@ const addTodoListMutation = gql`
   }
 `
 
+const addTodoItemMutation = gql`
+   mutation addTodoItem($todoListId: Int!, $name: String!) {
+       createTodoItem(todoListId: $todoListId, name: $name) { todoItem {id } }
+   }
+`
+
 // We then can use `graphql` to pass the query results returned by MyQuery
 // to MyComponent as a prop (and update them as the results change)
 // export const MyComponentWithQuery = graphql(allEmployees)(MyComponent)
@@ -164,7 +184,9 @@ const addTodoListMutation = gql`
 const withQueryAndMutations = graphql(renameTodoListMutation, {name: 'renameTodoList'})(
     graphql(renameTodoItemMutation, {name: 'renameTodoItem'})(
         graphql(addTodoListMutation, {name: 'addTodoList'})(
-            graphql(allTodoLists)(MyComponent)
+            graphql(addTodoItemMutation, {name: 'addTodoItem'})(
+                graphql(allTodoLists)(MyComponent)
+            )
         )
     )
 )
