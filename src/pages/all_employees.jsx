@@ -15,6 +15,8 @@ class MyComponent extends Component {
         this.toggleAddTodoListInput = this.toggleAddTodoListInput.bind(this)
         this.addTodoList = this.addTodoList.bind(this)
         this.toggleAddTodoItemInput = this.toggleAddTodoItemInput.bind(this)
+        this.deleteTodoList = this.deleteTodoList.bind(this)
+        this.deleteTodoItem = this.deleteTodoItem.bind(this)
         this.state = {
             editTodoListInput: false,
             editTodoItemInput: false,
@@ -80,7 +82,7 @@ class MyComponent extends Component {
         const { addTodoList, addTodoItem } = this.state
         return (
             <div>
-                <input type="text" placeholder="Enter new name" onChange={(e) => this.setText(e)} />
+                <input type="text" placeholder="Enter new name" autoFocus="true" onChange={(e) => this.setText(e)} />
                 <button onClick={todoListId ? this.renameTodoItem(id) : (addTodoList ? this.addTodoList() : (addTodoItem ? this.addTodoItem() : this.renameTodoList(id)))}>save</button>
             </div>
         )
@@ -89,13 +91,27 @@ class MyComponent extends Component {
     renderTodoItems(todos) {
         const { editTodoItemInput, editInputId, todoListId } = this.state
         return (
-            todos.map((todo, i) => <li key={i}>
-                <div>
-                    {todo.node.name}
-                    {editTodoItemInput && editInputId === i && todoListId === todo.node.todoListId ? this.renderNameInput(parseInt(atob(todo.node.id).split(':')[1], 10), todo.node.todoListId) : <button onClick={this.toggleEditTodoItemInput(i, todo.node.todoListId)}>edit</button>}
-                </div>
-            </li>)
+            todos.map((todo, i) => {
+                const todoId = parseInt(atob(todo.node.id).split(':')[1], 10)
+                return (
+                    <li key={i}>
+                        <div>
+                            {todo.node.name}
+                            {editTodoItemInput && editInputId === i && todoListId === todo.node.todoListId ? this.renderNameInput(todoId, todo.node.todoListId) : <button onClick={this.toggleEditTodoItemInput(i, todo.node.todoListId)}>edit</button>}
+                            <button onClick={this.deleteTodoItem(todoId)}>delete</button>
+                        </div>
+                    </li>
+                )
+            })
         )
+    }
+
+    deleteTodoList(todoListId) {
+        return () => this.props.deleteTodoList({variables: {id: todoListId}}).then(this.props.data.refetch)
+    }
+
+    deleteTodoItem(todoItemId) {
+        return () => this.props.deleteTodoItem({variables: {id: todoItemId}}).then(this.props.data.refetch)
     }
 
     renderTodoList(todoList, i) {
@@ -107,6 +123,7 @@ class MyComponent extends Component {
                     {todoList.node.name}
                     {editTodoListInput && editInputId === i ? this.renderNameInput(todoListId) : <button onClick={this.toggleEditTodoListInput(i)}>edit</button>}
                     {addTodoItem && todoListId === this.state.todoListId ? this.renderNameInput() : <button onClick={this.toggleAddTodoItemInput(parseInt(atob(todoList.node.id).split(":")[1], 10))}>add todo item</button>}
+                    <button onClick={this.deleteTodoList(todoListId)}>delete</button>
                     <div>
                         <ul>
                             {this.renderTodoItems(todoList.node.todos.edges)}
@@ -177,6 +194,18 @@ const addTodoItemMutation = gql`
    }
 `
 
+const deleteTodoListMutation = gql`
+    mutation deleteTodoList($id: Int!) {
+        deleteTodoList(id: $id) { todoList { id } }
+    }
+`
+
+const deleteTodoItemMutation = gql`
+    mutation deleteTodoItem($id: Int!) {
+        deleteTodoItem(id: $id) { todoItem { id } }
+    }
+`
+
 // We then can use `graphql` to pass the query results returned by MyQuery
 // to MyComponent as a prop (and update them as the results change)
 // export const MyComponentWithQuery = graphql(allEmployees)(MyComponent)
@@ -185,7 +214,11 @@ const withQueryAndMutations = graphql(renameTodoListMutation, {name: 'renameTodo
     graphql(renameTodoItemMutation, {name: 'renameTodoItem'})(
         graphql(addTodoListMutation, {name: 'addTodoList'})(
             graphql(addTodoItemMutation, {name: 'addTodoItem'})(
-                graphql(allTodoLists)(MyComponent)
+                graphql(deleteTodoListMutation, {name: 'deleteTodoList'})(
+                    graphql(deleteTodoItemMutation, {name: 'deleteTodoItem'})(
+                        graphql(allTodoLists)(MyComponent)
+                    )
+                )
             )
         )
     )
