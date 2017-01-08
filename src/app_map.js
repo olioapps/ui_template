@@ -34,12 +34,12 @@ const pages: pageDict = {
         open: true,
         component: Pages.EditGreeting,
     },
-    allEmployees: {
-        id: 'allEmployees',
-        title: 'All Employees',
-        path: 'allEmployees',
+    todoLists: {
+        id: 'todoLists',
+        title: 'Todo Lists',
+        path: 'todoLists',
         open: true,
-        component: Pages.AllEmployees,
+        component: Pages.TodoLists,
     },
 }
 

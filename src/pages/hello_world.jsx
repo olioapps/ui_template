@@ -20,7 +20,7 @@ class HelloWorld extends Component {
     }
 
     apolloComponent() {
-        this.context.router.push('/allEmployees')
+        this.context.router.push('/todoLists')
     }
 
     render() {
