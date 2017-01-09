@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux-immutablejs'
 import { INITIAL_STATE, incrementValue, updateGreeting } from '../core'
+import client from '../../api/client'
 
 // just for hello world
 function hello(state = INITIAL_STATE.get("hello"), action) {
@@ -21,10 +22,10 @@ function math(state = INITIAL_STATE.get("math"), action) {
     }
 }
 
-
 const rootReducer = combineReducers({
     hello,
     math,
+    apollo: client.reducer(),
 })
 
 export default rootReducer

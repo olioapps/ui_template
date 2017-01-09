@@ -78,6 +78,14 @@ class MyComponent extends Component {
         }
     }
 
+    deleteTodoList(todoListId) {
+        return () => this.props.deleteTodoList({variables: {id: todoListId}}).then(this.props.data.refetch)
+    }
+
+    deleteTodoItem(todoItemId) {
+        return () => this.props.deleteTodoItem({variables: {id: todoItemId}}).then(this.props.data.refetch)
+    }
+
     renderNameInput(id, todoListId) {
         const { addTodoList, addTodoItem } = this.state
         return (
@@ -106,19 +114,11 @@ class MyComponent extends Component {
         )
     }
 
-    deleteTodoList(todoListId) {
-        return () => this.props.deleteTodoList({variables: {id: todoListId}}).then(this.props.data.refetch)
-    }
-
-    deleteTodoItem(todoItemId) {
-        return () => this.props.deleteTodoItem({variables: {id: todoItemId}}).then(this.props.data.refetch)
-    }
-
     renderTodoList(todoList, i) {
         const { editTodoListInput, editInputId, addTodoItem } = this.state
         const todoListId = parseInt(atob(todoList.node.id).split(':')[1], 10)
         return (
-             <li key={i}>
+             <li key={todoList.node.name + '-' + i}>
                 <div>
                     {todoList.node.name}
                     {editTodoListInput && editInputId === i ? this.renderNameInput(todoListId) : <button onClick={this.toggleEditTodoListInput(i)}>edit</button>}

@@ -1,10 +1,12 @@
-// @flow
+import ApolloClient, { createNetworkInterface } from 'apollo-client'
 
-import { fetchify } from './api'
-import { fetchThen, handleResp } from '../util/api_utils'
+const devUrl = 'http://localhost:5000/graphql'
 
-const patientsEndpoint = fetchify('/patients')
+const client = new ApolloClient({
+    networkInterface: createNetworkInterface({
+        uri: devUrl,
+    }),
+    reduxRootSelector: state => state.get('apollo'),
+})
 
-export const getPatients = fetchThen(
-    patientsEndpoint('GET')(null), handleResp(200)
-)
+export default client
