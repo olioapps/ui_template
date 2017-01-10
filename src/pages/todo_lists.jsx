@@ -30,18 +30,16 @@ class TodoList extends Component {
         }
     }
 
+    toggleAddTodoListInput() {
+        return this.setState({addTodoList: !this.state.addTodoList})
+    }
+
     toggleAddTodoItemInput(id) {
         return () => this.setState({addTodoItem: !this.state.addTodoItem, todoListId: id})
     }
 
-    toggleAddTodoListInput() {
-        return () => this.setState({addTodoList: !this.state.addTodoList})
-    }
-
     toggleEditTodoListInput(id) {
-        return () => {
-            this.setState({editTodoListInput: !this.state.editTodolistInput, editInputId: id})
-        }
+        return () => this.setState({editTodoListInput: !this.state.editTodolistInput, editInputId: id})
     }
 
     toggleEditTodoItemInput(id, todoListId) {
@@ -69,7 +67,7 @@ class TodoList extends Component {
     addTodoList() {
         return () => {
             this.props.addTodoList({variables: {name: this.state.text}}).then(this.props.data.refetch)
-            this.toggleAddTodoListInput()()
+            this.toggleAddTodoListInput()
         }
     }
 
@@ -166,7 +164,7 @@ class TodoList extends Component {
 
         return (
             <div>
-                {addTodoList ? this.renderNameInput() : <button onClick={this.toggleAddTodoListInput()}>add todo list</button>}
+                {addTodoList ? this.renderNameInput() : <button onClick={this.toggleAddTodoListInput}>add todo list</button>}
                 <ul>
                     {listOfTodoLists.map((todoList, i) => this.renderTodoList(todoList, i))}
                 </ul>
