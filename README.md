@@ -45,3 +45,12 @@ We will use kebab case for url paths
 `
    /olioapps-path
 `
+
+## Apollo/GraphQL
+
+### Useful links
+* https://github.com/sogko/graphql-schema-language-cheat-sheet
+* https://github.com/DenisNeustroev/react-boilerplate - react-boiler plate integrated with immutable-js and apollo
+* https://learngraphql.com/basics/introduction
+* https://console.graph.cool
+* https://api.graph.cool/simple/v1/cixqtpjpo06jk0121ws1gt78u

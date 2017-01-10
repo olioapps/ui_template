@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
 import { graphql } from 'react-apollo'
-import gql from 'graphql-tag'
 import { connect } from 'react-redux'
+import { compose } from 'redux'
+import * as mutations from '../api/mutations'
 
-// MyComponent is a "presentational" or apollo-unaware component,
+// TodoList is a "presentational" or apollo-unaware component,
 // It could be a simple React class:
-class MyComponent extends Component {
+class TodoList extends Component {
     constructor(props) {
         super(props)
         this.toggleEditTodoListInput = this.toggleEditTodoListInput.bind(this)
@@ -136,102 +137,46 @@ class MyComponent extends Component {
 
     render() {
         const { addTodoList } = this.state
-        const allTodoLists = this.props.data.allTodoLists ? this.props.data.allTodoLists.edges : []
-        const todoListsLoaded = allTodoLists.length > 0
+        const { allTodoLists } = this.props.data
+        const listOfTodoLists = allTodoLists ? allTodoLists.edges : []
+
+        if (this.props.data.loading) {
+            return (<div>Loading</div>)
+        }
+
+        if (this.props.data.error) {
+            console.log(this.props.data.error)
+            return (<div>An unexpected error occurred</div>)
+        }
+
         return (
             <div>
                 {addTodoList ? this.renderNameInput() : <button onClick={this.toggleAddTodoListInput()}>add todo list</button>}
                 <ul>
-                    {todoListsLoaded && allTodoLists.map((todoList, i) => this.renderTodoList(todoList, i))}
+                    {listOfTodoLists.map((todoList, i) => this.renderTodoList(todoList, i))}
                 </ul>
             </div>
         )
     }
 }
 
-// Initialize GraphQL queries or mutations with the `gql` tag
-const allTodoLists = gql`query {
-   allTodoLists {
-        edges {
-            node {
-                id
-                name
-                todos {
-                    edges {
-                        node {
-                            id
-                            name
-                            todoListId
-                        }
-                    }
-                }
-            }
-        }
-    }
-}`
-
-const renameTodoListMutation = gql`
-    mutation updateTodoList($id: Int, $name: String!) {
-        updateTodoList(id: $id, name: $name) { todoList { name } }
-    }
-`
-
-const renameTodoItemMutation = gql`
-    mutation updateTodoItem($id: Int, $name: String!) {
-        updateTodoItem(id: $id, name: $name) { todoItem { name } }
-    }
-`
-
-const addTodoListMutation = gql`
-  mutation addTodoList($name: String!) {
-    createTodoList(name: $name) { todoList { id } }
-  }
-`
-
-const addTodoItemMutation = gql`
-   mutation addTodoItem($todoListId: Int!, $name: String!) {
-       createTodoItem(todoListId: $todoListId, name: $name) { todoItem {id } }
-   }
-`
-
-const deleteTodoListMutation = gql`
-    mutation deleteTodoList($id: Int!) {
-        deleteTodoList(id: $id) { todoList { id } }
-    }
-`
-
-const deleteTodoItemMutation = gql`
-    mutation deleteTodoItem($id: Int!) {
-        deleteTodoItem(id: $id) { todoItem { id } }
-    }
-`
-
 // We then can use `graphql` to pass the query results returned by MyQuery
-// to MyComponent as a prop (and update them as the results change)
-// export const MyComponentWithQuery = graphql(allEmployees)(MyComponent)
+// to TodoList as a prop (and update them as the results change)
+// export const TodoListWithQuery = graphql(allEmployees)(TodoList)
 
-const withQueryAndMutations = graphql(renameTodoListMutation, {name: 'renameTodoList'})(
-    graphql(renameTodoItemMutation, {name: 'renameTodoItem'})(
-        graphql(addTodoListMutation, {name: 'addTodoList'})(
-            graphql(addTodoItemMutation, {name: 'addTodoItem'})(
-                graphql(deleteTodoListMutation, {name: 'deleteTodoList'})(
-                    graphql(deleteTodoItemMutation, {name: 'deleteTodoItem'})(
-                        graphql(allTodoLists)(MyComponent)
-                    )
-                )
-            )
-        )
-    )
+const addQueriesMutations = compose(
+    graphql(mutations.renameTodoListMutation, {name: 'renameTodoList'}),
+    graphql(mutations.addTodoListMutation, {name: 'addTodoList'}),
+    graphql(mutations.addTodoItemMutation, {name: 'addTodoItem'}),
+    graphql(mutations.deleteTodoListMutation, {name: 'deleteTodoList'}),
+    graphql(mutations.deleteTodoItemMutation, {name: 'deleteTodoItem'}),
+    graphql(mutations.allTodoLists),
 )
 
+const withQueryAndMutations = addQueriesMutations(TodoList)
 
-
-// const MyComponentLinked = connect(
-//   state => state.toJSON(),
-// )(MyComponentWithQuery)
-
-const MyComponentLinked = connect(
+const TodoListLinked = connect(
   state => state.toJSON(),
 )(withQueryAndMutations)
 
-export default MyComponentLinked
+export default TodoListLinked
