@@ -6,7 +6,7 @@ import store                                           from './redux/store'
 import * as appMap                                     from './app_map'
 import App                                             from './app'
 import { ApolloProvider }                              from 'react-apollo'
-import client                                          from './api/client'
+import client                                          from './api/apollo_client'
 
 const appHistory = useRouterHistory(createHashHistory)({ queryKey: false })
 
@@ -19,6 +19,7 @@ const router = (
     </Router>
 )
 
+// ApolloProvider takes the place of our normal `react-redux` Provider
 ReactDOM.render(
     <ApolloProvider client={client} store={store}>
         {router}

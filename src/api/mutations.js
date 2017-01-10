@@ -2,6 +2,8 @@ import gql from 'graphql-tag'
 
 // Initialize GraphQL queries or mutations with the `gql` tag
 
+// Mutations describe API calls that make changes to models on the server
+
 export const renameTodoListMutation = gql`
     mutation updateTodoList($id: Int, $name: String!) {
         updateTodoList(id: $id, name: $name) { todoList { name } }

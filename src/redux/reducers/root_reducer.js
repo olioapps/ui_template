@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux-immutablejs'
 import { INITIAL_STATE, incrementValue, updateGreeting } from '../core'
-import client from '../../api/client'
+import client from '../../api/apollo_client'
 
 // just for hello world
 function hello(state = INITIAL_STATE.get("hello"), action) {
@@ -22,10 +22,13 @@ function math(state = INITIAL_STATE.get("math"), action) {
     }
 }
 
+// We incoorporate the Apollo reducer into our store
+const apollo = client.reducer()
+
 const rootReducer = combineReducers({
     hello,
     math,
-    apollo: client.reducer(),
+    apollo,
 })
 
 export default rootReducer

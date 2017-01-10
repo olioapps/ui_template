@@ -5,8 +5,10 @@ import { compose } from 'redux'
 import * as mutations from '../api/mutations'
 import * as queries from '../api/queries'
 
-// TodoList is a "presentational" or apollo-unaware component,
-// It could be a simple React class:
+// TodoList is a "presentational" or apollo-unaware component.
+// Through the wrappers below, we pass down apollo client functions
+// the component can then call directly.
+
 class TodoList extends Component {
     constructor(props) {
         super(props)
@@ -19,6 +21,7 @@ class TodoList extends Component {
         this.toggleAddTodoItemInput = this.toggleAddTodoItemInput.bind(this)
         this.deleteTodoList = this.deleteTodoList.bind(this)
         this.deleteTodoItem = this.deleteTodoItem.bind(this)
+
         this.state = {
             editTodoListInput: false,
             editTodoItemInput: false,
@@ -173,9 +176,11 @@ class TodoList extends Component {
     }
 }
 
-// We then can use `graphql` to pass the query results returned by MyQuery
-// to TodoList as a prop (and update them as the results change)
-// export const TodoListWithQuery = graphql(allEmployees)(TodoList)
+// Each call of `graphql` takes a defined mutation or a query returns a wrapper component.
+// That wrapper will pass down the mutation/query function and the data returned
+// from said api call. Each wrapper will keep track of it's own state (fetching, errors, etc.)
+// Since we want access to all these api functions, we compose a master wrapper component, which
+// creates a layer for each query/mutation.
 
 const addQueriesMutations = compose(
     graphql(mutations.renameTodoListMutation, {name: 'renameTodoList'}),
@@ -186,8 +191,11 @@ const addQueriesMutations = compose(
     graphql(queries.allTodoLists),
 )
 
+
+// We wrap the component in the above composed wrapper
 const withQueryAndMutations = addQueriesMutations(TodoList)
 
+// connect as usual
 const TodoListLinked = connect(
   state => state.toJSON(),
 )(withQueryAndMutations)
