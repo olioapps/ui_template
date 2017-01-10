@@ -3,6 +3,7 @@ import { graphql } from 'react-apollo'
 import { connect } from 'react-redux'
 import { compose } from 'redux'
 import * as mutations from '../api/mutations'
+import * as queries from '../api/queries'
 
 // TodoList is a "presentational" or apollo-unaware component,
 // It could be a simple React class:
@@ -118,12 +119,13 @@ class TodoList extends Component {
     renderTodoList(todoList, i) {
         const { editTodoListInput, editInputId, addTodoItem } = this.state
         const todoListId = parseInt(atob(todoList.node.id).split(':')[1], 10)
+
         return (
              <li key={todoList.node.name + '-' + i}>
                 <div>
                     {todoList.node.name}
-                    {editTodoListInput && editInputId === i ? this.renderNameInput(todoListId) : <button onClick={this.toggleEditTodoListInput(i)}>edit</button>}
-                    {addTodoItem && todoListId === this.state.todoListId ? this.renderNameInput() : <button onClick={this.toggleAddTodoItemInput(parseInt(atob(todoList.node.id).split(":")[1], 10))}>add todo item</button>}
+                    {editTodoListInput && editInputId === i ? this.renderNameInput(todoListId) : (<button onClick={this.toggleEditTodoListInput(i)}>edit</button>)}
+                    {addTodoItem && todoListId === this.state.todoListId ? this.renderNameInput() : (<button onClick={this.toggleAddTodoItemInput(todoListId)}>add todo item</button>)}
                     <button onClick={this.deleteTodoList(todoListId)}>delete</button>
                     <div>
                         <ul>
@@ -135,18 +137,31 @@ class TodoList extends Component {
         )
     }
 
+    renderLoading() {
+        return (<div>Loading</div>)
+    }
+
+    renderError(error) {
+        console.log(error)
+        return (
+            <div>
+                An unexpected error occurred
+                <span>{error}</span>
+            </div>
+        )
+    }
+
     render() {
         const { addTodoList } = this.state
         const { allTodoLists } = this.props.data
         const listOfTodoLists = allTodoLists ? allTodoLists.edges : []
 
         if (this.props.data.loading) {
-            return (<div>Loading</div>)
+            return this.renderLoading()
         }
 
         if (this.props.data.error) {
-            console.log(this.props.data.error)
-            return (<div>An unexpected error occurred</div>)
+            return this.renderError(this.props.data.error)
         }
 
         return (
@@ -170,7 +185,7 @@ const addQueriesMutations = compose(
     graphql(mutations.addTodoItemMutation, {name: 'addTodoItem'}),
     graphql(mutations.deleteTodoListMutation, {name: 'deleteTodoList'}),
     graphql(mutations.deleteTodoItemMutation, {name: 'deleteTodoItem'}),
-    graphql(mutations.allTodoLists),
+    graphql(queries.allTodoLists),
 )
 
 const withQueryAndMutations = addQueriesMutations(TodoList)

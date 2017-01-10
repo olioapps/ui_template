@@ -1,25 +1,6 @@
 import gql from 'graphql-tag'
 
 // Initialize GraphQL queries or mutations with the `gql` tag
-export const allTodoLists = gql`query {
-   allTodoLists {
-        edges {
-            node {
-                id
-                name
-                todos {
-                    edges {
-                        node {
-                            id
-                            name
-                            todoListId
-                        }
-                    }
-                }
-            }
-        }
-    }
-}`
 
 export const renameTodoListMutation = gql`
     mutation updateTodoList($id: Int, $name: String!) {
