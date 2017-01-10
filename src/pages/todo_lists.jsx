@@ -68,9 +68,9 @@ class TodoList extends Component {
             variables: {name: this.state.text},
             updateQueries: {
                 allTodoLists: (prev, { mutationResult }) => {
-                    const newList = mutationResult.data.createTodoList
-                    // these aren't catching for some reason (I suspect it's not firing at all)
-                    debugger
+                    const newList = mutationResult.data.createTodoList.todoList
+                    // this is getting a null todoList back from the server
+                    // not sure if backend or frontend problem
                     return {
                         ...prev,
                         edges: [...prev.edges, newList],
@@ -91,12 +91,13 @@ class TodoList extends Component {
             variables: {id: todoListId},
             updateQueries: {
                 allTodoLists: (prev, { mutationResult }) => {
-                    const toDelete = mutationResult.data.createTodoList
-                    // these aren't catching for some reason (I suspect it's not firing at all)
-                    debugger
+                    const toDelete = mutationResult.data.deleteTodoList.todoList
+                    // not sure if we need all this node/edge stuff / if we have to nest so much
                     return {
-                        ...prev,
-                        edges: prev.edges.filter(e => e.id !== toDelete.id),
+                        allTodoLists: {
+                            ...prev.allTodoLists,
+                            edges: prev.allTodoLists.edges.filter(e => e.node.id !== toDelete.id),
+                        },
                     }
                 },
             },
