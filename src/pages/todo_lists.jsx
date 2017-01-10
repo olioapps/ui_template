@@ -69,6 +69,7 @@ class TodoList extends Component {
             updateQueries: {
                 allTodoLists: (prev, { mutationResult }) => {
                     const newList = mutationResult.data.createTodoList
+                    // these aren't catching for some reason (I suspect it's not firing at all)
                     debugger
                     return {
                         ...prev,
@@ -91,6 +92,7 @@ class TodoList extends Component {
             updateQueries: {
                 allTodoLists: (prev, { mutationResult }) => {
                     const toDelete = mutationResult.data.createTodoList
+                    // these aren't catching for some reason (I suspect it's not firing at all)
                     debugger
                     return {
                         ...prev,
