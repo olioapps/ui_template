@@ -54,39 +54,55 @@ class TodoList extends Component {
     }
 
     renameTodoList(id) {
-        return () => {
-            this.props.renameTodoList({variables: {id: id, name: this.state.text}}).then(this.props.data.refetch)
-            this.toggleEditTodoListInput(null)()
-        }
+        return () => this.props.renameTodoList({variables: {id: id, name: this.state.text}})
+            .then(this.toggleEditTodoListInput(null))
     }
 
     renameTodoItem(id) {
-        return () => {
-            this.props.renameTodoItem({variables: {id: id, name: this.state.text}}).then(this.props.data.refetch)
-            this.toggleEditTodoItemInput(null, null)()
-        }
+        return () => this.props.renameTodoItem({variables: {id: id, name: this.state.text}})
+            .then(this.toggleEditTodoItemInput(null, null))
     }
 
     addTodoList() {
-        return () => {
-            this.props.addTodoList({variables: {name: this.state.text}}).then(this.props.data.refetch)
-            this.toggleAddTodoListInput()
-        }
+        return () => this.props.addTodoList({
+            variables: {name: this.state.text},
+            updateQueries: {
+                allTodoLists: (prev, { mutationResult }) => {
+                    const newList = mutationResult.data.createTodoList
+                    debugger
+                    return {
+                        ...prev,
+                        edges: [...prev.edges, newList],
+                    }
+                },
+            },
+        })
+        .then(this.toggleAddTodoListInput)
     }
 
     addTodoItem() {
-        return () => {
-            this.props.addTodoItem({variables: {todoListId: this.state.todoListId, name: this.state.text}}).then(this.props.data.refetch)
-            this.toggleAddTodoItemInput(null)()
-        }
+        return () => this.props.addTodoItem({variables: {todoListId: this.state.todoListId, name: this.state.text}})
+            .then(this.toggleAddTodoItemInput(null))
     }
 
     deleteTodoList(todoListId) {
-        return () => this.props.deleteTodoList({variables: {id: todoListId}}).then(this.props.data.refetch)
+        return () => this.props.deleteTodoList({
+            variables: {id: todoListId},
+            updateQueries: {
+                allTodoLists: (prev, { mutationResult }) => {
+                    const toDelete = mutationResult.data.createTodoList
+                    debugger
+                    return {
+                        ...prev,
+                        edges: prev.edges.filter(e => e.id !== toDelete.id),
+                    }
+                },
+            },
+        })
     }
 
     deleteTodoItem(todoItemId) {
-        return () => this.props.deleteTodoItem({variables: {id: todoItemId}}).then(this.props.data.refetch)
+        return () => this.props.deleteTodoItem({variables: {id: todoItemId}})
     }
 
     renderNameInput(id, todoListId) {
@@ -184,6 +200,7 @@ class TodoList extends Component {
 
 const addQueriesMutations = compose(
     graphql(mutations.renameTodoListMutation, {name: 'renameTodoList'}),
+    graphql(mutations.renameTodoItemMutation, {name: 'renameTodoItem'}),
     graphql(mutations.addTodoListMutation, {name: 'addTodoList'}),
     graphql(mutations.addTodoItemMutation, {name: 'addTodoItem'}),
     graphql(mutations.deleteTodoListMutation, {name: 'deleteTodoList'}),
