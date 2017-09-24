@@ -37,7 +37,7 @@ We will use kebab case for github repos:
 
 ## Quotes policy
 
-Unless there is no choice, single quotes for strings.
+Unless there is no choice, double quotes for strings.
 
 ## URL Path Conventions
 
